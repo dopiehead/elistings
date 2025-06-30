@@ -2,9 +2,14 @@
 <?php  session_start();
  require 'engine/configure.php';  
 if(isset($_POST["submit"]))   {  
-if(!empty($_POST["search"]))   {  
+if(!empty($_POST["search"]) && !empty($_POST["search_type"]))   {  
 $query = str_replace(" ", "+", mysqli_real_escape_string($conn,$_POST["search"]));
-header("location:products.php?search=" .htmlspecialchars($query)); 
+if($search_type=='product'){
+  header("location:products.php?search=" .htmlspecialchars($query)); 
+}
+else{
+   header("location:service-providers.php?search=" .htmlspecialchars($query));   
+}
  }  
 
  }  
@@ -72,10 +77,20 @@ header("location:products.php?search=" .htmlspecialchars($query));
                             aria-label="Search for products or services"
                         >
                     </div>
-                    <button name="submit" type="submit" class="search-btn bg-primary">
-                        <i class="fas fa-search"></i>
-                        <span class="d-none d-sm-inline">Search</span>
-                    </button>
+
+                     <div class='d-flex justify-content-end gap-1 align-items-center'>
+                          <div>
+                              <select name="search_type" id="search_type" class='border-0 text-secondary'>
+                                 <option value="service_provider">Service provider</option>
+                                 <option value="product">Products</option>        
+                             </select>
+                          </div>
+                           <button name="submit" type="submit" class="search-btn bg-primary">
+                             <i class="fas fa-search"></i>
+                                 <span class="d-none d-sm-inline">Search</span>
+                             </button>
+
+                    </div>
                 </form>
             </div>
         </div>
@@ -250,7 +265,7 @@ while ($row = mysqli_fetch_array($query_category)) { ?>
                         <!-- Banner Section -->
                         <div class="banner-section">
                             <div class="banner-image">
-                                <div class="banner-logo">Coca-Cola</div>
+                                <div class="banner-logo">Essential nigeria</div>
                             </div>
                             <a href="#" class="post-ad-btn">
                                 <i class="fas fa-plus"></i>
@@ -471,159 +486,8 @@ while ($row = mysqli_fetch_array($query_category)) { ?>
 
     <!-- footer -->
      <br><br>
-    <div class="footer-section mt-4">
-        <div class="container-custom">
-            <div class="row">
-                <!-- About Section -->
-                <div class="col-md-4">
-                    <div class="about-section">
-                        <h5>About</h5>
-                        <p class="about-text">
-                            Lorem ipsum dolor sit amet consectetur. Ullamcorper bibendum diam sapien faucibus. Dolor in nibh malesuada pharetra sit amet. Duis rhoncus. Non tortor sagittis neque vitae rutis. Varius congue faucibus ultrices consectetur condimentum. Ut integer fringilla id ante fusce varius eget.
-                        </p>
-                        <a href="#" class="learn-more-btn">Learn More</a>
-                    </div>
-                </div>
-                
-                <!-- Links Section -->
-                <div class="col-md-4">
-                    <div class="links-section">
-                        <ul class="links-list">
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Terms and Conditions</a></li>
-                            <li><a href="#">FAQs</a></li>
-                            <li><a href="#">Contact Us</a></li>
-                        </ul>
-                    </div>
-                </div>
-                
-                <!-- Social Section -->
-                <div class="col-md-4">
-                    <div class="social-section">
-                        <h5>Follow us</h5>
-                        <div class="social-icons">
-                            <a href="#" class="social-icon facebook">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                            <a href="#" class="social-icon twitter">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                            <a href="#" class="social-icon instagram">
-                                <i class="fab fa-instagram"></i>
-                            </a>
-                            <a href="#" class="social-icon linkedin">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
-                            <a href="#" class="social-icon youtube">
-                                <i class="fab fa-youtube"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <?php include("components/footer.php") ?>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-
-<script>
-$('#loader-image').hide();
-$('.numbering').load('engine/item-numbering.php');
-$('.btn-request').on('click',function(e){
-e.preventDefault();
-var data = $('#request_form').serialize();
-$('#loader-image').show();
-$.ajax({
-
-    type:"POST",
-     url:"engine/request-page.php",
-     data: $('#request_form').serialize(),
-     success:function(response) {
-    $('#loader-image').hide();
-     if (response ==1) {
-         swal({
-             icon:"success",
-             title:"Success",
-          
-             text:"Message was sent successfully",
-     });
-
-    $("#request_form")[0].reset();
-    }
-
-    else{
-
-     swal({
-
-         icon:"error",
-
-         text:response,
-
-         title:"Notice",
-
-
-     });
-
-    }
-     
-
-     }
-
-});
-
-
-});
-
-</script>
-
-
-<script type="text/javascript">
-    
-$('input:checkbox,.select_category').on('click',function (e) {
-  $("#loading-image").show();
-  var category = $(this).attr('id');
-
-  e.preventDefault();
-     $.ajax({
-     type: "POST",
-     url: "engine/product-process.php",
-     data: {'category':category},
-     cache:false,
-     contentType: "application/x-www-form-urlencoded",
-      success: function(response) {
-  $("#loading-image").hide();
-               $('#show_product').html('<div class="container text-decoration-none">'+response+'<div class="btn-home"><button class=" btn bg-danger text-white btn-primary btn-close w-100">&times</button></div></div>').slideDown();
-
-               $('.btn-close').click(function(e) {
-
-                e.preventDefault();
-
-                 
-                 $('#show_product').hide();
-                 
-               });
-
-             }
-
-});
-
-});
-</script>
-
-<script>
-
-function share() {
-    var url = $('.share').attr('id');
-    var encodedUrl = encodeURIComponent(url);
-    var facebookShare = "https://www.facebook.com/sharer/sharer.php?u=" + encodedUrl;
-    var twitterShare = "https://twitter.com/intent/tweet?url=" + encodedUrl;
-    var linkedinShare = "https://www.linkedin.com/shareArticle?url=" + encodedUrl;
-    window.open(facebookShare, "_blank");
-    window.open(twitterShare, "_blank");
-    window.open(linkedinShare, "_blank");
-}
-
-
-</script>
-
+    <script src="assets/js/index.js"></script>
 </body>
 </html>

@@ -428,17 +428,8 @@ echo"<span id='locitem'><a class='btn-compare' id='{$row['id']}'>Compare</a></sp
 
 </div></div>
 
- 
-
-
-
-
 
 </div>
-
-
-
-
 
 
 </div>

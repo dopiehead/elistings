@@ -2099,33 +2099,11 @@ margin:1em 1em;
 
 }
 
-
-
-
-.button_navigation{
-    
+.button_navigation{  
  display:inline-flex !important;
- 
  margin:0px 5px;
- margin-6top-8px;
+
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 .add_icon, #img_coca{
@@ -2144,30 +2122,12 @@ margin:1em 1em;
   
 }
 
-@media only screen and (max-width:767px){
-
-
-.banner figure{
-
-  
-}
-
-
-
-
-
-}
-
-
-
 
 figcaption a{
 
   text-decoration: none;
   color: black;
 }
-
-
 
 
 /*--------------------------------------------------------------
@@ -2501,34 +2461,7 @@ z-index: 300;
 }
 
 
-
-
-
-
 }
-
-
-
-/*--------------------------------------------------------------
-# Navigation button/nav_bar
---------------------------------------------------------------*/
-
-
-.nav_button img{
-
-
-
-
-  
-}
-
-
-
-
-
-
-
-
 
 
 
@@ -2583,13 +2516,6 @@ margin-left:23px;
 font-weight: 300;
 
 font-family: poppins !important;
-
-}
-
-
-.nav_link{
-
-
 
 }
 

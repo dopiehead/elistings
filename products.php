@@ -99,7 +99,7 @@ $featured_product = $getfeaturedProducts["featured"];
 
 <div class='d-flex justify-content-between px-3 mt-2 flex-md-row flex-column'>
        <!-- part a for filtering of result -->
-     <div class='filters col-md-3  pe-2 border-right border-3 border-secondary'>
+     <div class='filters col-md-4  pe-2 border-right border-3 border-secondary'>
         <h4 class='fw-bold mb-3'>Filter</h4>  
         <div class='d-flex flex-row flex-column gap-3 filter-content'>
         
@@ -196,7 +196,7 @@ $featured_product = $getfeaturedProducts["featured"];
 
      </div>
 
-     <div class='contents col-md-9'>
+     <div class='contents col-md-8'>
 
         <div class='d-flex justify-content-between'>
           <h3 class='fw-bold text-secondary'>Products</h3>

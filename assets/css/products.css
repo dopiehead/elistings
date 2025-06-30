@@ -1286,12 +1286,24 @@ gap:20px;
     padding:8px 5px;
 }
 
-.package-container{
-    gap:20px;
+.package-container{   
     height:650px;
     overflow-y:auto !important;
     scrollbar-width:none;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+
 }
+
+@media (min-width: 768px) {
+  .package-container {
+    grid-template-columns: repeat(3, 1fr); /* Tablet and up: 3 columns */
+  }
+}
+
+
+
 
 .price-content{
     gap:10px;
@@ -1347,7 +1359,17 @@ gap:20px;
         width:28px;
         height:28px;
       }
-      
+
+      .item:hover {
+        transform: translate(0px, 10px);
+        transition:0.3s ease-in-out; /* Move down by 10px */
+        border:1px solid transparent !important;
+        box-shadow: 0px 0px 5px rgba(150, 149, 149, 0.4);
+      }
+
+      .pagination{
+        cursor: pointer;
+      }
 
 
 

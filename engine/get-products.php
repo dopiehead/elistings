@@ -10,10 +10,14 @@ $initial_page = ($page - 1) * $num_per_page;
 
 // ---------- FILTER HANDLING ----------
 $filters = " WHERE sold = 0 ";
-
+$stop_words = ['in', 'the', 'a', 'an', 'and', 'or', 'for', 'to', 'at', 'on', 'with', 'by', 'us', 'from', 'but', 'when', 'who', 'can', 'find', 'they', 'where', 'am', 'we', 'while'];
 if (!empty($_POST['search'])) {
-    $search = $conn->real_escape_string(strtolower(trim($_POST['search'])));
-    $terms = explode(" ", $search);
+    $search_raw = $conn->real_escape_string(strtolower(trim($_POST['search'])));
+    $search = explode(" ", $search_raw);
+    $terms = array_filter($search, function ($word) use ($stop_words) {
+        return !empty($word) && !in_array($word, $stop_words);
+    });
+
     foreach ($terms as $term) {
         $term = $conn->real_escape_string($term);
         $filters .= " AND (
@@ -99,7 +103,7 @@ $products_result = $products->get_result();
 
 // ---------- DISPLAY PRODUCTS ----------
 if ($products_result->num_rows > 0): ?>
-    <div class="package-container d-flex justify-content-center justify-content-md-center flex-wrap flex-md-row flex-column gap-3 h-100">
+    <div class="package-container h-100">
     <?php while ($product = $products_result->fetch_assoc()):
         $id = $product["id"];
         $featured = $product["featured"];

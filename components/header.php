@@ -21,6 +21,11 @@
                             <i class="fas fa-shopping-cart"></i>
                         </a>
 
+                                                <!-- Shopping Cart -->
+                         <a href="service-providers.php" class="cart-icon">
+                            <i class="fas fa-wrench"></i>
+                        </a>
+
                         <!-- Authentication Links -->
                         <div class="auth-links d-none d-sm-flex">
                             <a href="login.php" class="auth-link">Log In</a>

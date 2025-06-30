@@ -1,19 +1,6 @@
-function openform() {
-  document.getElementById("myform").
-  style.height="49%";
-}
-
-
-function closeform() {
-  document.getElementById("myform").
-  style.height="0%";
-}
-
-
 $('input:checkbox,.select_category').on('click',function (e) {
   $("#loading-image").show();
 var category = $(this).attr('id');
-
   e.preventDefault();
      $.ajax({
      type: "POST",
@@ -23,74 +10,17 @@ var category = $(this).attr('id');
      contentType: "application/x-www-form-urlencoded",
       success: function(response) {
   $("#loading-image").hide();
-               $('#show_product').html('<div class="container">'+response+'<div class="btn-home"><button class=" btn btn-primary btn-close">&times</button></div></div>').slideDown();
-
-               $('.btn-close').click(function(e) {
-
-                e.preventDefault();
-
-                 
-                 $('#show_product').hide();
-                 
+               $('#show_product').html('<div class="container">'+response+'<div class="btn-home"><button class=" btn btn-primary btn-close w-100 bg-primary">&times</button></div></div>').slideDown();
+               $('.btn-close').on("click",function(e) {
+                e.preventDefault();               
+                 $('#show_product').hide();                
                });
-
              }
-
 });
-
-
 });
-
-
-
 var instance = $("img.lazy").Lazy({chainable: false});
 $("img.lazy").Lazy();
 var instance = $("img.lazy").data("plugin_lazy");
-
-$('#loader-image').hide();
-$('.numbering').load('engine/item-numbering.php');
-$('.btn-request').on('click',function(e){
-e.preventDefault();
-var data = $('#request_form').serialize();
-$('#loader-image').show();
-$.ajax({
-
-    type:"POST",
-     url:"engine/request-page.php",
-     data: $('#request_form').serialize(),
-     success:function(response) {
-    $('#loader-image').hide();
-     if (response ==1) {
-     swal({
-     icon:"success",
-     text:"Message was sent successfully",
-     });
-
-    $("#request_form")[0].reset();
-    }
-
-    else{
-
-     swal({
-
-      icon:"error",
-
-      text:response
-
-
-     });
-
-    }
-     
-
-     }
-
-});
-
-
-});
-
-
 var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
 (function(){
 var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
@@ -100,7 +30,6 @@ s1.charset='UTF-8';
 s1.setAttribute('crossorigin','*');
 s0.parentNode.insertBefore(s1,s0);
 })();
-
   
 $('.featured').flickity({
  cellAlign: 'left',
@@ -111,7 +40,43 @@ freeScroll: true,
 wrapAround: true,
 contain: true,
 prevNextButtons: false,
-
 });
-
-</script>
+$('#loader-image').hide();
+$('.btn-request').on('click',function(e){
+e.preventDefault();
+var data = $('#request_form').serialize();
+$('#loader-image').show();
+$.ajax({
+    type:"POST",
+     url:"engine/request-page.php",
+     data: $('#request_form').serialize(),
+     success:function(response) {
+    $('#loader-image').hide();
+     if (response ==1) {
+         swal({
+             icon:"success",
+             title:"Success",          
+             text:"Message was sent successfully",
+     });
+    $("#request_form")[0].reset();
+    }
+    else{
+     swal({
+         icon:"error",
+         text:response,
+         title:"Notice",
+     });
+    }
+     }
+});
+});
+function share() {
+    var url = $('.share').attr('id');
+    var encodedUrl = encodeURIComponent(url);
+    var facebookShare = "https://www.facebook.com/sharer/sharer.php?u=" + encodedUrl;
+    var twitterShare = "https://twitter.com/intent/tweet?url=" + encodedUrl;
+    var linkedinShare = "https://www.linkedin.com/shareArticle?url=" + encodedUrl;
+    window.open(facebookShare, "_blank");
+    window.open(twitterShare, "_blank");
+    window.open(linkedinShare, "_blank");
+}
