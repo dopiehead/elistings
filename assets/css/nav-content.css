@@ -1,0 +1,276 @@
+
+/* header and navigation */
+
+
+.nav{
+       display:flex;
+       justify-content: space-between;
+     /* align-items: center; */
+       padding-top:10px;
+       position: relative;
+}
+
+
+.open_logo{
+       display: flex;
+       justify-content:center;
+        gap:20px;
+}
+
+
+@media screen and (max-width: 768px){
+ 
+    .nav{
+         padding-left:10px;
+   }
+
+}
+
+.li-content{
+        display: flex;
+        justify-content:center;
+        gap:25px;
+        font-size:14px;
+  
+}
+
+.li-content a{
+        color:black;  
+  }
+
+
+  .li-content li:hover,.li-content li:focus{
+        color:rgb(202, 77, 4); 
+        text-decoration: none; 
+        cursor: pointer; 
+}
+
+
+.li-content a:hover,.li-content a:focus{
+       color:rgb(202, 77, 4); 
+       text-decoration: none; 
+}
+
+
+
+
+@media screen and (max-width: 768px){
+ 
+     .li-content{
+             display: none !important;   
+     }
+ 
+ }
+
+
+
+
+.dropdown-content{
+   
+        display:flex;
+        justify-content:center;
+        align-items:start;
+        flex-direction: column;
+        gap:4px;
+        margin-left:-5px;
+        margin-top:0;
+        list-style-type:none;
+        text-decoration: none;
+        position: absolute;  
+        background-color: #fff;
+        z-index:3;
+}
+
+
+.dropdown-content a:hover,.dropdown-content a:focus{
+       color:rgb(255, 208, 40);
+       text-decoration: none;
+}
+
+
+.profile_search{
+       display: flex;
+       justify-content: space-between; 
+       gap: 30px;
+}
+
+
+@media screen and (max-width:768px){
+
+     .profile_search{
+         
+          justify-content: center; 
+          gap: 10px;
+    }
+     
+ }
+
+
+  .open-btn{
+     display: none;
+}
+
+
+@media screen and (max-width:768px){
+
+  .open-btn{
+       margin-top:5px;
+       display: block;
+}
+
+}
+
+
+
+.profile_icons{
+      display: flex;
+      justify-content:space-between;
+      gap: 10px;
+      margin-top:0px;
+ 
+}
+
+@media screen and (max-width:768px){
+
+    .profile_icons{
+           position: relative;
+           top:-7px;
+    
+   }
+    
+}
+
+
+.profile_icons a{
+   
+      color:black;
+
+}
+
+
+@media screen and (max-width:768px) {
+  
+     .profile_icons .fa-heart,.fa-shopping-cart{
+           font-size:15px;
+           margin-top:-5px;
+           
+   }
+
+}
+
+
+
+.search-container input[type="text"]{
+       width: 400px;
+      padding: 5px;
+      border-radius: 5px;
+      font-size:14px;
+}
+
+
+@media screen and (max-width:768px) {
+  
+     .search-container input[type="text"]{
+           width: 240px !important;
+       
+   }
+
+}
+
+
+
+
+.search-container input[type="text"]:focus{
+      border:none;
+      outline:none;
+}
+
+
+.search-container .btn{
+      margin-left:-40px;
+      position: relative;
+}
+
+
+.search-container .btn:hover{
+      border:none;
+      outline: none;
+}
+
+.active{
+      display: none;
+      transition: 0.3s opacity ease-in-out;
+}
+
+/*------------------------------------------------------------------------------------------------
+ mobile view for the navigation menu
+ --------------------------------------------------------------------------------------------------*/
+ 
+ .mobile-overlay{
+
+     display: none;
+ }
+
+ @media only screen and (max-width:768px) {
+     .mobile-overlay {
+        height: 100%;
+        width: 0%;
+        display: block;
+        position:fixed;
+        z-index: 999;
+        top:0;
+        right: 0;
+        color: #ffffff;
+        background-color: rgba(0, 60, 90, 1);
+        overflow-x: hidden;
+        transition: width 0.5s ease-in-out; /* Smooth transition */
+     }
+
+
+     .dropdown-content{
+          background-color: rgba(0, 60, 90, 1);
+     }
+  
+     .mobile-nav-content {
+        position: relative;
+        top: 20%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+     }
+  
+     .mobile-overlay a {
+        padding: 5px;
+        font-size: 14px !important;
+        color: white;
+        display: block;
+        margin: 20px 10px;
+        text-transform: capitalize;
+        font-weight: 200;
+        font-family: Poppins, sans-serif;
+        transition: 0.3s;
+     }
+  
+     .mobile-overlay .close-btn {
+        position: absolute;
+        top: 0;
+        left: 10px;
+        font-size: 19px;
+        color: white;
+        border: 1px solid transparent;
+        border-radius: 50%;
+        padding: 0px 10px;
+        z-index: 301; /* Ensure this is above the overlay */
+        display: block;
+     }
+  
+     .mobile-overlay a:hover,
+     .mobile-overlay a:focus {
+        color: red !important;
+        text-decoration: none;
+     }
+  }
+  

@@ -1,0 +1,140 @@
+
+
+
+
+@media only screen and (max-width:400px){
+
+#priceitem{
+
+font-family:Poppins;
+font-weight: bold;
+color: rgba(225,65,20,0.9) !important;
+opacity: 0.8;
+text-transform:capitalize;
+font-size:15px !important;
+padding:5px !important;
+position: relative;
+margin-bottom: 8px;
+
+
+}
+
+
+
+
+#conitem,#locitem,#catitem{
+font-size:13px !important;
+font-family:poppins;
+color: rgba(0,0,0,0.4);
+padding:5px !important;
+width:100%;
+
+font-weight: bold;
+text-transform: capitalize;
+
+
+}
+
+
+
+
+#imgitem{
+height: 150px !important;
+width:100%;
+
+}
+
+
+
+#nameitem a{
+  font-size:14px !important;
+  font-weight:normal;
+  padding-left:10px;
+  text-transform:capitalize;
+  color: rgba(0,0,0,0.4);
+  padding-top: 5px !important;
+
+ word-wrap:break-word;
+ text-align:center;
+  font-family:poppins;  
+}
+
+h6{
+
+  font-size: 16px !important;
+  font-weight: bold;
+}
+
+#discount{
+background-color: rgba(255,195,50,0.4);
+color: rgba(255,95,50,1);
+border: 1px solid transparent transparent;
+position:relative;
+top:45px;
+font-weight: bold;
+padding:3px;
+left: 79% !important;
+
+font-size:13px;
+
+} 
+
+
+#noviews{
+
+position:relative;
+top:45px;
+left:0px !important;
+background-color: rgba(0,0,0,0.8);
+color: white;
+font-weight: bold;
+padding: 7px;
+z-index: ;
+font-size:11px;
+
+}
+
+
+
+ 
+#views{
+
+position:relative;
+top:45px;
+left:-45px !important;
+background-color: rgba(0,0,0,0.8);
+color: white;
+font-weight: bold;
+padding: 7px;
+z-index: ;
+font-size: 11px;
+
+}
+
+
+.nav_login{
+
+margin-left:40px !important;
+font-weight: normal !important;
+display: none !important;
+
+}
+
+
+
+.nav_signup{
+
+margin-left:40px !important;
+font-weight: normal !important;
+display: none !important;
+
+}
+
+
+
+
+
+}
+
+
+

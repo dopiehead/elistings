@@ -1,0 +1,1567 @@
+
+
+body{font-family: poppins;}
+
+h1 img{
+
+	margin-left: 10px;
+}
+
+
+.main{
+    background-image:linear-gradient(to right top,rgba(0,0,0,0.4),rgba(0,0,0,0.6)),url("../img/cyber-monday.jpg");
+    height:50vh;
+    width:100% ;
+    background-size:cover;
+    background-position:center;
+}
+
+a{
+    text-decoration:none;
+}
+
+.btn-success{
+  background-color:green; 
+  color:white;
+  padding:5px 8px;
+}
+
+.heading{
+     justify-content:space-between;
+     align-items:center;
+}
+
+
+
+
+
+.menu select,.menu input{
+border:1px solid transparent;
+box-shadow:0px 0px 3px rgba(0,0,0,0.4);
+border-radius:15px;
+font-size:14px;
+
+}
+
+
+.menu select:hover, .menu input:hover,.menu select:focus,.menu input:focus{
+    outline:2px solid skyblue;
+}
+
+
+.menu{
+    justify-content:center;
+    align-items:center;
+    gap:10px;
+}
+
+@media screen and (max-width:1200px){
+    
+  .menu{
+      overflow-x:auto;
+      position:relative;
+       justify-content:start;
+    align-items:center;
+  }  
+    
+    
+}
+
+
+
+
+.ladipo-container,.orile-container,.alaba-container, .ikeja-container,.balogun-container,.mile12-container{
+   display:none;
+   justify-content:center;
+   align-items:center;
+   flex-wrap:wrap;
+   gap:15px;
+   margin:20px 0px;
+
+    
+}
+
+
+/*.mile12-container{
+    
+   justify-content:space-between;
+   align-items:center;
+   flex-wrap:wrap;
+   gap:10px;
+      display:none;
+    
+}*/
+
+.btn-link{
+    border:1px solid transparent;
+    box-shadow:0px 0px 4px rgba(0,0,0,0.4);
+    font-size:14px;
+    text-decoration:none;
+    border-radius:15px;
+    
+}
+
+.btn-link:hover,.btn-link:focus{
+  box-shadow:0px 0px 5px rgba(0,60,90,0.9);
+  background-color:lightgreen;
+}
+
+
+
+.g-5{
+    gap:30px;
+}
+
+
+.ladipo-container h6,.orile-container h6,.alaba-container h6, .ikeja h6,.balogun h6,.mile12-container h6{
+    font-weight:bold;
+    text-transform:capitalize;
+}
+
+.batteries{
+    background-image:linear-gradient(to right top,rgba(0,0,0,0.7),rgba(0,0,0,0.6)),url("../../carpart/batteries.png");
+    background-size:cover;
+    height:200px;
+    width:250px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+
+.mirrors{
+    background-image:linear-gradient(to right top,rgba(0,0,0,0.7),rgba(0,0,0,0.6)),url("../../carpart/car-mirror.png");
+    background-size:cover;
+    height:200px;
+    width:250px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+
+
+.radiators{
+    background-image:linear-gradient(to right top,rgba(0,0,0,0.7),rgba(0,0,0,0.6)),url("../../carpart/radiator.png");
+    background-size:cover;
+    height:200px;
+    width:250px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+
+
+.bumper{
+    background-image:linear-gradient(to right top,rgba(0,0,0,0.7),rgba(0,0,0,0.6)),url("../../carpart/car-bumper.jpg");
+    background-size:cover;
+    height:200px;
+    width:250px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+
+
+.horns{
+    background-image:linear-gradient(to right top,rgba(0,0,0,0.7),rgba(0,0,0,0.6)),url("../../carpart/horn.png");
+    background-size:cover;
+    height:200px;
+    width:250px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+
+
+
+.compressors{
+    background-image:linear-gradient(to right top,rgba(0,0,0,0.7),rgba(0,0,0,0.6)),url("../../carpart/compressor.png");
+    background-size:cover;
+    height:200px;
+    width:250px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+
+
+.windscreens{
+    background-image:linear-gradient(to right top,rgba(0,0,0,0.4),rgba(0,0,0,0.6)),url("../../carpart/windshield.png");
+    background-size:cover;
+    height:200px;
+    width:250px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+
+.lamps{
+    background-image:linear-gradient(to right top,rgba(0,0,0,0.4),rgba(0,0,0,0.6)),url("../../carpart/car-light.png");
+    background-size:cover;
+    height:200px;
+    width:250px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+
+
+
+
+.car_engine{
+        background-image:linear-gradient(to right top,rgba(0,0,0,0.4),rgba(0,0,0,0.6)),url("../../carpart/engine.png");
+    background-size:cover;
+    height:200px;
+    width:250px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.gear_boxes{
+    
+    background-image:linear-gradient(to right top,rgba(0,0,0,0.4),rgba(0,0,0,0.6)),url("../../carpart/gear-box.png");
+    background-size:cover;
+    height:200px;
+    width:250px; 
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    
+}
+
+
+
+.brakes{
+    
+    background-image:linear-gradient(to right top,rgba(0,0,0,0.4),rgba(0,0,0,0.6)),url("../../carpart/brakes.png");
+    background-size:cover;
+    height:200px;
+    width:250px; 
+        display:flex;
+    justify-content:center;
+    align-items:center;
+    
+}
+
+
+.tyres{
+    
+    background-image:linear-gradient(to right top,rgba(0,0,0,0.4),rgba(0,0,0,0.6)),url("../../carpart/tyres.png");
+    background-size:cover;
+    height:200px;
+    width:250px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    
+}
+
+
+
+.clutches{
+    
+    background-image:linear-gradient(to right top,rgba(0,0,0,0.4),rgba(0,0,0,0.6)),url("../../carpart/clutch.png");
+    background-size:cover;
+    height:200px;
+    width:250px; 
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    
+}
+
+
+.exhausts{
+    
+    background-image:linear-gradient(to right top,rgba(0,0,0,0.4),rgba(0,0,0,0.6)),url("../../carpart/exhaust-pipe.png");
+    background-size:cover;
+    height:200px;
+    width:250px; 
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    
+}
+
+.tiles{
+    
+    background-image:linear-gradient(to right top,rgba(0,0,0,0.4),rgba(0,0,0,0.6)),url("../../household/tiles.png");
+    background-size:cover;
+    height:200px;
+    width:250px; 
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    
+}
+
+
+
+.pipes{
+    
+    background-image:linear-gradient(to right top,rgba(0,0,0,0.4),rgba(0,0,0,0.6)),url("../../household/pipes.png");
+    background-size:cover;
+    height:200px;
+    width:250px; 
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    
+}
+
+
+
+
+
+.iron_door{
+    
+    background-image:linear-gradient(to right top,rgba(0,0,0,0.4),rgba(0,0,0,0.6)),url("../../household/iron_door.png");
+    background-size:cover;
+    height:200px;
+    width:250px; 
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    
+}
+
+
+
+
+.roofing_sheets{
+    
+    background-image:linear-gradient(to right top,rgba(0,0,0,0.4),rgba(0,0,0,0.6)),url("../../household/roofing_sheets.png");
+    background-size:cover;
+    height:200px;
+    width:250px; 
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    
+}
+
+
+.toilet_seats{
+    
+    background-image:linear-gradient(to right top,rgba(0,0,0,0.4),rgba(0,0,0,0.6)),url("../../household/toilet_seats.png");
+    background-size:cover;
+    height:200px;
+    width:250px; 
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    
+}
+
+
+
+.kitchen_sinks{
+    
+    background-image:linear-gradient(to right top,rgba(0,0,0,0.4),rgba(0,0,0,0.6)),url("../../household/kitchen_sinks.png");
+    background-size:cover;
+    height:200px;
+    width:250px; 
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    
+}
+
+
+.water_filter{
+    
+    background-image:linear-gradient(to right top,rgba(0,0,0,0.4),rgba(0,0,0,0.6)),url("../../household/water_filter.png");
+    background-size:cover;
+    height:200px;
+    width:250px; 
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    
+}
+
+
+
+.wash_basin{
+    
+    background-image:linear-gradient(to right top,rgba(0,0,0,0.4),rgba(0,0,0,0.6)),url("../../household/wash_basin.png");
+    background-size:cover;
+    height:200px;
+    width:250px; 
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    
+}
+
+
+
+.unisex{
+    
+    background-image:linear-gradient(to right top,rgba(0,0,0,0.4),rgba(0,0,0,0.6)),url("../../balogun/unisex.png");
+    background-size:cover;
+    height:200px;
+    width:250px; 
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    
+}
+
+
+
+
+.boys{
+    
+    background-image:linear-gradient(to right top,rgba(0,0,0,0.4),rgba(0,0,0,0.6)),url("../../balogun/boys.png");
+    background-size:cover;
+    height:200px;
+    width:250px; 
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    
+}
+
+
+
+
+.girls{
+    
+    background-image:linear-gradient(to right top,rgba(0,0,0,0.4),rgba(0,0,0,0.6)),url("../../balogun/girls.png");
+    background-size:cover;
+    height:200px;
+    width:250px; 
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    
+}
+
+
+.traditional_men{
+    
+    background-image:linear-gradient(to right top,rgba(0,0,0,0.4),rgba(0,0,0,0.6)),url("../../balogun/traditional_men.png");
+    background-size:cover;
+    height:200px;
+    width:250px; 
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    
+}
+
+
+
+
+
+.traditional_women{
+    
+    background-image:linear-gradient(to right top,rgba(0,0,0,0.4),rgba(0,0,0,0.6)),url("../../balogun/traditional_women.png");
+    background-size:cover;
+    height:200px;
+    width:250px; 
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    
+}
+
+
+
+
+.male_clothes{
+    
+    background-image:linear-gradient(to right top,rgba(0,0,0,0.4),rgba(0,0,0,0.6)),url("../../balogun/men_wear.png");
+    background-size:cover;
+    height:200px;
+    width:250px; 
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    
+}
+
+
+
+.female_clothes{
+    
+    background-image:linear-gradient(to right top,rgba(0,0,0,0.4),rgba(0,0,0,0.6)),url("../../balogun/women_wear.png");
+    background-size:cover;
+    height:200px;
+    width:250px; 
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    
+}
+
+
+
+.washing_machine{
+    
+    background-image:linear-gradient(to right top,rgba(0,0,0,0.4),rgba(0,0,0,0.6)),url("../../alaba/washing_machine.png");
+    background-size:cover;
+    height:200px;
+    width:250px; 
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    
+}
+
+
+
+
+.television{
+    
+    background-image:linear-gradient(to right top,rgba(0,0,0,0.4),rgba(0,0,0,0.6)),url("../../alaba/television.png");
+    background-size:cover;
+    height:200px;
+    width:250px; 
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    
+}
+
+
+
+
+.home_theater{
+    
+    background-image:linear-gradient(to right top,rgba(0,0,0,0.4),rgba(0,0,0,0.6)),url("../../alaba/home_theater.png");
+    background-size:cover;
+    height:200px;
+    width:250px; 
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    
+}
+
+
+
+.air_conditioner{
+    
+    background-image:linear-gradient(to right top,rgba(0,0,0,0.4),rgba(0,0,0,0.6)),url("../../alaba/air_conditioner.jpg");
+    background-size:cover;
+    height:200px;
+    width:250px; 
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    
+}
+
+
+
+.refrigerator{
+    
+    background-image:linear-gradient(to right top,rgba(0,0,0,0.4),rgba(0,0,0,0.6)),url("../../alaba/refrigerator.png");
+    background-size:cover;
+    height:200px;
+    width:250px; 
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    
+}
+
+
+
+.fan{
+    
+    background-image:linear-gradient(to right top,rgba(0,0,0,0.4),rgba(0,0,0,0.6)),url("../../alaba/fan.png");
+    background-size:cover;
+    height:200px;
+    width:250px; 
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    
+}
+
+
+.clipper{
+    
+    background-image:linear-gradient(to right top,rgba(0,0,0,0.4),rgba(0,0,0,0.6)),url("../../alaba/clipper.png");
+    background-size:cover;
+    height:200px;
+    width:250px; 
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    
+}
+
+
+.microwave{
+    
+    background-image:linear-gradient(to right top,rgba(0,0,0,0.4),rgba(0,0,0,0.6)),url("../../alaba/microwave.png");
+    background-size:cover;
+    height:200px;
+    width:250px; 
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    
+}
+
+
+.blender{
+    
+    background-image:linear-gradient(to right top,rgba(0,0,0,0.4),rgba(0,0,0,0.6)),url("../../alaba/blender.png");
+    background-size:cover;
+    height:200px;
+    width:250px; 
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    
+}
+
+
+
+.pressing_iron{
+    
+    background-image:linear-gradient(to right top,rgba(0,0,0,0.4),rgba(0,0,0,0.6)),url("../../alaba/pressing_iron.png");
+    background-size:cover;
+    height:200px;
+    width:250px; 
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    
+}
+
+
+
+.electric_kettle{
+    
+    background-image:linear-gradient(to right top,rgba(0,0,0,0.4),rgba(0,0,0,0.6)),url("../../alaba/electric_kettle.png");
+    background-size:cover;
+    height:200px;
+    width:250px; 
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    
+}
+
+
+
+.generator{
+    
+    background-image:linear-gradient(to right top,rgba(0,0,0,0.4),rgba(0,0,0,0.6)),url("../../alaba/generator.png");
+    background-size:cover;
+    height:200px;
+    width:250px; 
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    
+}
+
+
+
+.solar_panel{
+    
+    background-image:linear-gradient(to right top,rgba(0,0,0,0.4),rgba(0,0,0,0.6)),url("../../alaba/solar_panel.png");
+    background-size:cover;
+    height:200px;
+    width:250px; 
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    
+}
+
+
+
+
+.tablets{
+    
+    background-image:linear-gradient(to right top,rgba(0,0,0,0.4),rgba(0,0,0,0.6)),url("../../ikeja/tablets.png");
+    background-size:cover;
+    height:200px;
+    width:250px; 
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    
+}
+
+
+
+
+
+.printers{
+    
+    background-image:linear-gradient(to right top,rgba(0,0,0,0.4),rgba(0,0,0,0.6)),url("../../ikeja/printers.png");
+    background-size:cover;
+    height:200px;
+    width:250px; 
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    
+}
+
+
+
+
+
+
+.mobile_phones{
+    
+    background-image:linear-gradient(to right top,rgba(0,0,0,0.4),rgba(0,0,0,0.6)),url("../../ikeja/mobile_phones.png");
+    background-size:cover;
+    height:200px;
+    width:250px; 
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    
+}
+
+
+
+
+.accessories{
+    
+    background-image:linear-gradient(to right top,rgba(0,0,0,0.4),rgba(0,0,0,0.6)),url("../../ikeja/accessories.png");
+    background-size:cover;
+    height:200px;
+    width:250px; 
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    
+}
+
+
+
+.storage{
+    
+    background-image:linear-gradient(to right top,rgba(0,0,0,0.4),rgba(0,0,0,0.6)),url("../../ikeja/storage.png");
+    background-size:cover;
+    height:200px;
+    width:250px; 
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    
+}
+
+
+
+
+
+.networking{
+    
+    background-image:linear-gradient(to right top,rgba(0,0,0,0.4),rgba(0,0,0,0.6)),url("../../ikeja/networking.png");
+    background-size:cover;
+    height:200px;
+    width:250px; 
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    
+}
+
+
+
+.abatoir{
+    
+    background-image:linear-gradient(to right top,rgba(0,0,0,0.4),rgba(0,0,0,0.6)),url("../../mile12/abatoir.png");
+    background-size:cover;
+    height:200px;
+    width:250px; 
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    
+}
+
+
+
+.soup{
+    
+    background-image:linear-gradient(to right top,rgba(0,0,0,0.4),rgba(0,0,0,0.6)),url("../../mile12/soup.png");
+    background-size:cover;
+    height:200px;
+    width:250px; 
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    
+}
+
+
+
+.abatoir{
+    
+    background-image:linear-gradient(to right top,rgba(0,0,0,0.4),rgba(0,0,0,0.6)),url("../../mile12/abatoir.png");
+    background-size:cover;
+    height:200px;
+    width:250px; 
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    
+}
+
+
+
+.fruits{
+    
+    background-image:linear-gradient(to right top,rgba(0,0,0,0.4),rgba(0,0,0,0.6)),url("../../mile12/fruits.png");
+    background-size:cover;
+    height:200px;
+    width:250px; 
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    
+}
+
+
+
+.grains{
+    
+    background-image:linear-gradient(to right top,rgba(0,0,0,0.4),rgba(0,0,0,0.6)),url("../../mile12/grains.png");
+    background-size:cover;
+    height:200px;
+    width:250px; 
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    
+}
+
+
+
+.meat{
+    
+    background-image:linear-gradient(to right top,rgba(0,0,0,0.4),rgba(0,0,0,0.6)),url("../../mile12/meat.png");
+    background-size:cover;
+    height:200px;
+    width:250px; 
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    
+}
+
+
+
+.peppersoup{
+    
+    background-image:linear-gradient(to right top,rgba(0,0,0,0.4),rgba(0,0,0,0.6)),url("../../mile12/peppersoup.png");
+    background-size:cover;
+    height:200px;
+    width:250px; 
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    
+}
+
+
+.poultry{
+    
+    background-image:linear-gradient(to right top,rgba(0,0,0,0.4),rgba(0,0,0,0.6)),url("../../mile12/poultry.png");
+    background-size:cover;
+    height:200px;
+    width:250px; 
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    
+}
+
+
+
+.oil{
+    
+    background-image:linear-gradient(to right top,rgba(0,0,0,0.4),rgba(0,0,0,0.6)),url("../../mile12/oil.png");
+    background-size:cover;
+    height:200px;
+    width:250px; 
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    
+}
+
+
+
+.seafood {
+    
+    background-image:linear-gradient(to right top,rgba(0,0,0,0.4),rgba(0,0,0,0.6)),url("../../mile12/seafood.png");
+    background-size:cover;
+    height:200px;
+    width:250px; 
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    
+}
+
+
+.footer a{
+    text-decoration:none;
+}
+
+
+
+@media only screen and (min-width:376px) and (max-width:390px){
+
+    
+    .nav_login,.nav_signup{
+    
+    margin-left:40px;
+    font-weight: normal;
+    display: none;
+    
+    padding: 2px;
+    
+    border:2px solid white;
+    
+    }
+    
+    #think{
+    
+      font-size: 0.9rem !important;
+      text-decoration:none;
+    }
+    
+    
+    
+    }
+    
+    
+
+
+    @media only screen and (min-width:300px) and (max-width:430px){
+
+
+        .section_search{
+        text-align: left !important;
+        }
+        
+        
+        .section_search span{
+        
+        font-size: 12px;
+        position: relative;
+        left: -3px;
+        
+        }
+        
+        
+        .section_search input[type=search] {
+        
+          font-size: 14px;
+            width:160px !important;
+            margin-left: 8px;
+        
+        }
+        
+        }
+        
+        
+
+        @media only screen and (min-width:415px) and (max-width:430px){
+        
+        .nav_login,.nav_signup{
+        
+        margin-left:40px !important;
+        font-weight: normal !important;
+        display: none! important;
+        padding: 2px !important;
+        border:2px solid white !important;
+        
+        
+        }
+    
+        }
+        
+        
+        
+
+
+#think{
+    margin-left: 210px !important;
+    
+    }
+    
+    @media only screen and (min-width:497px) and (max-width:797px){
+    #think{
+    margin-left: 30px !important;
+    font-size: 1rem;
+    
+    }
+    }
+    
+    
+    
+    @media only screen and (max-width:797px){
+    #think{
+    margin-left: 30px !important;
+    
+    }
+    }
+    
+    
+    
+    
+    
+    
+    
+    @media only screen and (max-width:767px){
+    
+    .nav_login{
+    
+    margin-left:40px !important;
+    font-weight: normal !important;
+    
+    }
+    
+    }
+
+
+    
+
+.section_search{
+
+    text-align: center;
+    
+    }
+    
+    
+    
+    
+    @media only screen and (min-width:415px) and (max-width:498px){
+    
+    
+    .section_search{
+    text-align: left !important;
+    }
+    
+    
+    .section_search span{
+    
+    font-size: 12px;
+    position: relative;
+    left: -3px;
+    
+    }
+    
+    
+    }
+    
+    
+    
+    @media only screen and (min-width:498px) and (max-width:990px){
+    
+    
+    .section_search{
+    text-align: left !important;
+    }
+    
+    
+    .section_search span{
+    
+    font-size: 12px;
+    position: relative;
+    left: -1px;
+    
+    
+    }
+    
+    
+.category_select{
+
+	font-size: 13px;
+	margin-left:4px;
+	height: 33px;
+    width: 130px;
+	
+}
+
+.section_search input[type=search] {
+
+	font-size: 14px;
+    width:260px !important;
+    margin-left: 8px;
+
+}
+}
+
+
+
+
+
+.section_search input[type=search] {
+
+	
+	font-size: 14px;
+
+	width:400px;
+
+	margin-left: 10px;
+
+	height: 33px;
+
+	box-shadow: 0px 0px 3px rgba(0,70,90,0.5);
+
+	border:1px solid transparent;
+
+
+
+}
+
+
+
+
+
+@media only screen and (min-width:440px) and (max-width:797px){
+
+
+.section_search input[type=search] {
+
+	font-size: 13px;
+    width:205px;
+    margin-left: 5px;
+
+}
+
+
+}
+
+
+
+.section_search  select:focus{
+
+border:2px solid skyblue;
+outline: 2px solid skyblue;
+
+}
+
+
+
+
+
+
+.section_search input[type=search]:focus {
+
+	
+	outline: 2px solid skyblue;
+
+
+
+}
+
+    
+  
+
+
+.nav_signup{
+
+
+    border:1px solid none;
+    border-left:1px solid white;
+    border-left-color: rgba(192,192,192,1);
+    margin-left:0px;
+    font-weight: normal !important;
+    
+    
+    
+    }
+      
+    
+
+
+/*--------------------------------------------------------------
+# navigation bar mobile
+--------------------------------------------------------------*/
+
+@media only screen and (max-width:1200px){
+
+    .button_navigation{
+    
+    font-size:12px;
+    cursor: pointer;
+    color:black;
+    padding:5px 0px;
+    margin-right:10px !important;
+    font-weight: bold;
+    
+    }
+    
+    
+    }
+    
+    
+/*--------------------------------------------------------------
+# navigation bar 
+--------------------------------------------------------------*/
+
+
+.button_navigation{
+
+    font-family:poppins;
+    
+    float:left;
+    
+    font-size:13px;
+    
+    cursor: pointer;
+    
+    color:black;
+    
+    padding:8px 1px;
+    
+    margin-right:32px;
+    
+    font-weight: bold;
+    
+    }
+    
+    @media only screen and (max-width:1200px){
+    
+    .button_navigation{
+    
+    display: none;
+    
+    }
+    
+    
+    
+    
+    }
+    
+    .button_navigation:hover{
+    
+    opacity: 0.8;
+    
+    text-decoration: none;
+    
+    color: lightblue;
+    
+    }
+    
+    
+    .nav-container{
+        width: 100%;
+        margin-top: 30px;
+        /*display: flex;
+        align-items: center;
+        justify-content: space-between;*/	}
+    
+    
+    /*--------------------------------------------------------------
+    # anchor category
+    --------------------------------------------------------------*/
+    
+    
+    
+    @media only screen and (max-width:480px){
+    }
+    
+    /*--------------------------------------------------------------
+    # navigation bar img
+    --------------------------------------------------------------*/
+    
+    
+    .button_navigation img{
+    
+    width: 20px;
+    height: 18px;
+    
+    }
+    
+    
+    /*--------------------------------------------------------------
+    # navigation search bar
+    --------------------------------------------------------------*/
+    
+    
+    #input_search{
+    
+    font-size: 12px;
+    
+    border:1px solid transparent;
+    font-weight: normal;
+    
+    background-color: rgba(192,192,192,0.5);
+    border-radius: 12px;
+    
+    width: 390px;
+    
+    
+    }
+    
+    
+    /*--------------------------------------------------------------
+    # navigation search bar button
+    --------------------------------------------------------------*/
+    
+    
+    #btn-search{
+    
+        font-size: 10px;
+        border-radius:0px 13px 13px 0px;
+        margin-left: -80px;
+        padding: 8px 8px;
+        position: relative;
+    z-index: 9;
+    color: white !important;
+    }
+    
+    
+
+#package{
+
+background-color:white;padding-bottom: 8px;margin-bottom:50px;border:1px solid rgba(0,70,90,0.2);
+width:14rem;
+
+}
+
+.package-container{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:20px;
+   
+}
+    
+
+#package img{
+height:150px;
+width:100%;
+object-fit:cover;
+
+}
+
+
+@media screen and (min-width:414px) and (max-width:768px){
+    
+ #package{
+
+background-color:rgba(243,243,243,0.1);padding-bottom: 8px;margin-bottom:50px;border:1px solid rgba(0,70,90,0.2);
+width:12rem;
+
+}
+  
+  
+  .package-container{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:0;
+}
+     
+    
+}
+
+
+
+
+
+@media screen and (min-width:380px) and (max-width:413px){
+    
+ #package{
+
+background-color:rgba(243,243,243,0.1);padding-bottom: 8px;margin-bottom:50px;border:1px solid rgba(0,70,90,0.2);
+width:10.4rem;
+
+
+}
+  
+  
+  .package-container{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:0;
+}
+     
+    
+}
+
+
+
+
+/*--------------------------------------------------------------
+# product list
+--------------------------------------------------------------*/
+
+
+#priceitem{
+
+font-family:Poppins;
+font-weight: bold;
+color:black;
+opacity: 0.8;
+text-transform:capitalize;
+font-size:14px;
+padding:10px;
+position: relative;
+margin-bottom: 8px;
+
+
+}
+
+
+
+
+#conitem,#locitem,#catitem{
+font-size:12px;
+font-family:poppins;
+color: rgba(0,0,0,0.9);
+padding:10px;
+width:100%;
+font-weight: bold;
+text-transform: capitalize;
+
+
+}
+
+
+#nameitem a{
+  font-size:12px;
+  font-weight:normal;
+  padding-left:10px;
+  text-transform:capitalize;
+  color: rgba(0,0,0,0.4);
+  padding-top: 8px;
+  word-wrap:break-word;
+ text-align:center;
+  font-family:poppins;  
+  text-decoration:none;
+}
+
+
+
+
+@media screen and (min-width:320px) and (max-width:379px){
+    
+ #package{
+
+background-color:rgba(243,243,243,0.1);padding-bottom: 8px;margin-bottom:50px;border:1px solid rgba(0,70,90,0.2);
+width:9.8rem;
+padding-bottom:10px;
+
+}
+  
+  
+  .package-container{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:0px;
+}
+   
+   
+      .nav_login,.nav_signup{
+    
+    margin-left:40px !important;
+    font-weight: normal !important;
+    display: none! important;
+    
+    padding: 2px !important;
+    
+    border:2px solid white !important;
+    
+    }  
+    
+}
+
+
+/*--------------------------------------------------------------
+# footer
+--------------------------------------------------------------*/
+
+.footer h6{
+
+    font-weight: bold;
+  
+    font-size: 16px;
+  
+    margin-bottom: 10px;
+  }
+  
+  
+  .footer p{
+  
+    font-size: 13px;
+  }
+  
+  
+  .footer{
+    padding: 10px 20px;
+  
+    background-color: rgba(192,192,192,0.5);
+  }
+  
+  
+  .footer img{
+  
+  width: 140px;
+  
+  }
+  
+  .footer button{
+  
+    font-size: 13px;
+  
+    border:1px solid transparent;
+  
+    background-color: rgba(0,0,0,0.6);
+  
+    color: white;
+  
+    margin-bottom: 8px;
+  
+  
+  }
+  
+  
+  .footer .col-md-4{
+      padding:10px;
+  }
+  
+  .footer{
+  
+      margin-top: 30px;
+  }
+  
+
+  
+  @media only screen and (max-width:1200px){
+  
+  .button_navigation{
+  
+  display: none;
+  
+  }
+  
+  
+  }
+  
+  

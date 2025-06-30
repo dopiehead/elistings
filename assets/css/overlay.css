@@ -1,0 +1,120 @@
+
+
+.overlay{
+	display: none;
+}
+
+.overlay .close-btn{
+display: none;
+
+
+}
+
+.overlay a:hover,.overlay a:focus{
+  color:red;
+  text-decoration: none;
+}
+
+
+#open-btn{
+   display: none;
+
+}
+
+
+
+
+
+@media only screen and (max-width:767px){
+
+
+.overlay{
+height: 0%;
+width: 100%;
+display: block;
+position:absolute;
+z-index: 300;
+top: 12px;
+right: 0;
+color:#818181;
+background-color: rgba(0,60,90,1);
+overflow-x:hidden;
+
+
+}
+.overlay-content{
+position:relative;
+top:8%;
+width: 100%;
+text-align: center;
+
+}
+
+.overlay a{
+padding: 5px;
+font-size:14px !important;
+color: white; 
+display: block;
+text-transform: capitalize;
+font-weight:200;
+font-family:poppins;
+transition: 0.3s;
+}
+
+#section_heart{
+ 
+ display: flex!important;
+align-items: flex-start;
+justify-content: space-around;
+width: 30%;
+display: inline-block;
+}
+
+#nav_button{
+
+  display: inline-block !important;
+  font-family: poppins;
+}
+
+
+
+.overlay .close-btn{
+position: absolute;
+top:-1px;
+left:13px;
+font-size:19px;
+color:white;
+border:1px solid transparent;
+border-radius:50%;
+padding:0px 10px;
+z-index: 300;
+display: block;
+
+}
+
+.overlay a:hover,.overlay a:focus{
+  color:red !important;
+  text-decoration: none;
+}
+
+
+#open-btn{
+   display: block;
+  color: white;
+  font-size:18px;
+  position: absolute;
+  cursor: pointer;
+  top:1px !important;
+  left: 35px;
+  margin-left: 20px;
+
+  
+  
+}
+
+
+
+
+
+
+}
