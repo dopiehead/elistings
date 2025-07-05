@@ -57,7 +57,6 @@ $dbc=mysqli_query($conn,$sql);
 while ($row = mysqli_fetch_array($dbc)) {
 $mydiscount = $row['discount'];
   }
-  
 }
  ?>
 <!--------------------------------------------- Discount form---------------------------------------------------------------------------------------->
@@ -66,16 +65,16 @@ $mydiscount = $row['discount'];
 <p>Discount(%)</p>
 <input type="number" maxlength="18" min="0" name = "dis" style="" placeholder="%" value="<?php echo $mydiscount; ?>">
 <input type="submit" name="submit-discount" id="submit-discount"  value="Update" class="btn btn-update btn-info" style="">
-<div align="center" style="display: none;" id="loading-image"><img id="loader" height="50" width="80" src="loading-image.GIF"></div>
+<div class="text-center" style="display: none;" id="loading-image"><img id="loader" height="50" width="80" src="loading-image.GIF"></div>
   </form>
 
 <!--------------------------------------------- Picture  form---------------------------------------------------------------------------------------->
 <form id="myformx"  method="post" enctype="multipart/form-data">
-<p align="center" id="pic-details"><i class="fa fa-camera"></i> Please upload at least one image below 2mb in 'jpeg' or 'png' format only.</p>
-<input type="hidden" name="pict" value="<?php echo$id;?>"> 
+<p class="text-center" id="pic-details"><i class="fa fa-camera"></i> Please upload at least one image below 2mb in 'jpeg' or 'png' format only.</p>
+<input type="hidden" name="pict" value="<?= htmlspecialchars($id);?>"> 
 <input type="file" name="fileupload[]" accept="image/*" multiple="multiple"><br><br>
 <input type="submit" name="submitx" id="submitx" style="color: white;" class="btn btn-info form-control" value=" Submit" >
-<div align="center" style="display: none;" id="loading-image"><img id="loader" height="50" width="80" src="loading-image.GIF"></div>
+<div class="text-center" style="display: none;" id="loading-image"><img id="loader" height="50" width="80" src="loading-image.GIF"></div>
 </form>
 </div>
 

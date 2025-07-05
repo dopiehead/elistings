@@ -1,5 +1,10 @@
 <?php session_start();
 require 'engine/get-dollar.php';
+$num_per_page = 10;
+$page = isset($_POST['page']) ? (int) $_POST['page'] : 1;
+$page = max($page, 1);
+$initial_page = ($page - 1) * $num_per_page;
+
 if (!empty($_SESSION["id"])) {
 $date = $_SESSION['date'];
 $myid = $_SESSION['id'];
@@ -55,6 +60,21 @@ $condition .= " AND product_price <= '".htmlspecialchars($price)."'";
 }
 
 $discount = mysqli_query($conn,$condition);
+
+
+
+
+// ---------- COUNT TOTAL RECORDS ----------
+$countQuery = "SELECT COUNT(*) AS total FROM item_detail";
+$countStmt = $conn->prepare($countQuery);
+$countStmt->execute();
+$countResult = $countStmt->get_result();
+$totalRecords = $countResult->fetch_assoc()['total'];
+
+$from = $initial_page + 1;
+$to = min($initial_page + $num_per_page, $totalRecords);
+
+
 if ($discount ->num_rows>0) {
 echo"<p><b>".$discount ->num_rows." item(s)</b></p>";
 echo "<table><tbody id='mytable' class=''>";
@@ -110,6 +130,34 @@ else{
 
 
 ?>
+
+<div class="text-center mt-4">
+<?php
+$total_num_page = ceil($totalRecords / $num_per_page);
+$radius = 2;
+
+if ($page > 1) {
+    echo '<span id="page_num"><a class="btn-dark btn-success btn-pagination prev" id="' . ($page - 1) . '">&lt;</a></span>';
+}
+
+for ($i = 1; $i <= $total_num_page; $i++) {
+    if (
+        $i <= $radius ||
+        ($i >= $page - $radius && $i <= $page + $radius) ||
+        $i > $total_num_page - $radius
+    ) {
+        $active = $i == $page ? 'active-button' : '';
+        echo "<span id='page_num'><a class='btn-dark btn-success btn-pagination $active' id='$i'>$i</a></span>";
+    } elseif ($i == $page - $radius - 1 || $i == $page + $radius + 1) {
+        echo "... ";
+    }
+}
+
+if ($page < $total_num_page) {
+    echo '<span id="page_num"><a class="btn-dark  btn-success btn-pagination next" id="' . ($page + 1) . '">&gt;</a></span>';
+}
+?>
+</div>
 
 
 <div id="play" class='popupmodal active'>

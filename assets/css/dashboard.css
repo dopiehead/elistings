@@ -1,0 +1,509 @@
+
+body{
+
+    font-family: poppins;
+  }
+  
+  
+  #discount{
+  
+    display: none;
+  }
+  
+  
+  
+  #count{
+  
+  
+  color:white;
+  background-color: red;
+  border-radius: 50%;
+  padding:0px 5px !important;
+  font-weight: bold;
+  position: absolute;
+  margin-top: -5px;
+  font-size: 10px;
+  z-index: 1;
+  
+  }
+  
+  
+  
+  
+  
+  
+  .notification{
+  
+  color:white;
+  background-color: red;
+  padding:0px 8px;
+  border-radius:50%;
+  margin-top:-5px;
+  font-size:10px;
+  position: absolute;
+  }
+  
+  
+  #views{
+  
+    display: none;
+  }
+
+  
+  #request{
+  display: inline-block;
+  width:187px;
+  background-color:#cce6ff;
+  margin-right:6px;
+  margin-bottom: 10px;
+  padding:7px;
+  border-radius: 15px;
+  }
+  
+  
+  
+  
+  @media only screen and (max-width:497px){
+  
+  #request{
+  display: inline-block;
+  width:100%;
+  background-color:#cce6ff;
+  margin-right:6px;
+  margin-bottom: 10px;
+  padding:7px;
+  border-radius: 15px;
+  }
+  
+  
+  
+  }
+  
+  
+  
+  
+  
+  #request h6{
+  
+    color:blue;
+  
+    font-weight: bold;
+  
+    font-size: 14px;
+  }
+  
+  
+  
+  @media only screen and (max-width:497px){
+  
+  
+  #request h6{
+  
+    color:blue;
+  
+    font-weight: bold;
+  
+    font-size: 18px;
+  }
+  
+  
+  
+  
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  #request p{
+  
+  
+  
+  font-size: 21px;
+  
+  color:blue;
+  
+  font-weight: bold;
+  
+  
+  }
+  
+  
+  #request .fa-star{
+  
+  
+    color:white;
+  
+   font-size:0.8rem;
+  
+   
+  }
+  
+  
+  
+  #deals{
+  
+  background-color: red;
+  
+  border:1px solid transparent;
+  
+  border-radius:50%;
+  
+  padding:8px;
+  
+  
+  }
+  
+  
+  #listings{
+  
+  
+  background-color:green;
+  
+  border:1px solid transparent;
+  
+  border-radius:50%;
+  
+  padding:8px;
+  }
+  
+  
+  
+  
+   .fa-shopping-cart{color: white;background-color: green;border-radius: 50%;padding: 8px;font-size:13px; }
+  .fa-eye{color: white;background-color: rgba(192,192,192,0.7);border-radius: 50%;padding: 8px;}
+  .fa-share-alt{color: white;background-color:red;border-radius: 50%; padding: 8px;}
+  .fa-comments{color: white;background-color:skyblue;border-radius: 50%;padding: 8px;}
+  
+  
+  
+  
+  
+  #bar-chart{
+  padding: 20px;
+  
+  border:2px solid rgba(0,0,70,0.3);
+  
+  margin-top: 25px;
+  
+  border-radius: 15px;
+  
+  }
+  
+  
+  
+  #star{
+  
+    font-size:11px;
+  
+    color:blue;
+  }
+  
+  
+  #date{
+  
+  float: right;margin-right: 13px;
+  }
+  
+  
+  .computer_details input{
+  
+  font-size: 12px;
+  margin-left: 45px;
+  
+  border:1px solid transparent;
+  
+  box-shadow: 0px 0px 3px rgba(0,0,0,0.6);
+  
+  
+  }
+  
+  
+  .computer_details input:focus{
+  
+  outline: 2px solid skyblue !important;
+  border:2px solid skyblue !important;
+  
+  
+  }
+  
+  
+  
+  
+  
+   #label{
+  
+  font-size: 12px;
+  
+  
+  }
+  
+  
+  
+  
+  
+  
+  
+  @media only screen and (max-width:767px){
+  
+  input::placeholder{
+  
+  
+    text-align: left;
+  }
+  
+  #date{
+  
+  
+  margin-right: 25px;
+  font-size: 12px;
+  }
+  
+  
+  #battery{
+  
+    font-size: 11px;
+  }
+  
+  }
+  
+  
+  
+ 
+  
+   select{
+  
+    font-size: 12px !important;
+    margin-top: 10px;
+  
+  
+  }
+  
+  @media only screen  and (max-width:498px){
+  
+   select{
+  
+    font-size: 13px !important;
+    margin-top: 10px;
+  
+  
+  }
+  
+  }
+  
+  
+  .col-md-6{
+  
+  
+    margin-top: 10px;
+  
+  }
+  
+  
+  
+  .col-md-6 h6{
+  
+    font-weight: bold;
+  
+    font-size: 15px;
+  }
+  
+  
+  .col-md-9 h6{
+  
+    font-weight: bold;
+  }
+  
+  
+  #label{
+  
+    font-size: 13px;
+
+  
+    padding: 20px 23px;
+  
+    width: 100%;
+    height:600px;
+    overflow-y: auto;
+    margin-top: 30px;
+  }
+  
+  
+  
+  #product input{
+  
+    width: 100%;
+  
+    
+  }
+  
+  
+  /*--------------------------------------------------------------
+  # circle
+  --------------------------------------------------------------*/
+  
+  
+  
+  #higher{
+  
+    margin-bottom: 10px;
+  
+    margin-top: 10px;
+  
+   color: skyblue !important;
+  
+    font-size: 25px;
+  
+    margin-left: 10px;
+  }
+  
+  
+  
+  
+  
+  
+  #high{
+  
+    margin-bottom: 10px;
+  
+    margin-top: 10px;
+  
+   color: rgba(192,192,192,0.6) !important;
+  
+    font-size: 25px;
+  
+    margin-left: 10px;
+  }
+  
+  
+  
+  #highest{
+  
+    margin-bottom: 10px;
+  
+    margin-top: 10px;
+  
+   color: skyblue !important;
+  
+    font-size: 25px;
+  
+    margin-left: 10px;
+  }
+  
+  
+  @media only screen and (max-width:497px){
+  
+  
+  
+  
+  }
+  
+  
+  /*--------------------------------------------------------------
+  # pie chart
+  --------------------------------------------------------------*/
+  
+  
+    .chart-container {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      background: conic-gradient(
+        red 0% 45%,
+        green 45% 70%,
+        lightblue 70% 90%,
+        rgba(192,192,192,1) 90% 100%
+      );
+    }
+  
+  
+  
+    .chart-inner {
+      position: absolute;
+      top: 25px; /* Adjust to control the inner circle size */
+      left: 25px; /* Adjust to control the inner circle size */
+      width: 150px; /* Adjust to control the inner circle size */
+      height: 150px; /* Adjust to control the inner circle size */
+      border-radius: 50%;
+      background-color:#f1f1f1;
+    }
+  
+    
+    .label {
+      position: absolute;
+      font-size: 14px;
+      font-weight: bold;
+    }
+    .label.red { color: yellow; top: 5px; left: 110px; }
+    .label.green { color: green; top: 110px; right: 5px; }
+    .label.lightblue { color: lightblue; bottom: 5px; left: 45px; }
+    .label.blue { color: blue; bottom: 60px; left: 5px; }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  /*--------------------------------------------------------------
+  # progress circle
+  --------------------------------------------------------------*/
+   
+  .progress-circle::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 80%;
+      height: 80%;
+      background-color: #fff;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+  }
+  
+  .progress-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 14px;
+      color: #333;
+      text-align: center;
+  }
+  
+  
+  
+  
+  
+  .fa-bell{
+  
+    font-size: 21px;
+  
+  }
+  
+  
+  .button_dashboard{
+  
+    margin-top: 10px;
+  }
+  
+  .button_logout{
+  
+    margin-top: 10px;
+  }
+  
+  .button_logout:hover{
+  
+    text-decoration: none;
+  
+    color:red;
+  }
+  

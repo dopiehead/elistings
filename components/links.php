@@ -13,6 +13,7 @@
           <link rel="stylesheet" href="mobile-view.css">
           <script src="assets/js/sweetalert.min.js"></script> 
   <script src="assets/js/jquery-1.11.3.min.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
 <script src="assets/js/flickity.pkgd.min.js"></script>
 <script type="text/javascript" src="assets/js/jquery.lazy.min.js"></script>
 <script src="assets/js/subscription.js"></script>

@@ -121,10 +121,6 @@
 }
 
 .notification-bubble {
-    position: absolute;
-    right: 20px;
-    top: 50%;
-    transform: translateY(-50%);
     width: 120px;
     height: 60px;
     background: linear-gradient(135deg, #e3f2fd, #bbdefb);

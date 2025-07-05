@@ -1,0 +1,150 @@
+
+  
+  
+  #user_image{
+  
+    height: 130px;
+  
+    width: 130px;
+  
+    border-radius: 50%;
+  
+    padding: 5px;
+  
+    border:2px solid skyblue;
+  
+  
+  }
+  
+  
+  
+  
+  
+  #user_name{
+ 
+  
+  font-weight: bold;
+  
+  font-size: 13px !important;
+  
+  text-transform:capitalize;
+  }
+  
+  
+  
+  #user_email{
+  
+  font-size: 13px !important;
+  
+  }
+  
+  
+  
+  @media only screen and (max-width:497px){
+  
+  
+  
+  #user_email{
+  
+  font-size: 14px !important;
+  
+  
+  }
+  
+  
+  #user_name{
+  
+  font-weight: bold;
+  
+  font-size: 15px !important;
+  
+  text-transform:capitalize;
+  }
+  
+  
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  @media only screen and (min-width:498px) and (max-width:767px){
+  
+  
+  
+  #user_email{
+  
+  font-size: 14px !important;
+  
+  
+  
+  
+  }
+  
+  #user_name{
+  
+  font-weight: bold;
+  
+  font-size: 14px !important;
+  
+  }
+  
+  
+  }
+  
+  
+
+  @media only screen and (min-width:768px) and (max-width:1203px){
+  
+  #user_email{
+  
+  font-size: 13px !important;
+  
+  }
+   
+  }
+  
+ 
+  
+  .col-md-2 select{
+  
+    font-size: 12px;
+    margin-top: 10px;
+  
+    text-align-last: center;
+  }
+  
+  @media only screen and (max-width:767px){
+  
+  
+  .col-md-2 select{
+  
+  
+    text-align-last:left;
+  }
+  
+  
+  
+  }
+  
+  
+  @media only screen  and (min-width:498px) and (max-width:767px){
+  
+  #user_email{
+ 
+  
+  font-size: 13px !important;
+  
+  }
+  
+  }
+  
+  
+  
+  
+  

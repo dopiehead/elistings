@@ -22,10 +22,8 @@ if (empty($compose)) {
 
     $result = mysqli_query($conn, $insert_query);
 
- 
     if ($result) {
-        
-   
+          
         // Send email using PHPMailer
         require '../PHPMailer-master/PHPMailer-master/PHPMailerAutoload.php';
 
@@ -45,9 +43,9 @@ $mail->SMTPAuth=true;
 
 $mail->SMTPSecure='ssl';
 
-$mail->Username='info@estores.ng';
+$mail->Username = $_ENV['userName'];
 
-$mail->Password="j(Mr7DlV7Oog";
+$mail->Password = $_ENV['password'];
 
 $mail->setFrom('info@estores.ng','estores.ng');
 

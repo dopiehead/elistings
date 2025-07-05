@@ -62,7 +62,6 @@ endif;
 
 <option value="buyer">Buyer</option>
 <option value="vendor">Vendor</option>
-<option value="service_provider">Service Provider</option>
 <option value="admin">Admin</option>
 
 </select><br>

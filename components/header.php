@@ -28,15 +28,22 @@
 
                         <!-- Authentication Links -->
                         <div class="auth-links d-none d-sm-flex">
-                            <a href="login.php" class="auth-link">Log In</a>
+                            <?php if(!isset($_SESSION['id']) && !isset($_SESSION['business_id'])): ?>
+                               <a href="login.php" class="auth-link">Log In</a>
                             <div class="divider"></div>
-                            <a href="join-us.php" class="auth-link">Sign Up</a>
+                               <a href="join-us.php" class="auth-link">Sign Up</a>
+                            <?php else : ?>
+                                <div class="divider"></div>
+                                <a href="dashboard.php" class="auth-link">Profile</a> 
+                            <?php endif ?>
                         </div>
 
                         <!-- Get Started Button -->
+                        <?php if(!isset($_SESSION['id']) && !isset($_SESSION['business_id'])): ?>
                         <a href="join-us.php" class="btn-get-started">
                             Get Started
                         </a>
+                        <?php endif ?>
                     </div>
                 </div>
             </div>
@@ -45,8 +52,12 @@
             <div class="row d-sm-none mt-2">
                 <div class="col-12">
                     <div class="auth-links justify-content-center">
+                    <?php if(!isset($_SESSION['id']) && !isset($_SESSION['business_id'])): ?>
                         <a href="login.php" class="auth-link">Log In</a>
-                        <a href="join-us" class="auth-link">Sign Up</a>
+                        <a href="join-us.php" class="auth-link">Sign Up</a>
+                    <?php else : ?>
+                        <a href="dashboard.php" class="auth-link">Profile</a>   
+                    <?php endif ?>
                     </div>
                 </div>
             </div>

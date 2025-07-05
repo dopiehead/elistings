@@ -1680,14 +1680,14 @@ while ($states = mysqli_fetch_array($getStates)) {
 
 <textarea  style="border:1px solid transparent" class="form-control" name="services" placeholder="Services Your Organization Provides, ...." wrap="physical"></textarea><br>
 
+
+
 <select name="business_category" id="business_category" class="form-control" style="text-transform: capitalize;">
+
 <?php
-
-$query_category = mysqli_query($conn,"SELECT e_auto_categories FROM categories");
-
-while ($row = mysqli_fetch_array($query_category)) {?>
-
-<option value="<?php echo$row['e_auto_categories']?>"><?php echo$row['e_auto_categories']?></option>
+$categories = ['Autoparts','Vehicles','Property','Building_materials','Mobile Phones & Tablets','Electronics','Home, Furniture & Appliances','Beauty & Personal Care','Fashion','Leisure & Activities','Jobs','Babies & Kids','Animals & Pets','Farm products','Commercial Equipment & Tools','Repair & Construction','hotel_products'];
+foreach ($categories as $category) { ?>
+  <option value="<?= htmlspecialchars($category)?>"><?= htmlspecialchars($category) ?></option>
 <?php } ?>
 
 </select><br>
@@ -1890,19 +1890,10 @@ var location = $(this).val();
            $("#editpage-details")[0].reset();
            
             $(".loading-image").hide();
-
-           
-              
-
-
+            
               $("#myformx").hide();
-
-
-
           }
-            
-            
-
+    
              else{
 
               swal({
@@ -1925,7 +1916,6 @@ var location = $(this).val();
 
     });
 
-
 </script>
 
 
@@ -1934,10 +1924,6 @@ var location = $(this).val();
 function cancel() {
 $("#editpage-details")[0].reset();
 }
-
-
-
-
 </script>
 
 <!--Start of Tawk.to Script-->
@@ -1953,13 +1939,6 @@ s0.parentNode.insertBefore(s1,s0);
 })();
 </script>
 <!--End of Tawk.to Script-->
-
-
-
-
-
-
-
 
 
 </body>

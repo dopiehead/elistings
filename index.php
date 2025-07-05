@@ -112,103 +112,46 @@ else{
             <!-- Brands Grid -->
             <div class="brands-container">
                 <div class="brands-grid">
-                    <div class="brand-card">
-                        <div class="brand-icon">P</div>
-                        <div class="brand-name">Product</div>
-                        <div class="brand-category">Category</div>
-                    </div>
-                    <div class="brand-card">
-                        <div class="brand-icon">P</div>
-                        <div class="brand-name">Product</div>
-                        <div class="brand-category">Category</div>
-                    </div>
-                    <div class="brand-card">
-                        <div class="brand-icon">P</div>
-                        <div class="brand-name">Product</div>
-                        <div class="brand-category">Category</div>
-                    </div>
-                    <div class="brand-card">
-                        <div class="brand-icon">P</div>
-                        <div class="brand-name">Product</div>
-                        <div class="brand-category">Category</div>
-                    </div>
-                    <div class="brand-card">
-                        <div class="brand-icon">P</div>
-                        <div class="brand-name">Product</div>
-                        <div class="brand-category">Category</div>
-                    </div>
-                    <div class="brand-card">
-                        <div class="brand-icon">P</div>
-                        <div class="brand-name">Product</div>
-                        <div class="brand-category">Category</div>
-                    </div>
+                <?php
+$brands = [
+    ['icon' => 'P', 'name' => 'Product', 'category' => 'Category'],
+    ['icon' => 'P', 'name' => 'Product', 'category' => 'Category'],
+    ['icon' => 'P', 'name' => 'Product', 'category' => 'Category'],
+    ['icon' => 'P', 'name' => 'Product', 'category' => 'Category'],
+    ['icon' => 'P', 'name' => 'Product', 'category' => 'Category'],
+    ['icon' => 'P', 'name' => 'Product', 'category' => 'Category'],
+];
+
+foreach ($brands as $brand): ?>
+    <div class="brand-card">
+        <div class="brand-icon"><?= htmlspecialchars($brand['icon']) ?></div>
+        <div class="brand-name"><?= htmlspecialchars($brand['name']) ?></div>
+        <div class="brand-category"><?= htmlspecialchars($brand['category']) ?></div>
+    </div>
+<?php endforeach; ?>
                 </div>
 
                 <!-- Scrolling Brands (Alternative Layout) -->
                 <div class="brands-scroll d-none">
                     <div class="brands-track">
                         <!-- First set -->
-                        <div class="brand-card">
-                            <div class="brand-icon">P</div>
-                            <div class="brand-name">Product</div>
-                            <div class="brand-category">Category</div>
-                        </div>
-                        <div class="brand-card">
-                            <div class="brand-icon">P</div>
-                            <div class="brand-name">Product</div>
-                            <div class="brand-category">Category</div>
-                        </div>
-                        <div class="brand-card">
-                            <div class="brand-icon">P</div>
-                            <div class="brand-name">Product</div>
-                            <div class="brand-category">Category</div>
-                        </div>
-                        <div class="brand-card">
-                            <div class="brand-icon">P</div>
-                            <div class="brand-name">Product</div>
-                            <div class="brand-category">Category</div>
-                        </div>
-                        <div class="brand-card">
-                            <div class="brand-icon">P</div>
-                            <div class="brand-name">Product</div>
-                            <div class="brand-category">Category</div>
-                        </div>
-                        <div class="brand-card">
-                            <div class="brand-icon">P</div>
-                            <div class="brand-name">Product</div>
-                            <div class="brand-category">Category</div>
-                        </div>
-                        <!-- Duplicate set for seamless loop -->
-                        <div class="brand-card">
-                            <div class="brand-icon">P</div>
-                            <div class="brand-name">Product</div>
-                            <div class="brand-category">Category</div>
-                        </div>
-                        <div class="brand-card">
-                            <div class="brand-icon">P</div>
-                            <div class="brand-name">Product</div>
-                            <div class="brand-category">Category</div>
-                        </div>
-                        <div class="brand-card">
-                            <div class="brand-icon">P</div>
-                            <div class="brand-name">Product</div>
-                            <div class="brand-category">Category</div>
-                        </div>
-                        <div class="brand-card">
-                            <div class="brand-icon">P</div>
-                            <div class="brand-name">Product</div>
-                            <div class="brand-category">Category</div>
-                        </div>
-                        <div class="brand-card">
-                            <div class="brand-icon">P</div>
-                            <div class="brand-name">Product</div>
-                            <div class="brand-category">Category</div>
-                        </div>
-                        <div class="brand-card">
-                            <div class="brand-icon">P</div>
-                            <div class="brand-name">Product</div>
-                            <div class="brand-category">Category</div>
-                        </div>
+                        <?php
+$brands = [
+    ['icon' => 'P', 'name' => 'Product', 'category' => 'Category'],
+    ['icon' => 'P', 'name' => 'Product', 'category' => 'Category'],
+    ['icon' => 'P', 'name' => 'Product', 'category' => 'Category'],
+    ['icon' => 'P', 'name' => 'Product', 'category' => 'Category'],
+    ['icon' => 'P', 'name' => 'Product', 'category' => 'Category'],
+    ['icon' => 'P', 'name' => 'Product', 'category' => 'Category'],
+];
+
+foreach ($brands as $brand): ?>
+    <div class="brand-card">
+        <div class="brand-icon"><?= htmlspecialchars($brand['icon']) ?></div>
+        <div class="brand-name"><?= htmlspecialchars($brand['name']) ?></div>
+        <div class="brand-category"><?= htmlspecialchars($brand['category']) ?></div>
+    </div>
+<?php endforeach; ?>
                     </div>
                 </div>
             </div>
@@ -350,117 +293,36 @@ while ($row = mysqli_fetch_array($query_category)) { ?>
         <!-- Groups Grid -->
         <div class="row g-3 mb-4">
             <!-- IT news group -->
-            <div class="col-md-2 col-6">
-                <div class="group-card">
-                    <div class="group-image">
-                        <div class="people">
-                            <div class="person"></div>
-                            <div class="person"></div>
-                            <div class="person"></div>
-                        </div>
-                    </div>
-                    <div class="group-title">IT news</div>
-                    <div class="group-stats">
-                        <span>1 Member</span>
-                        <span>0 Posts today</span>
-                    </div>
-                    <button class="join-btn">Join</button>
-                </div>
-            </div>
-            
-            <!-- Tech group -->
-            <div class="col-md-2 col-6">
-                <div class="group-card">
-                    <div class="group-image">
-                        <div class="people">
-                            <div class="person"></div>
-                            <div class="person"></div>
-                            <div class="person"></div>
-                        </div>
-                    </div>
-                    <div class="group-title">Tech group</div>
-                    <div class="group-stats">
-                        <span>1 Member</span>
-                        <span>0 Posts today</span>
-                    </div>
-                    <button class="join-btn">Join</button>
-                </div>
-            </div>
-            
-            <!-- Group -->
-            <div class="col-md-2 col-6">
-                <div class="group-card">
-                    <div class="group-image">
-                        <div class="people">
-                            <div class="person"></div>
-                            <div class="person"></div>
-                            <div class="person"></div>
-                        </div>
-                    </div>
-                    <div class="group-title">Group</div>
-                    <div class="group-stats">
-                        <span>1 Member</span>
-                        <span>0 Posts today</span>
-                    </div>
-                    <button class="join-btn">Join</button>
-                </div>
-            </div>
-            
-            <!-- Essential staff -->
-            <div class="col-md-2 col-6">
-                <div class="group-card">
-                    <div class="group-image">
-                        <div class="people">
-                            <div class="person"></div>
-                            <div class="person"></div>
-                            <div class="person"></div>
-                        </div>
-                    </div>
-                    <div class="group-title">Essential staff</div>
-                    <div class="group-stats">
-                        <span>1 Member</span>
-                        <span>0 Posts today</span>
-                    </div>
-                    <button class="join-btn">Join</button>
-                </div>
-            </div>
-            
-            <!-- Health group -->
-            <div class="col-md-2 col-6">
-                <div class="group-card">
-                    <div class="group-image">
-                        <div class="people">
-                            <div class="person"></div>
-                            <div class="person"></div>
-                            <div class="person"></div>
-                        </div>
-                    </div>
-                    <div class="group-title">Health group</div>
-                    <div class="group-stats">
-                        <span>1 Member</span>
-                        <span>0 Posts today</span>
-                    </div>
-                    <button class="join-btn">Join</button>
-                </div>
-            </div>
+            <?php
+$groups = [
+    'IT news',
+    'Tech group',
+    'Group',
+    'Essential staff',
+    'Health group',
+    'IT group'
+];
 
-            <div class="col-md-2 col-6">
-                <div class="group-card">
-                    <div class="group-image">
-                        <div class="people">
-                            <div class="person"></div>
-                            <div class="person"></div>
-                            <div class="person"></div>
-                        </div>
-                    </div>
-                    <div class="group-title">IT group</div>
-                    <div class="group-stats">
-                        <span>1 Member</span>
-                        <span>0 Posts today</span>
-                    </div>
-                    <button class="join-btn">Join</button>
+foreach ($groups as $groupTitle): ?>
+    <div class="col-md-2 col-6">
+        <div class="group-card">
+            <div class="group-image">
+                <div class="people">
+                    <div class="person"></div>
+                    <div class="person"></div>
+                    <div class="person"></div>
                 </div>
             </div>
+            <div class="group-title"><?= htmlspecialchars($groupTitle) ?></div>
+            <div class="group-stats">
+                <span>1 Member</span>
+                <span>0 Posts today</span>
+            </div>
+            <button class="join-btn">Join</button>
+        </div>
+    </div>
+<?php endforeach; ?>
+
         </div>
         <br><br>
         
@@ -469,8 +331,8 @@ while ($row = mysqli_fetch_array($query_category)) { ?>
 
         <div class="notification-box">
             <br>
-            <div class="d-flex align-items-center">
-                <a href="#" class="click-here-btn">Click Here</a>
+            <div class="d-flex align-items-center flex-md-row flex-column">
+                <div><a href="#" class="click-here-btn">Click Here</a></div>
                 <div class="notification-text">
                     <strong>Here are some reported culprits</strong><br>
                     consectetur. Ullamcorper<br>

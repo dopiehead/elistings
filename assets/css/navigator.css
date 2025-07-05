@@ -1,0 +1,155 @@
+  
+  /*--------------------------------------------------------------
+  # overlay dashboard
+  --------------------------------------------------------------*/
+  
+  #overlay{
+  
+    display: block;
+    position:relative;
+    z-index:1;
+    width: 100%;
+    background-color:rgb(126, 15, 19);
+    
+    }
+    
+    
+    .overlay-content{
+    position:relative;
+    top: 28px;
+    width: 100%;
+    text-align:left;
+    margin-left: 20px;
+    }
+    
+    #overlay a{
+    padding: 5px;
+    font-size:17px;
+    color:rgb(255, 255, 255) !important;
+    display: block;
+    text-transform: capitalize;
+    font-weight:normal;
+     font-family:poppins;
+    transition: 0.3s;
+    }
+    
+    
+    @media only screen and (max-width:497px){
+    
+    #overlay a{
+    padding: 5px;
+    font-size:14px !important;
+    color:rgb(255, 255, 255) !important;
+    display: block;
+    text-transform: capitalize;
+    font-weight:normal;
+     font-family:poppins;
+    transition: 0.3s;
+    }
+    
+    
+    #overlay{
+        
+     display:none;   
+    }
+    }
+    
+    
+    
+    .overlay a:hover,.overlay a:focus{
+      opacity: 0.5;
+      text-decoration: none;
+    }
+    
+    #overlay hr{
+    
+      border:2px solid rgb(255, 255, 255);
+    
+      width: 40%;
+    
+      position: absolute;
+    
+      left: 0% !important;
+    
+      margin-top: 10px;
+    
+    }
+    
+  
+    #active{
+    
+     background-color:rgba(255, 255, 255, 0.505);
+    
+      width: 100%;
+  
+      color:black !important;
+  
+    }
+    
+    
+    @media only screen and (max-width:767px){
+    
+    
+    #overlay{
+    
+      overflow-x:hidden;
+      overflow-y:hidden;
+    
+    
+    
+    }
+    
+    
+    #overlay hr{
+    
+     width: 20%;
+    
+    
+    
+    }
+    
+    
+    }
+    
+    
+    
+    
+    
+    @media only screen and (max-width:468px){
+    
+    
+    #overlay{
+    
+      overflow-x:hidden;
+      overflow-y:hidden;
+    }
+    
+    
+    #overlay hr{
+    
+     width: 20%;
+    
+    
+    
+    }
+    
+    
+    
+    
+    }
+    
+    
+    
+    @media only screen and (max-width:767px){
+    
+    #overlay img{
+    
+      width: 12px;
+    
+      height: 11px;
+    }
+    
+  
+    }
+    
+    

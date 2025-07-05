@@ -1,24 +1,20 @@
 <?php session_start();
 
+date_default_timezone_set('Africa/Lagos');
+date_default_timezone_get();
 
 if (isset($_SESSION["admin_email"])) { 
-  
 echo"<script>location.href='admin.php'</script>";
-
 }
-
 
 if (!isset($_SESSION["id"]) && !isset($_SESSION["business_id"]) && !isset($_SESSION["sp_id"] )) { 
 echo"<script>location.href='login.php'</script>";
 exit();
 }
 
-
-
-
-
-date_default_timezone_set('Africa/Lagos');
-date_default_timezone_get();
+if(isset($_SESSION["id"])):
+  echo"<script>location.href='profile.php'</script>";
+endif;
 ?>
 
 <?php 
@@ -32,11 +28,7 @@ $business_date = $_SESSION['business_date'];
 $userId = $_SESSION['business_id'];
 $you = $_SESSION['business_email'] ;
 }
-if (!empty($_SESSION["sp_id"])) {
-$sp_date = $_SESSION['sp_date'];
-$userId = $_SESSION['sp_id'];
-$you = $_SESSION['sp_email'];
-}
+
 ?>
 
 
@@ -46,10 +38,6 @@ require 'engine/configure.php';
 
 if(isset($_SESSION['business_id'])){
 $getviews =  mysqli_query($conn,"select sum(views) as views from item_detail where user_id = '".htmlspecialchars($userId)."'");
-}
-
-if(isset($_SESSION['sp_id'])){
-$getviews =  mysqli_query($conn,"select sum(views) as views from service_providers where sp_id = '".htmlspecialchars($userId)."'");
 }
 
        while ($row = mysqli_fetch_array($getviews)) {
@@ -73,873 +61,26 @@ $getviews =  mysqli_query($conn,"select sum(views) as views from service_provide
      <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;700&family=Roboto&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/flickity.min.css">
+  <link rel="stylesheet" href="assets/css/dashboard.css">
+  <link rel="stylesheet" href="assets/css/navigator.css">
+  <link rel="stylesheet" href="assets/css/profile-section.css">
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="assets/js/sweetalert.min.js"></script> 
   <script src="assets/js/jquery-1.11.3.min.js"></script>
 <script src="assets/js/flickity.pkgd.min.js"></script>
-
-<style type="text/css">
-
-body{
-
-  font-family: poppins;
-}
-
-
-#discount{
-
-  display: none;
-}
-
-
-
-#count{
-
-
-color:white;
-background-color: red;
-border-radius: 50%;
-padding:0px 5px !important;
-font-weight: bold;
-position: absolute;
-right:;
-margin-top: -5px;
-font-size: 10px;
-z-index: 1;
-
-}
-
-
-
-
-
-
-.notification{
-
-color:white;
-background-color: red;
-padding:0px 8px;
-border-radius:50%;
-margin-top:-5px;
-font-size:10px;
-position: absolute;
-}
-
-
-#views{
-
-  display: none;
-}
-
-#user_image{
-
-  height: 80px;
-
-  width: 80px;
-
-  border-radius: 50%;
-
-  padding: 5px;
-
-  border:2px solid skyblue;
-
-
-}
-
-
-#request{
-display: inline-block;
-width:187px;
-background-color:#cce6ff;
-margin-right:6px;
-margin-bottom: 10px;
-padding:7px;
-border-radius: 15px;
-}
-
-
-
-
-@media only screen and (max-width:497px){
-
-#request{
-display: inline-block;
-width:100%;
-background-color:#cce6ff;
-margin-right:6px;
-margin-bottom: 10px;
-padding:7px;
-border-radius: 15px;
-}
-
-
-
-}
-
-
-
-
-
-#request h6{
-
-  color:blue;
-
-  font-weight: bold;
-
-  font-size: 14px;
-}
-
-
-
-@media only screen and (max-width:497px){
-
-
-#request h6{
-
-  color:blue;
-
-  font-weight: bold;
-
-  font-size: 18px;
-}
-
-
-
-
-}
-
-
-
-
-
-
-
-
-
-#request p{
-
-
-
-font-size: 21px;
-
-color:blue;
-
-font-weight: bold;
-
-
-}
-
-
-#request .fa-star{
-
-
-  color:white;
-
- font-size:0.8rem;
-
- 
-}
-
-
-
-#deals{
-
-background-color: red;
-
-border:1px solid transparent;
-
-border-radius:50%;
-
-padding:8px;
-
-
-}
-
-
-#listings{
-
-
-background-color:green;
-
-border:1px solid transparent;
-
-border-radius:50%;
-
-padding:8px;
-}
-
-
-
-
- .fa-shopping-cart{color: white;background-color: green;border-radius: 50%;padding: 8px;font-size:13px; }
-.fa-eye{color: white;background-color: rgba(192,192,192,0.7);border-radius: 50%;padding: 8px;}
-.fa-share-alt{color: white;background-color:red;border-radius: 50%; padding: 8px;}
-.fa-comments{color: white;background-color:skyblue;border-radius: 50%;padding: 8px;}
-
-
-
-
-
-#bar-chart{
-padding: 20px;
-
-border:2px solid rgba(0,0,70,0.3);
-
-margin-top: 25px;
-
-border-radius: 15px;
-
-}
-
-
-
-#star{
-
-  font-size:11px;
-
-  color:blue;
-}
-
-
-#date{
-
-float: right;margin-right: 13px;
-}
-
-
-.computer_details input{
-
-font-size: 12px;
-margin-left: 45px;
-
-border:1px solid transparent;
-
-box-shadow: 0px 0px 3px rgba(0,0,0,0.6);
-
-
-}
-
-
-.computer_details input:focus{
-
-outline: 2px solid skyblue !important;
-border:2px solid skyblue !important;
-
-
-}
-
-
-
-
-
- #label{
-
-font-size: 12px;
-
-
-}
-
-
-
-
-
-
-#active{
-
-  background-color:white;
-
-  width: 100%;
-
-}
-
-
-
-@media only screen and (max-width:767px){
-
-input::placeholder{
-
-
-  text-align: left;
-}
-
-#date{
-
-
-margin-right: 25px;
-font-size: 12px;
-}
-
-
-#battery{
-
-  font-size: 11px;
-}
-
-}
-
-
-
-
-
-#user_name{
-
-position: relative;
-
-font-weight: bold;
-
-font-size: 14px !important;
-
-margin-top: -30px;
-}
-
-
-
-@media only screen and (max-width:497px){
-
-
-#user_name{
-
-font-size: 14px !important;
-text-transform:capitalize;
-
-}
-
-#user_email{
-
-position: relative;
-
-left:23% !important;
-
-top:-36px;
-
-font-size: 13px !important;
-
-}
-
-
-
-}
-
-
-#user_email{
-
-position: relative;
-
-left:17.5%;
-
-top:-36px;
-
-font-size: 13px !important;
-
-}
-
-
-
-@media only screen and (max-width:767px){
-
-
-
-#user_email{
-
-
-position: relative;
-
-margin-left: 0px;
-
-margin-top: -18px;
-
-font-size: 13px !important;
-
-
-
-
-}
-
-
-
-}
-
-
-
-
- select{
-
-  font-size: 12px !important;
-  margin-top: 10px;
-
-
-}
-
-@media only screen  and (max-width:498px){
-
- select{
-
-  font-size: 13px !important;
-  margin-top: 10px;
-
-
-}
-
-}
-
-
-.col-md-6{
-
-
-  margin-top: 10px;
-
-}
-
-
-
-.col-md-6 h6{
-
-  font-weight: bold;
-
-  font-size: 15px;
-}
-
-
-.col-md-9 h6{
-
-  font-weight: bold;
-}
-
-
-#label{
-
-  font-size: 13px;
-
-  background-color:rgba(240,240,240,0.9);
-
-  padding: 20px 23px;
-
-  width: 100%;
-  margin-top: 30px;
-}
-
-
-
-#product input{
-
-  width: 100%;
-
-  
-}
-
-
-/*--------------------------------------------------------------
-# circle
---------------------------------------------------------------*/
-
-
-
-#higher{
-
-  margin-bottom: 10px;
-
-  margin-top: 10px;
-
- color: skyblue !important;
-
-  font-size: 25px;
-
-  margin-left: 10px;
-}
-
-
-
-
-
-
-#high{
-
-  margin-bottom: 10px;
-
-  margin-top: 10px;
-
- color: rgba(192,192,192,0.6) !important;
-
-  font-size: 25px;
-
-  margin-left: 10px;
-}
-
-
-
-#highest{
-
-  margin-bottom: 10px;
-
-  margin-top: 10px;
-
- color: skyblue !important;
-
-  font-size: 25px;
-
-  margin-left: 10px;
-}
-
-
-@media only screen and (max-width:497px){
-
-
-
-
-}
-
-
-/*--------------------------------------------------------------
-# pie chart
---------------------------------------------------------------*/
-
-
-  .chart-container {
-    position: relative;
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-    background: conic-gradient(
-      red 0% 45%,
-      green 45% 70%,
-      lightblue 70% 90%,
-      rgba(192,192,192,1) 90% 100%
-    );
-  }
-
-
-
-  .chart-inner {
-    position: absolute;
-    top: 25px; /* Adjust to control the inner circle size */
-    left: 25px; /* Adjust to control the inner circle size */
-    width: 150px; /* Adjust to control the inner circle size */
-    height: 150px; /* Adjust to control the inner circle size */
-    border-radius: 50%;
-    background-color:#f1f1f1;
-  }
-
-  
-  .label {
-    position: absolute;
-    font-size: 14px;
-    font-weight: bold;
-  }
-  .label.red { color: yellow; top: 5px; left: 110px; }
-  .label.green { color: green; top: 110px; right: 5px; }
-  .label.lightblue { color: lightblue; bottom: 5px; left: 45px; }
-  .label.blue { color: blue; bottom: 60px; left: 5px; }
-
-
-
-
-
-
-
-
-
-
-/*--------------------------------------------------------------
-# progress circle
---------------------------------------------------------------*/
-
-
-
+<style>
 
 .progress-circle {
-    position: relative;
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    background: conic-gradient(skyblue 0% <?php echo$audience."%" ?>, #ddd <?php echo$audience."%" ?> 100%);
-}
-
-.progress-circle::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 80%;
-    height: 80%;
-    background-color: #fff;
-    border-radius: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.progress-text {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 14px;
-    color: #333;
-    text-align: center;
-}
-
-
-
-
-
-/*--------------------------------------------------------------
-# overlay dashboard
---------------------------------------------------------------*/
-
-
-
-
-#overlay{
-
-display: block;
-position:relative;
-z-index: 300;
-width: 100%;
-background-color:skyblue;
-
-}
-
-
-.active{
-    
-    display:none;
-}
-
-
-.overlay-content{
-position:relative;
-top: 28px;
-width: 100%;
-text-align:left;
-margin-left: 20px;
-}
-
-#overlay a{
-padding: 5px;
-font-size:13px;
-color:black !important;
-display: block;
-text-transform: capitalize;
-font-weight:normal;
- font-family:poppins;
-transition: 0.3s;
-}
-
-
-
-#cart{
-background-color:none !important;
-border-radius:none !important;
-}
-
-
-@media only screen and (max-width:497px){
-
-#overlay a{
-padding: 5px;
-font-size:15px !important;
-color:black !important;
-display: block;
-text-transform: capitalize;
-font-weight:normal;
- font-family:poppins;
-transition: 0.3s;
-}
-
-#overlay{
-    display:none;
-}
-
-
-}
-
-
-
-.overlay a:hover,.overlay a:focus{
-  opacity: 0.5;
-  text-decoration: none;
-}
-
-#overlay hr{
-
-  border:2px solid rgba(0,0,0,0.6);
-
-  width: 40%;
-
-  position: absolute;
-
-  left: 0% !important;
-
-  margin-top: 10px;
-
-
-
-}
-
-
-@media only screen and (max-width:767px){
-
-
-#overlay{
-
-  overflow-x:hidden;
-  overflow-y:hidden;
-
-
-
-}
-
-
-#overlay hr{
-
- width: 20%;
-
-
-
-}
-
-
-}
-
-@media only screen and (max-width:497px){
- 
- #overlay{
-    
-  display:none;   
-    
-}
-
-}
-
-
-
-#openbar{
- 
- display:none;   
-    
-}
-
-@media only screen and (max-width:497px){
-
-#openbar{
- 
- display:block;  
- 
- z-index:9;
- 
- margin-left:10px;
- 
- margin-top:5px;
-    
-}
-
-
-}
-
-
-
-
-
-@media only screen and (max-width:468px){
-
-
-#overlay{
-
-  overflow-x:hidden;
-  overflow-y:hidden;
- 
-}
-
-
-
-
-#overlay hr{
-
- width: 20%;
-
-
-
-}
-
-
-
-
-
-}
-
-
-
-@media only screen and (max-width:767px){
-
-#overlay img{
-
-  width: 12px;
-
-  height: 11px;
-}
-
-
-.fa-envelope{
-
-  color: black;
-
-  font-size: 12px;
-
-}
-
-
-
-}
-
-
-
-
-
-
-.fa-envelope{
-
-  color: black;
-
-}
-
-
-.fa-bell{
-
-  font-size: 21px;
-
-}
-
-
-.bell{
-
-  margin-left: 45px;
-
-  position: relative;
-
-  top: -53px;
-
-
-}
-
-
-
-
-
-.button_dashboard{
-
-  margin-top: 10px;
-}
-
-.button_logout{
-
-  margin-top: 10px;
-}
-
-.button_logout:hover{
-
-  text-decoration: none;
-
-  color:red;
-}
-
+      position: relative;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: conic-gradient(
+        skyblue 0% <?= $audience ?>%, 
+        #ddd <?= $audience ?>% 100%
+    );
+  }
+  
 </style>
 </head>
 <body>
@@ -947,100 +88,19 @@ transition: 0.3s;
 
 <!------------------------------------------overlay content--------------------------------------------------->
 
-<a id="openbar" onclick="openbar()"><i class="fa fa-bars"></i></a>
+<a  class='d-md-none d-block' id="openbar" onclick="openbar()"><i class="fa fa-bars"></i></a>
 
 <div style="overflow-y: hidden;overflow: hidden;">
 
-<div style="" class="  row">
+<div class="row">
 
 <div id="overlay" class="col-md-3">
 
-<div class="overlay-content">
+<?php include ("components/navigator.php"); ?>
 
-<a href="index.php" class="button_home" ><img src="assets/icons/Vector.png"> Home<span id="date"><?php echo date("F d, Y");?></span></a><br>
-<a id="active" href="" class="button_dashboard"><img src="assets/icons/round-dashboard.png"> Dashboard</a><br>
-
-<?php 
-if (isset($_SESSION['business_id'])) {
-    
-
-echo'<a href="postadvert.php"><img src="assets/icons/healthicons_person.png"> Post product<i class="fa fa-caret"></i> </a><br>';
-echo'<a href="mylistings.php" > <img src="assets/icons/material-symbols_box-add-outline.png"> My listing</a><br>';
-
-}
-?>
-<a href="profile.php"><img src="assets/icons/icon-park-outline_add-pic.png"> 
-
-Profile</a><br>
-
-<?php 
-require 'engine/configure.php';
-$getQuery = "select * from messages where receiver_email = '$you' and is_receiver_deleted = 0 group by sender_email"; 
-$messages = mysqli_query($conn,$getQuery); 
-if($messages->num_rows>0){ $inbox =$messages->num_rows;
-}
-else{
-$inbox=0;
-} ?>
-
-
-
-<?php  if(isset($_SESSION['sp_id'])){ ?>       
-
-<a href="messages-sp.php"><i class="fa fa-envelope"></i> Messages(<?php echo $inbox  ?>)</a><br>
-
-<?php } else {?>
-
-
-
-
-<a href="messages.php"><i class="fa fa-envelope"></i> Messages(<?php echo $inbox  ?>)</a><br>
-
-<?php } ?>
-
-
-
-<a href="order-history.php"><i id="cart" class="fa fa-shopping-cart" style="background:none;color:black;padding:0px;"></i> Order History</a><br>
-
-<?php if (isset($_SESSION["sp_id"])) {
-?>
-<a href="services-provided.php"><i class='fas fa-hard-hat'></i> Service Provided</a><br>
-<a href="work-experience.php"><i class='fa fa-history'></i> Work Experience</a><br>
-<?php
- }
-?>
-
-<?php if (isset($_SESSION['business_id'])) {
- 
- echo'<a href="sold-history.php"><i class="fa fa-history"></i> Sold History</a><br>';
-}
-
-
-?>
-
-
-
-
-
-
-<hr>
-
-<br>
-
-
-<a href="logout.php" class="button_logout"><img src="assets/icons/icon-park_logout.png"> Logout</a>
-
-<br><br><br>
 </div>
 
-
-
- </div>
-
-
-
-
-  <div class="col-md-9">
+<div class="col-md-9">
 
 <div class="container">
 
@@ -1048,30 +108,18 @@ $inbox=0;
   
   <div class="col-md-6">
  
-<?php if (isset($_SESSION['business_id'])) {
+     <?php if (isset($_SESSION['business_id'])) {
     //Check if user is a vendor
- $username = $_SESSION['business_name'];
+       $username = $_SESSION['business_name'];
+       $useremail = $_SESSION['business_email'];
 
- $useremail = $_SESSION['business_email'];
+     }
 
-}
-
-    //Check if user is a service provider
-if (isset($_SESSION['sp_id'])) {
-
-  $sp_id = $_SESSION['sp_id'];
-
- $username = "<a style='text-decoration:none;color:black' href='sp_details.php?sp_id=$sp_id'>".$_SESSION['sp_name']."</a>";
-
- $useremail = $_SESSION['sp_email'];
-
-}
     //Check if user is a buyer
 if (isset($_SESSION['id'])) {
 
- $username = $_SESSION['name'];
-
- $useremail = $_SESSION['email'];
+    $username = $_SESSION['name'];
+    $useremail = $_SESSION['email'];
 
 
 
@@ -1079,137 +127,46 @@ if (isset($_SESSION['id'])) {
 ?>
 <br>
 
-
-
-
-  <h6>Overview</h6>
-
- 
+  <h5 style='font-weight:bold;' class='fw-bold'>Overview</h5>
 
 </div>
 
-  <div class="col-md-6">
+<div class="col-md-6">
+      <?php
+        require 'engine/configure.php';   
+        $vendor = mysqli_query($conn,"SELECT * FROM vendor_profile WHERE id = '$userId'");
+        if ($vendor) {   
+          while ($dataVendor = mysqli_fetch_array($vendor)) {
+            $vendorName = $dataVendor['business_name'];
+            $vendorImg = $dataVendor['business_image'] ?? "https://placehold.co/400";
+          }
+        }
+      ?>
+      <div style='gap:10px;' class="d-flex align-items-center">
+        <img id="user_image" src="<?= htmlspecialchars($vendorImg); ?>" class="rounded-circle me-3" alt="Vendor Image" style="object-fit: cover;">
 
-  
-    <?php
-    //Check if user is a vendor
+        <div>
+          <div class="d-flex align-items-center justify-content-between">
+            <span class="fw-bold user_name" id="user_name"><?= htmlspecialchars($_SESSION['business_name']); ?></span>
 
-if (isset($_SESSION['business_id'])) {
-
-    require 'engine/configure.php';
-    
-    $vendor = mysqli_query($conn,"select * from vendor_profile where id = '$userId'");
-
-    if ($vendor) {
-     
-     while ($dataVendor = mysqli_fetch_array($vendor)) {
-
-      $vendorName = $dataVendor['business_name'];
-
-      $vendorImg = $dataVendor['business_image'];
-
-     }
-
-    }
-}
-     ?>
-
-
-    <?php
-
-       //Check if user is a  service provider
-
-if (isset($_SESSION['sp_id'])) {
-
-    require 'engine/configure.php';
-    
-    $vendor = mysqli_query($conn,"select * from service_providers where sp_id = '$userId'");
-
-    if ($vendor) {
-     
-     while ($dataVendor = mysqli_fetch_array($vendor)) {
-
-      $vendorName = $dataVendor['sp_name'];
-
-      $vendorImg = $dataVendor['sp_img'];
-
-     }
-
-    }
-}
-     ?>
-
-
-
-    <?php
-
-       //Check if user is a  buyer
-
-if (isset($_SESSION['id'])) {
-
-    require 'engine/configure.php';
-    
-    $vendor = mysqli_query($conn,"select * from user_profile where id = '$userId'");
-
-    if ($vendor) {
-     
-     while ($dataVendor = mysqli_fetch_array($vendor)) {
-
-      $vendorName = $dataVendor['user_name'];
-
-      $vendorImg = $dataVendor['user_image'];
-
-     }
-
-    }
-}
-     ?>
-
-  
-<?php if (file_exists($vendorImg)) {
-$extension = strtolower(pathinfo($vendorImg,PATHINFO_EXTENSION));
-$image_extension  = array('jpg','jpeg','png');
-if (!in_array($extension , $image_extension)) {
-$vendorImg = "<i style='font-size:20px;color:black;' class='fa fa-user-alt'></i>";
-echo$vendorImg; }
-else{ ?>
-<img id="user_image" src="<?php echo $vendorImg;?>">
-<?php }  } 
-?>
-
-<span id="user_name"> <?php echo $username?></span><br>
-
-<small style="" class="user_email" id="user_email"><?php echo $useremail;?></small>
-<?php
-
-require 'engine/configure.php';
-if (isset($_SESSION['business_id'])) {
-$you = $_SESSION['business_id'];
-$getnotification = mysqli_query($conn,"select * from vendor_notifications where pending=0 and recipient_id ='".htmlspecialchars($you)."'");
-echo'<a href="vendor-notification.php"><span class="bell">&nbsp; <i class="fa-solid fa-bell"></i>';
-$countNotifications = $getnotification->num_rows;
-if ($countNotifications>0) {
-?>
-<span class="notification"><?php echo$countNotifications;?>
-<?php    }  }  ?>
-</span></span></a>
-
-<?php
-
-require 'engine/configure.php';
-if (isset($_SESSION['sp_id'])) {
-$you = $_SESSION['sp_id'];
-$getnotification = mysqli_query($conn,"select * from sp_notifications where pending=0 and recipient_id ='".htmlspecialchars($you)."'");
-echo'<a href="sp_notifications.php"><span class="bell">&nbsp; <i class="fa-solid fa-bell"><span class="notification">';
-$countNotifications = $getnotification->num_rows;
-if ($countNotifications>0) {
-?>
-<?php echo$countNotifications;?>
-   <?php   }  } ?>
-</span></i></span></a>
-
-
-
+            <a href="vendor-notification.php" class="ms-3 text-decoration-none position-relative">
+              <i class="fa-solid fa-bell"></i>
+              <?php
+                if (isset($_SESSION['business_id'])) {
+                  $business_id = $_SESSION['business_id'];
+                  $getnotification = mysqli_query($conn,"SELECT * FROM vendor_notifications WHERE pending = 0 AND recipient_id ='".htmlspecialchars($business_id)."'");
+                  $countNotifications = $getnotification->num_rows;
+                  if ($countNotifications > 0) {
+                    echo '<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">'.htmlspecialchars($countNotifications).'</span>';
+                  }
+                }
+              ?>
+            </a>
+          </div>
+          <small class="text-muted d-block user_email" id="user_email"><?= htmlspecialchars($_SESSION['business_email']); ?></small>
+        </div>
+      </div>
+    </div>
 <?php
 
 require 'engine/configure.php';
@@ -1258,18 +215,11 @@ if ($countNotifications>0) {
       
  <h6>Total listings</h6>
  <?php
- 
- $get_listings = mysqli_query($conn,"select * from item_detail where user_id = '".$_SESSION['business_id']."' ");
- 
+   $get_listings = mysqli_query($conn,"select * from item_detail where user_id = '".$_SESSION['business_id']."' ");
  ?>
- 
- 
- 
-
       <p><?php if($get_listings->num_rows>0){ echo $get_listings->num_rows;} else{echo"0";} ?></p><br>
 
       <i id="listings" class="fa fa-star"></i> <span id="star"><span style="color:green;"> +343</span> than last month</span>
-
 
     </div>
 
@@ -1277,36 +227,7 @@ if ($countNotifications>0) {
 }
 ?> 
 
-
-
-
-  <?php  if (isset($_SESSION['sp_id'])) { ?>
- 
- <div  id="request">
-      
- <h6>Total Jobs</h6>
- <?php
- 
- $get_listings = mysqli_query($conn,"select * from work_experience where sp_id = '".$_SESSION['sp_id']."' ");
- 
- ?>
- 
- 
- 
-
-      <p><?php if($get_listings->num_rows>0){ echo $get_listings->num_rows;} else{echo"0";} ?></p><br>
-
-      <i id="listings" class="fa fa-star"></i> <span id="star"><span style="color:green;"> +343</span> than last month</span>
-
-
-    </div>
-
-<?php
-}
-?> 
-
-
-    <div  id="request">
+<div  id="request">
 <?php
 
 require 'engine/configure.php';
@@ -1318,11 +239,6 @@ $deals = mysqli_query($conn,"select * from buyer_notifications where recipient_i
 if (isset($_SESSION['business_id'])) {
 $you = $_SESSION['business_id'];
 $deals = mysqli_query($conn,"select * from vendor_notifications where recipient_id ='".htmlspecialchars($you)."'and pending = 0");
-} 
-
-if (isset($_SESSION['sp_id'])) {
-$you = $_SESSION['sp_id'];
-$deals = mysqli_query($conn,"select * from sp_notifications where recipient_id ='".htmlspecialchars($you)."'and pending = 0");
 } 
 
 $donedeals = $deals->num_rows;
@@ -1359,67 +275,17 @@ if ($getproduct->num_rows > 0) {
 
         $data[] = $entry; // Add the product entry to the data array
     }
-
     // Convert PHP array to JSON format
     $json_data = json_encode($data);
-    
- 
 
-  
 }
 
 }
 ?>
 
-
-
-<?php
-
-if (isset($_SESSION['sp_id'])) {
-
-
-    // Prepare and execute SQL query
-    $getproduct = mysqli_query($conn, "SELECT sp_id, title, charge FROM work_experience WHERE sp_id = '".$_SESSION['sp_id']."'");
-
-    if ($getproduct) {
-        if ($getproduct->num_rows > 0) {
-            $data = array(); // Initialize an array to store products
-
-            while ($product = mysqli_fetch_assoc($getproduct)) {
-                // Build each product entry
-                $entry = array(
-                    'product' => $product['title'],
-                    'sales' => (int)$product['charge'] // assuming charge is numeric
-                );
-
-                $data[] = $entry; // Add the product entry to the data array
-            }
-
-            // Convert PHP array to JSON format
-            
-            $json_data = json_encode($data);
-            
-        } else {
-            echo json_encode(array('error' => 'No data found for sp_id'));
-        }
-    } else {
-        echo json_encode(array('error' => 'Query failed: ' . mysqli_error($conn)));
-    }
-
-} // End of isset($_SESSION['sp_id']) check
-?>
-
-
-
-
-
-
-
- <?php if(isset($_SESSION['business_id']) || isset($_SESSION['sp_id'])){?> 
+ <?php if(isset($_SESSION['business_id'])){?> 
 <div id="bar-chart">
-
-  <br>
-  
+ <br> 
 <?php if($getproduct->num_rows > 0){ ?>
 <h6><?php if(isset($_SESSION['business_id'])){echo"Sales Data";} else{echo "Work history";}?></h6>
 
@@ -1432,7 +298,7 @@ if (isset($_SESSION['sp_id'])) {
 <br><br>
     </div>
     
- <?php if(isset($_SESSION['business_id']) || isset($_SESSION['sp_id'])){?> 
+ <?php if(isset($_SESSION['business_id'])){?> 
 
    <div class="col-md-4">
      
@@ -1464,32 +330,6 @@ $perReviews =round($reviews->num_rows/100);
 
 $remainder = 100-($perview + $added + $perReviews);
 }
-
-
-if(!empty($_SESSION['sp_id'])) {
- 
- 
- $cart = mysqli_query($conn,"select * from work_experience where sp_id = '".$_SESSION['sp_id']."'");
-if ($cart->num_rows>0) { $added = round($cart->num_rows/100);
- } else{$added = 1;}
-
-$views =  mysqli_query($conn,"select sum(views) as views from service_providers where sp_id = '".$_SESSION['sp_id']."'");
-if ($views->num_rows>0) {
-while ($myviews = mysqli_fetch_array($views)) {
-  $perview = round($myviews['views']/100);
- } 
- 
-}
-
-$reviews = mysqli_query($conn,"select sp_comment.sp_id, service_providers.sp_id from sp_comment,service_providers where sp_comment.sp_id = '".$_SESSION['sp_id']."' and sp_comment.sp_id = service_providers.sp_id");
-$perReviews =round($reviews->num_rows/100); 
-
-$remainder = 100-($perview + $added + $perReviews);
-}
-
-
-
-
 
  ?>    
 
@@ -1528,9 +368,6 @@ var jsonDatapie = <?php echo $json_Datapie; ?>;
 <div class="col-md-6 col-6"><i class="fa fa-share-alt"></i><span style="font-size:13px;"> Shares</span></div>
 <div class="col-md-6 col-6"><i class="fa fa-comments"></i><span style="font-size:13px;"> Reviews</span></div>
 </div>
-
-
-
 
 </div>
 
@@ -1666,10 +503,6 @@ $graphdata = json_encode($graphdata);
 
 <?php } ?>
 
-
-
-
-
 <script>
         // Access jsonData variable containing PHP JSON data
         var jsonData_pie = <?php echo $json_Datapie; ?>;
@@ -1771,13 +604,7 @@ $graphdata = json_encode($graphdata);
             }
         });
     </script>
-    
-    
-    
-    
-    
-    
-    
+ 
 
 <script>
 
