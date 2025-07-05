@@ -10,6 +10,7 @@ function closeform() {
 }
 
 
+
 $('input:checkbox,.select_category').on('click',function (e) {
   $("#loading-image").show();
 var category = $(this).attr('id');
@@ -113,5 +114,3 @@ contain: true,
 prevNextButtons: false,
 
 });
-
-</script>

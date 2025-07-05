@@ -286,66 +286,7 @@ else{
 
 
 
-$('#form-product').on('submit',function(e){
 
-       e.preventDefault();
-
-       $(".loader").show();
-       
-       var formdata = new FormData();
-
-
-     $.ajax({
-
-           type: "POST",
-
-           url: "postads-process.php",
-
-           data:new FormData(this),
-
-           cache:false,
-
-           processData:false,
-
-           contentType:false,
-
-            success: function(response) {
-
-            $(".loader").hide();
-
-if (response==1) {
-               swal({
-                      text:"Item(s) uploaded successfully",
-                     icon:"success",
-
-             });
-               
-              $('#bom').load(location.href + " #cy");
-              $("#form-product")[0].reset();
-              setTimeout(function() {
-               window.location.href='mylistings.php'
-               }, 500); 
-              
-             } 
-
-     else{
-         swal({icon:"error",
-               text:response
-
- }); 
-       }
-
-           },
-
-           error: function(jqXHR, textStatus, errorThrown) {
-
-               console.log(errorThrown);
-
-           }
-
-       })
-
-   });
 
 
 
@@ -379,68 +320,6 @@ swal({
 
            }
        });
-
-   });
-
-
-$('#formPopup').on('submit',function(e){
-
-       e.preventDefault();
-
-       $("#loading-image").show();
-       
-       var formdata = new FormData();
-
-     $.ajax({
-
-           type: "POST",
-
-           url: "seller-verify.php",
-
-           data:new FormData(this),
-
-           cache:false,
-
-           processData:false,
-
-           contentType:false,
-
-            success: function(data) {
-
-            $("#loading-image").hide();
-
-           
-
-if (data==1) {
-
-         
-             swal({
-                      text:"Image upload successful. We will revert back shortly",
-                     icon:"success",
-
-             });
-               
-              $('#bom').load(location.href + " #cy");
-              $("#formPopup")[0].reset();
-              $("#formPopup").removeClass("active");
-} 
-
-else{
-         swal({
-
-           icon:"error",
-           text:data}); 
-}
-
-           },
-
-           error: function(jqXHR, textStatus, errorThrown) {
-
-               console.log(errorThrown);
-
-           }
-
-       })
 
    });
 

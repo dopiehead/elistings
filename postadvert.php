@@ -50,6 +50,37 @@ require("engine/configure.php");
 </head>
 <body>
 
+<!-- popup for verification -->
+
+
+<div id="popup" class="popup active">
+     <a class="close"  onclick="verify_id()">&times;</a>  
+
+     <form method="post" id="formPopup" enctype="multipart/form-data">
+         <div class="row jumbotron">
+           <div class="col-md-6">
+             <h4>Upload passport / Selfie (max:2MB)</h4> 
+             <p>Please upload a passport size photograph or a selfie to continue. This to reduce spamming and phising. All sellers are required to  upload a valid ID card and a selfie or passport size photograph.</p>
+             <input type="hidden" name="sid" value="<?= htmlspecialchars($_SESSION['business_id'])?>">
+             <input type="hidden" name="verified" value="0">
+             <input  type="file" name="img" accept="image/*" capture='environment'>
+             <br>
+             <br>
+           </div>
+
+           <div class="col-md-6">
+             <h4>Upload Valid ID (max:2MB)</h4>
+             <p>Please upload any valid ID card. Verification process takes about 6-24 hrs for new sellers account to be active, please bear with us.</p>
+             <input type="file" name="valid_id"  accept="image/*">
+             <br>
+             <br>
+           </div>
+<div align="center" style="display: none;" id="loading-image"><img id="loader" height="50" width="80" src="loading-image.GIF"></div>
+<button type="submit" name="submit_verify" style="font-size:13px;" class="btn btn-success form-control">Submit</button>
+</div>
+<br>
+</form>
+</div>
 
 <!------------------------------------------overlay content--------------------------------------------------->
 
@@ -124,221 +155,190 @@ require("engine/configure.php");
 
 <br>
 
-<div id='label'>
+<div id='label px-2'>
 
-<h6>Product details</h6>
+<h6 class='px-3'>Product details</h6>
 
-<div class=' container'>
+
   
-    <form id="form-product">
+<form id="form-product">
+  <div class="container">
+    <input type="text" class="form-control p-2" name="product_name" placeholder="....Write product Name" required>
+  </div>
 
-      <input type="text" class="form-control p-2" name="product_name" placeholder="....Write product Name">
-
-</div>
-
-<div class="row mt-3 px-3">
-
-  <div style='gap:20px;font-size:14px;' class="col-md-6 d-flex flex-row flex-column g-3">
-
-   <select name="product_category" class='category form-control' id="product_category" style="text-transform: capitalize;font-size:14px;" >
-      <option>Choose Category</option>
-       <?php
-         $query_category = mysqli_query($conn,"SELECT e_auto_categories FROM categories");
-         while ($row = mysqli_fetch_array($query_category)) { 
-       ?>
-       <option value="<?= htmlspecialchars($row['e_auto_categories']) ?>"><?= htmlspecialchars($row['e_auto_categories']) ?></option>
-       <?php } ?>
-    </select>
-
-     <span id='subcategory'></span>
-
-
-   </div>
-
-   <div style='gap:20px;' class="col-md-6 d-flex flex-row flex-column g-3 px-3">
-
-      <select id="btn-condition" style="padding: 8px;font-size:14px;" class="btn-condition form-control">
-
-        <option value="">Select Product condition</option>
-        <option value="new">New</option>
-        <option value="tokunbo">Tokunbo</option>
-       <option value="used">Nigerian used</option>
-
+  <div class="row mt-3 px-3">
+    <div style="gap:20px;font-size:14px;" class="col-md-6 d-flex flex-row flex-column g-3">
+      <select name="product_category" class="category form-control" id="product_category" style="text-transform: capitalize;font-size:14px;" required>
+        <option>Choose Category</option>
+        <?php
+        $query_category = mysqli_query($conn,"SELECT e_auto_categories FROM categories");
+        while ($row = mysqli_fetch_array($query_category)) { 
+        ?>
+        <option value="<?= htmlspecialchars($row['e_auto_categories']) ?>"><?= htmlspecialchars($row['e_auto_categories']) ?></option>
+        <?php } ?>
       </select>
 
-       <select style="text-transform: capitalize;font-size:14px;" name="product_color" id="product_color" class="form-control">
-         <option value="">choose color</option>
-       <?php
-          $colors = ['blue', 'brown', 'red', 'yellow', 'pink', 'purple', 'white', 'gold', 'black', 'green', 'magenta', 'orange' ]; 
-           foreach ($colors as $color) {
-              echo'<option value="'.htmlspecialchars($color).'">'.htmlspecialchars($color).'</option>';
-            }
+      <!-- Subcategory will be injected here -->
+      <span id="subcategory"></span>
+    </div>
+
+    <div style="gap:20px;" class="col-md-6 d-flex flex-row flex-column g-3 px-3">
+      <!-- FIXED: Added name -->
+      <select id="btn-condition" name="product_condition" style="padding: 8px;font-size:14px;" class="btn-condition form-control text-capitalize" required>
+        <option value="">Select Product condition</option>
+       <?php $conditions = ['new','used','tokunbo'];
+         foreach ($conditions as $condition) {
+           echo"<option value='".$condition."'>".$condition."</option>";
+         }  
        ?>
-       </select>
-   </div>
+      </select>
 
- </div>
-<br>
-<h6>Address details</h6>
+      <select name="product_color" id="product_color" class="form-control" style="text-transform: capitalize;font-size:14px;">
+        <option value="">choose color</option>
+        <?php
+        $colors = ['blue', 'brown', 'red', 'yellow', 'pink', 'purple', 'white', 'gold', 'black', 'green', 'magenta', 'orange' ]; 
+        foreach ($colors as $color) {
+          echo'<option value="'.htmlspecialchars($color).'">'.htmlspecialchars($color).'</option>';
+        }
+        ?>
+      </select>
+    </div>
+  </div>
 
-<div class="row px-3">
+  <br>
+  <h6 class="px-3">Address details</h6>
 
-   <div class="col-md-6">
-     <select name="product_location"  style="font-size: 14px;text-transform: capitalize;"class="form-control">
-            <option selected="" value="">Entire Nigeria</option>
-           <?php
-           require("engine/connection.php");
-            $getstates = $con->prepare("SELECT DISTINCT state FROM states_in_nigeria ORDER BY state ASC");
-            if($getstates->execute()):
-              $state_result = $getstates->get_result();
-              while($stateRow = $state_result->fetch_assoc()){
-                echo'<option value="'.$stateRow["state"].'">'.$stateRow["state"].'</option>';          
-              }
-            endif; ?>
-        <br>
+  <div class="row px-3">
+    <div class="col-md-6">
+      <select name="product_location" class="form-control" style="font-size: 14px;text-transform: capitalize;" required>
+        <option selected="" value="">Entire Nigeria</option>
+        <?php
+        require("engine/connection.php");
+        $getstates = $con->prepare("SELECT DISTINCT state FROM states_in_nigeria ORDER BY state ASC");
+        if($getstates->execute()):
+          $state_result = $getstates->get_result();
+          while($stateRow = $state_result->fetch_assoc()){
+            echo'<option value="'.$stateRow["state"].'">'.$stateRow["state"].'</option>';          
+          }
+        endif; ?>
       </select>
     </div>
 
-     <div class="col-md-6">
-        <input class="form-control" type="text" name="product_address" placeholder="Street / Estate / Neighbourhood">
-      </div>
- </div>
-
-<br>
-<h6>Price details</h6>
-
-<div class="row px-3">
-
-  <div class="col-md-6">
-    
-  <input style="font-size:14px" inputmode="numeric" class="form-control" type="number" min="1" minlength="4" name="product_price" id="product_price" placeholder="Price"></div>
-
-  <div class="col-md-6">
-     
-  <select style="padding:8px;border-radius:3px;" id="discount_hide" class="btn-accordion active" name="discount">
-       <option value="">How many percentage</option>
-     <?php 
-        for ($i = 10; $i < 100; $i += 10) {
-          echo "<option value='$i'>$i% OFF</option>";
-       }
-     ?>
-     </select>
-
-
+    <div class="col-md-6">
+      <input class="form-control" type="text" name="product_address" placeholder="Street / Estate / Neighbourhood" required>
+    </div>
   </div>
 
-</div>
-<br>
+  <br>
+  <h6 class="px-3">Price details</h6>
 
+  <div class="row px-3">
+    <div class="col-md-6">
+      <input style="font-size:14px" inputmode="numeric" class="form-control" type="number" min="1" name="product_price" id="product_price" placeholder="Price" required>
+    </div>
 
-<h6>Phone number</h6>
+    <div class="col-md-6">
+      <select style="padding:8px;border-radius:3px;" id="discount_hide" class="btn-accordion active" name="discount">
+        <option value="">How many percentage</option>
+        <?php 
+        for ($i = 10; $i < 100; $i += 10) {
+          echo "<option value='$i'>$i% OFF</option>";
+        }
+        ?>
+      </select>
+    </div>
+  </div>
 
-<div class='px-3'>
-  <input style="font-size:14px;" class="form-control" type="number" min="1" minlength="4" name="phone_number" id="phone_number" value="<?= htmlspecialchars($business_contact) ?>" placeholder="Phone number">
-</div>
+  <br>
 
-<br>
+  <!-- ✅ ADDED Quantity -->
+  <div class="row px-3">
+    <div class="col-md-6">
+      <input style="font-size:14px;" class="form-control" type="number" min="1" name="quantity" id="quantity" placeholder="Quantity available" required>
+    </div>
+  </div>
 
-<div class="form-group px-3">
-  <h6>Description</h6>
-  <textarea
-    name="product_details"
-    rows="5"
-    class="form-control"
-    style="font-size: 14px;"
-    placeholder="Describe your product"
-    wrap="physical"
-    required
-  ></textarea>
-</div>
+  <br>
+  <h6 class="px-3">Phone number</h6>
+  <div class="px-3">
+    <input style="font-size:14px;" class="form-control" type="number" min="1" name="phone_number" id="phone_number" value="<?= htmlspecialchars($business_contact) ?>" placeholder="Phone number" required>
+  </div>
 
-<!-- File Upload Section -->
-<div class="form-group mt-3 px-3">
-  <label
-    for="imager"
-    class="form-control text-center"
-    style="background-color: rgba(192,192,192,0.8); padding: 30px; cursor: pointer;"
-  >
-    <small
-      id="file-label"
-      style="font-size: 14px; padding: 1px; background-color: rgba(0,0,0,0.6); color: white;"
-    >
-      Upload image (Max 4MB)
-    </small>
-    <br>
-    <span id="fileName" style="display: block; margin-top: 5px;"></span>
-    <input
-      type="file"
-      id="imager"
-      name="imager"
+  <br>
+  <div class="form-group px-3">
+    <h6>Description</h6>
+    <textarea
+      name="product_details"
+      rows="5"
       class="form-control"
-      accept="image/*"
-      style="display: none;"
-      onchange="updateFileName(this)"
+      style="font-size: 14px;"
+      placeholder="Describe your product"
+      wrap="physical"
       required
+    ></textarea>
+  </div>
+
+  <!-- File Upload Section -->
+  <div class="form-group mt-3 px-3">
+    <label
+      for="imager"
+      class="form-control text-center"
+      style="background-color: rgba(192,192,192,0.8); padding: 30px; cursor: pointer;"
     >
-  </label>
-</div>
+      <small
+        id="file-label"
+        style="font-size: 14px; padding: 1px; background-color: rgba(0,0,0,0.6); color: white;"
+      >
+        Upload image (Max 4MB)
+      </small>
+      <br>
+      <span id="fileName" style="display: block; margin-top: 5px;"></span>
+      <input
+        type="file"
+        id="imager"
+        name="imager"
+        class="form-control"
+        accept="image/*"
+        style="display: none;"
+        onchange="updateFileName(this)"
+        required
+      >
+    </label>
+  </div>
 
-<div class="container text-center">
-<?php 
-$getverification = mysqli_query($conn,"select * from verify_seller where sid ='".htmlspecialchars($_SESSION['business_id'])."' and verified = 1 ");
-if ($getverification->num_rows===0) {?> 
-<a type="submit" name="verify_id" onclick="verify_id()" class="btn btn-success"> Verify ID </a>
-<?php }else{?>
-<input type="submit" name="submit" value="Submit" class="btn btn-success">
-<?php } ?>
-<img id="loader" class="loader" height="50" width="80" src="loading-image.GIF">
-</div>
+  <div class="container text-center">
+    <?php 
+    $getverification = mysqli_query($conn,"select * from verify_seller where sid ='".htmlspecialchars($_SESSION['business_id'])."' and verified = 1 ");
+    if ($getverification->num_rows === 0) {?> 
+      <a type="submit" name="verify_id" onclick="verify_id()" class="btn btn-success"> Verify ID </a>
+    <?php } else { ?>
+      <input type="submit" name="submit" value="Submit" class="btn btn-success">
+    <?php } ?>
+    <img id="loader" class="loader" height="50" width="80" src="loading-image.GIF">
+  </div>
+
+  <!-- Hidden Fields -->
+  <input type="hidden" name="user_id" value="<?= htmlspecialchars($_SESSION['business_id'])?>">
+  <input type="hidden" name="sold" value="0">
+  <input type="hidden" name="gift_picks" value="0">
+  <input type="hidden" name="deals" value="0">
+  <input type="hidden" name="views" value="0">
+  <input type="hidden" name="likes" value="0">
+  <input type="hidden" name="featured" value="0">
 </form>
 
-</div>
 
 </div>
 
+</div>
 
-<input type="hidden" name="user_id" value="<?= htmlspecialchars($_SESSION['business_id'])?>">
-<input type="hidden" name="sold" value="0">
-<input type="hidden" name="gift_picks" value="0">
-<input type="hidden" name="deals" value="0">
-<input type="hidden" name="views" value="0">
-<input type="hidden" name="likes" value="0">
-<input type="hidden" name="featured" value="0">
+
+
 </div>
 <br>
 </div>
 
 
-
-<div id="popup" class="popup active">
-     <a class="close"  onclick="verify_id()">&times;</a>  
-
-     <form method="post" id="formPopup" enctype="multipart/form-data">
-         <div class="row jumbotron">
-           <div class="col-md-6">
-             <h4>Upload passport / Selfie (max:2MB)</h4> 
-             <p>Please upload a passport size photograph or a selfie to continue. This to reduce spamming and phising. All sellers are required to  upload a valid ID card and a selfie or passport size photograph.</p>
-             <input type="hidden" name="sid" value="<?= htmlspecialchars($_SESSION['business_id'])?>">
-             <input type="hidden" name="verified" value="0">
-             <input  type="file" name="img" accept="image/*" capture='environment'>
-             <br>
-             <br>
-           </div>
-
-           <div class="col-md-6">
-             <h4>Upload Valid ID (max:2MB)</h4>
-             <p>Please upload any valid ID card. Verification process takes about 6-24 hrs for new sellers account to be active, please bear with us.</p>
-             <input type="file" name="valid_id"  accept="image/*">
-             <br>
-             <br>
-           </div>
-<div align="center" style="display: none;" id="loading-image"><img id="loader" height="50" width="80" src="loading-image.GIF"></div>
-<button type="submit" name="submit_verify" style="font-size:13px;" class="btn btn-success form-control">Submit</button>
-</div>
-<br>
-
-</form>
-</div>
 <?php $txn_ref = time(); $fee ="1000"; ?>
 <script src="https://js.paystack.co/v2/inline.js"></script>
 
@@ -394,6 +394,130 @@ const category = $(this).val();
              $('#subcategory').html(data);             
            }
     });
+});
+
+
+$('#formPopup').on('submit',function(e){
+
+e.preventDefault();
+
+$("#loading-image").show();
+
+var formdata = new FormData();
+
+$.ajax({
+
+    type: "POST",
+
+    url: "seller-verify.php",
+
+    data:new FormData(this),
+
+    cache:false,
+
+    processData:false,
+
+    contentType:false,
+
+     success: function(data) {
+
+     $("#loading-image").hide();
+
+    
+
+if (data==1) {
+
+  
+      swal({
+               text:"Image upload successful. We will revert back shortly",
+              icon:"success",
+
+      });
+        
+       $('#bom').load(location.href + " #cy");
+       $("#formPopup")[0].reset();
+       $("#formPopup").removeClass("active");
+} 
+
+else{
+  swal({
+
+    icon:"error",
+    text:data}); 
+}
+
+    },
+
+    error: function(jqXHR, textStatus, errorThrown) {
+
+        console.log(errorThrown);
+
+    }
+
+})
+
+});
+
+
+$('#form-product').on('submit',function(e){
+
+e.preventDefault();
+
+$(".loader").show();
+
+var formdata = new FormData();
+
+
+$.ajax({
+
+    type: "POST",
+
+    url: "postads-process.php",
+
+    data:new FormData(this),
+
+    cache:false,
+
+    processData:false,
+
+    contentType:false,
+
+     success: function(response) {
+
+     $(".loader").hide();
+
+if (response==1) {
+        swal({
+               text:"Item(s) uploaded successfully",
+              icon:"success",
+
+      });
+        
+       $('#bom').load(location.href + " #cy");
+       $("#form-product")[0].reset();
+       setTimeout(function() {
+        window.location.href='mylistings.php'
+        }, 500); 
+       
+      } 
+
+else{
+  swal({icon:"error",
+        text:response
+
+}); 
+}
+
+    },
+
+    error: function(jqXHR, textStatus, errorThrown) {
+
+        console.log(errorThrown);
+
+    }
+
+})
+
 });
 
 var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();

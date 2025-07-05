@@ -562,5 +562,9 @@ body{
     height:600px;
     overflow-y: auto;
   }
+
+  h6{
+    padding: 0px 10px;
+  }
   
   

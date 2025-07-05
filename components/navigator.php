@@ -20,6 +20,8 @@
 
                    <br>
                      <a href="logout.php" class="button_logout"><i class='fa fa-sign-out'></i> Logout</a><br>
+
                </div>
+               <br><br>
 
             

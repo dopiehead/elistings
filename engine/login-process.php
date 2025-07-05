@@ -31,6 +31,7 @@ $_SESSION["location"]=$row['user_location'];
 $_SESSION["phone"]=$row['user_phone'];
 $_SESSION['date']= $row['joined_date'];
 $_SESSION['image'] = __DIR__.$row['user_image'];
+$_SESSION['user_type'] =  'buyer';
 echo "1";  
 	}
 	
@@ -53,6 +54,7 @@ if ($user_type=='vendor') {
     $_SESSION['business_image'] =  __DIR__.$row['business_image'];
     $_SESSION['business_contact'] = $row['business_contact'];
     $_SESSION['business_address'] =  $row['business_address'];
+    $_SESSION['user_type'] =  'vendor';
     echo "1";  
 	}
 	
@@ -62,34 +64,6 @@ else{echo"Incorrect login details";
 }
 
 }
-
-//login as a service provider
-if ($user_type=='service_provider') {
-$condition ="select * from service_providers where sp_email = '".$user_email."' and sp_password = '".$secret_password."' and sp_verified = 1";
-$sbc = mysqli_query($conn,$condition);
-$result = $sbc->num_rows;
-if ($result>0) { 
-while ($row = mysqli_fetch_array($sbc))  {
-$_SESSION["sp_id"] = $row['sp_id'];
-$_SESSION["sp_email"]=$row['sp_email'];
-$_SESSION["sp_name"]=$row['sp_name'];
-$_SESSION['sp_date']= $row['date'];
-
-$_SESSION['sp_location']= $row['sp_location'];
-$_SESSION['sp_image'] =  __DIR__.$row['sp_img'];
-echo "1";  
-	}
-	
-}
-else{echo"Incorrect login details";
-
-}
-
-
-}
-
-
-
 
 
 //login as a service provider

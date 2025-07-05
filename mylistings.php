@@ -76,7 +76,6 @@ $useremail = $_SESSION['sp_email'];
 
      <div class="col-md-6">
      <?php
-        require 'engine/configure.php';   
         $vendor = mysqli_query($conn,"SELECT * FROM vendor_profile WHERE id = '$userId'");
         if ($vendor) {   
           while ($dataVendor = mysqli_fetch_array($vendor)) {
@@ -113,7 +112,7 @@ $useremail = $_SESSION['sp_email'];
 
 
 
-    
+
 <div id="label">
        <div class="row">
          <div class="col-md-6">
@@ -144,7 +143,7 @@ while ($row = mysqli_fetch_array($query_category)) {?>
 
     foreach ($priceOptions as $price) {
         $usd = round($price / $exchangeRate, 2);
-        echo "<option value='{$price}'>&#8358;" . number_format($price) . " (${$usd})</option>";
+        echo "<option value='{$price}'> Under &#8358;" . number_format($price) . "</option>";
     }
   ?>
 </select>
@@ -160,7 +159,7 @@ while ($row = mysqli_fetch_array($query_category)) {?>
 
 </div><br>
 
-<div align="center" style="display: none;" id="loading-image"><img id="loader" height="50" width="80" src="loading-image.GIF"></div>
+<div classs="text-center" style="display: none;" id="loading-image"><img id="loader" height="50" width="80" src="loading-image.GIF"></div>
 <div class="myitems"></div>
 </div>
 

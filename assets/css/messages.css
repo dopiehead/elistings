@@ -1,0 +1,568 @@
+ 
+body{
+
+    font-family: poppins;
+  }
+  
+  @media only screen and (max-width:497px){
+   
+   #overlay{
+      
+    display:none;   
+      
+  }
+  
+  }
+  
+  
+  #openbar{
+   
+   display:none;   
+      
+  }
+  
+  @media only screen and (max-width:497px){
+  
+  #openbar{
+  
+   display:block;  
+   
+   z-index:9;
+   
+   margin-left:10px;
+   
+   margin-top:5px;
+      
+  }
+  }
+  
+  
+  
+  td a{
+  
+    font-size: 0.7rem !important;
+  }
+  #refresh, .mark, #trash {
+  
+  border:2px solid skyblue;
+  
+  padding: 4px 10px;
+  
+  margin: 0px 5px;
+  
+    color: skyblue !important;
+  
+    cursor: pointer;
+  
+  
+  }
+  
+  
+  @media only screen and (max-width:767px){
+  
+  
+   .mark{
+  
+  border:2px solid skyblue;
+  
+  padding: 4px 10px;
+  
+  margin: 0px 5px;
+  
+    color: skyblue !important;
+  
+    cursor: pointer;
+  
+    font-size: 0.55rem !important;
+    
+    display:none !important;
+  
+  
+  }
+  
+  }
+  
+  
+  
+  .notification{
+  
+  color:white;
+  background-color: red;
+  padding:0px 8px;
+  border-radius:50%;
+  margin-top:-5px;
+  font-size:10px;
+  position: absolute;
+  }
+  
+  
+  
+  #inbox{
+  
+     width: 70%
+  }
+  
+  @media only screen and (max-width:767px){
+  
+   #inbox{
+  
+     width:45%
+  }
+  
+  
+  }
+  
+  
+  #sender, #subject, #td_date{
+  
+  opacity: 0.7;
+  
+  }
+  
+  
+  #subject{
+  
+    width: 60%;
+  }
+  
+  
+  #td-action{
+  
+  width: 80px; text-align: center;
+  }
+  
+  
+  
+  #td-from{
+  width: 250px; text-align: center;
+  }
+  
+  
+  
+  #td-subject{
+   width: 450px; text-align: center;
+  
+  }
+  
+  
+  #td-date{
+  
+  width: 220px; text-align: center;
+  
+  
+  }
+  
+  #user_image{
+  
+    height: 130px;
+  
+    width: 130px;
+  
+    border-radius: 50%;
+  
+    padding: 5px;
+  
+    border:2px solid skyblue;
+  
+  
+  }
+  
+  
+  
+  
+  .btn-search{
+  
+    color: white !important;
+  
+    float: right;
+  
+    margin-top: -20px;
+  
+    display: none;
+  }
+  
+  
+  input[type=search]{
+  
+    font-size: 13px;
+  
+    margin:  20px 0px;
+  }
+  
+  
+  #messages_home .btn-primary, #messages_home .btn-trash{
+  
+  font-size:0.8rem;
+  
+  }
+  
+  
+  
+  
+  #messages_home .btn-primary{
+  
+  border-right: 2px solid black;
+  
+  }
+  
+  
+  
+  #messages_home .btn-trash{
+  
+  background-color: inherit;
+  
+  border-right: 2px solid black;
+  
+  
+  
+  color:black!;
+  
+  
+  
+  }
+  
+  
+  
+  
+  #package{
+  
+  background-color:rgba(243,243,243,0.1);padding-bottom: 8px;margin-bottom:50px;border:1px solid rgba(0,70,90,0.2);
+  padding: 10px;
+  
+  width:200px;
+  
+  display: inline-block;
+  margin:1em 1em;
+  
+  }
+  
+  
+  #priceitem{
+  
+  font-family:Poppins;
+  font-weight: bold;
+  color:black;
+  opacity: 0.8;
+  text-transform:capitalize;
+  font-size:14px;
+  padding:10px;
+  position: relative;
+  margin-bottom: 8px;
+  
+  
+  }
+  
+  
+  
+  #conitem,#locitem,#catitem{
+  font-size:12px;
+  font-family:poppins;
+  color: rgba(0,0,0,0.9);
+  padding:10px;
+  width:100%;
+  
+  font-weight: bold;
+  text-transform: capitalize;
+  
+  
+  }
+  
+  
+  #imgitem{
+  height: 120px;
+  width:100%;
+  margin-top:-24px;
+  
+  border-radius:15px 15px 0px 0px;
+  }
+  
+  #nameitem a{
+    font-size:12px;
+    font-weight:normal;
+    padding-left:10px;
+    text-transform:capitalize;
+    color: rgba(0,0,0,0.4);
+    padding-top: 8px;
+  
+   word-wrap:break-word;
+   text-align:center;
+    font-family:poppins;  
+  }
+  
+  
+  @media only screen and (max-width:767px){
+  
+  #package{
+  
+  background-color:rgba(243,243,243,0.1);padding-bottom: 8px;margin-bottom:50px;border:1px solid rgba(0,70,90,0.1);
+  padding: 8px;
+  
+  width:160px;
+  
+  display: inline-block;
+  margin:1em 1em;
+  
+  }
+  
+  
+  #priceitem{
+  
+  font-family:Poppins;
+  font-weight: bold;
+  
+  text-transform:capitalize;
+  font-size:14px;
+  padding:10px;
+  position: relative;
+  
+  
+  
+  }
+  #conitem,#locitem,#catitem{
+  
+  padding: 8px;
+  }
+  
+  #imgitem{
+  
+  height: 120px;
+  width:100%;
+  margin-top:-24px;
+  
+  border-radius:15px 15px 0px 0px;
+  }
+  
+  #nameitem a{
+    font-size:12px;
+    font-weight:normal;
+    padding-left:10px;
+    text-transform:capitalize;
+    color: rgba(0,0,0,0.4);
+  
+   word-wrap:break-word;
+   text-align:center;
+    font-family:poppins;  
+  }
+  
+  
+  }
+  
+  
+  #date{
+  
+  float: right;margin-right: 13px;
+  }
+  
+  
+  .computer_details input{
+  
+  font-size: 12px;
+  margin-left: 45px;
+  
+  border:1px solid transparent;
+  
+  box-shadow: 0px 0px 3px rgba(0,0,0,0.6);
+  
+  
+  }
+  
+  
+  .computer_details input:focus{
+  
+  outline: 2px solid skyblue !important;
+  border:2px solid skyblue !important;
+  
+  
+  }
+  
+  .computer_details label{
+  
+  font-size: 12px;
+  
+  
+  }
+  
+  input,textarea{
+  
+  font-size: 12px;
+  
+  }
+  
+  
+  input[type=text]{
+  
+  
+    font-size: 12px !important;
+  }
+  
+  
+  input::placeholder{
+  
+  
+    text-align: center;
+  }
+  
+  #active{
+  
+    background-color:white;
+  
+    width: 100%;
+  
+  }
+  
+  
+  
+  @media only screen and (max-width:767px){
+  
+  input::placeholder{
+  
+  
+    text-align: left;
+  }
+  
+  #date{
+  
+  float:right;
+  margin-right: 31px;
+  font-size: 12px;
+  }
+  
+  
+  #battery{
+  
+    font-size: 11px;
+  }
+  
+  }
+  
+  
+  div p{
+  
+  
+    font-size: 12px;
+  
+    width: 100%;
+  
+    padding: 15px 30px;
+  
+    margin-top: 25px;
+  
+    border:1px solid rgba(225,225,285,0.8);
+  
+  
+    background-color: rgba(225,225,285,0.8);
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  @media only screen and (max-width:468px){
+  
+  
+  input::placeholder{
+  
+  
+    text-align:left;
+  }
+  
+  }
+  
+  
+  
+  
+   select{
+  
+    font-size: 12px !important;
+    margin-top: 10px;
+  
+  
+  }
+  
+
+  
+  
+  
+  
+  .col-md-6{
+  
+  
+    margin-top: 10px;
+  
+  }
+  
+  
+  
+  .col-md-6 h6{
+  
+    font-weight: bold;
+  
+    font-size: 15px;
+  }
+  
+  
+  .col-md-9 h6{
+  
+    font-weight: bold;
+  }
+  
+  
+  #label{
+  
+    font-size: 13px;
+  
+    background-color:rgba(240,240,240,0.9);
+  
+    padding: 20px 23px;
+  
+    width: 100%;
+    margin-top: 30px;
+  }
+  
+  
+  
+  #product input{
+  
+    width: 100%;
+  
+    
+  }
+  /*--------------------------------------------------------------
+  # overlay dashboard
+  --------------------------------------------------------------*/
+  
+  
+  
+  .fa-bell{
+  
+    font-size: 21px;
+  
+  }
+  
+  
+  
+  .button_dashboard{
+  
+    margin-top: 10px;
+  }
+  
+  .button_logout{
+  
+    margin-top: 10px;
+  }
+  
+  .button_logout:hover{
+  
+    text-decoration: none;
+  
+    color:red;
+  }
+  
+  
+  
+  
+  
+  

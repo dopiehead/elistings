@@ -1,89 +1,85 @@
-<?php session_start();
+<?php
+session_start();
 require 'engine/configure.php';
+require 'vendor/autoload.php';
 
-$sid = mysqli_escape_string($conn,$_POST['sid']);
-    
-  $verified =  mysqli_escape_string($conn,$_POST['verified']);
+use Cloudinary\Cloudinary;
+use Cloudinary\Configuration\Configuration;
 
-  $date=date("D, F d, Y g:iA", strtotime('+1 hours'));
+// Cloudinary config
+Configuration::instance([
+    'cloud' => [
+        'cloud_name' => $_ENV['CLOUDINARY_CLOUD_NAME'],
+        'api_key'    => $_ENV['CLOUDINARY_API_KEY'],
+        'api_secret' => $_ENV['CLOUDINARY_API_SECRET'],
+    ],
+    'url' => ['secure' => true]
+]);
 
-$maxsize=5242880;    
+$cloudinary = new Cloudinary();
 
-$imageFolder="seller-verification/";
+$sid = mysqli_real_escape_string($conn, $_POST['sid']);
+$verified = mysqli_real_escape_string($conn, $_POST['verified']);
+$date = date("D, F d, Y g:iA", strtotime('+1 hour'));
 
-$basename= mysqli_escape_string($conn,basename($_FILES["img"]["name"]));
+$maxsize = 5 * 1024 * 1024; // 5MB
 
-$basenamex=mysqli_escape_string($conn,basename($_FILES["valid_id"]["name"]));
+$img = $_FILES["img"];
+$valid_id = $_FILES["valid_id"];
 
-$imagePath=$imageFolder.$basename;
+$allowed_extensions = ['jpg', 'jpeg', 'png', 'JPG', 'JPEG', 'PNG'];
 
-$imagePathx=$imageFolder.$basenamex;
+$img_ext = strtolower(pathinfo($img["name"], PATHINFO_EXTENSION));
+$valid_id_ext = strtolower(pathinfo($valid_id["name"], PATHINFO_EXTENSION));
 
-$allowed_extensions = array("jpg",
-    "jpeg",
-    "png",
-      "JPG",
-    "JPEG",
-    "PNG");
+$img_temp = $img["tmp_name"];
+$valid_id_temp = $valid_id["tmp_name"];
 
-$imageExtension=pathinfo($imagePath,PATHINFO_EXTENSION);
-
-$imageExtensionx=pathinfo($imagePathx,PATHINFO_EXTENSION);
-
-$image_temp_name=$_FILES["img"]["tmp_name"];
-
-$image_temp_namex=$_FILES["valid_id"]["tmp_name"];
-
-
-if (!file_exists($image_temp_name) || !file_exists($image_temp_namex)) {
-  
- echo "Choose Image file to upload"; 
+// Validate files
+if (!file_exists($img_temp) || !file_exists($valid_id_temp)) {
+    exit("Choose both images to upload.");
+}
+if (!in_array($img_ext, $allowed_extensions) || !in_array($valid_id_ext, $allowed_extensions)) {
+    exit("Only JPG and PNG images are allowed.");
+}
+if ($img["size"] > $maxsize || $valid_id["size"] > $maxsize) {
+    exit("Image size exceeds 5MB limit.");
 }
 
-elseif(!in_array($imageExtension,$allowed_extensions) && !in_array($imageExtensionx,$allowed_extensions) ){ echo "Kindly upload valid Image in png and Jpeg only";
-    
+// Upload to Cloudinary
+$img_upload = $cloudinary->uploadApi()->upload($img_temp, [
+    'folder' => 'seller-verification/'
+]);
+$valid_id_upload = $cloudinary->uploadApi()->upload($valid_id_temp, [
+    'folder' => 'seller-verification/'
+]);
+
+$img_url = $img_upload['secure_url'] ?? null;
+$valid_id_url = $valid_id_upload['secure_url'] ?? null;
+
+if (!$img_url || !$valid_id_url) {
+    exit("Cloudinary upload failed.");
 }
 
-elseif (($_FILES["img"]["size"] > $maxsize)) {
-    
-   "Image file size limit is exceeded"; 
+// Check if already submitted
+$check_stmt = $conn->prepare("SELECT id FROM verify_seller WHERE sid = ?");
+$check_stmt->bind_param("s", $sid);
+$check_stmt->execute();
+$check_stmt->store_result();
 
+if ($check_stmt->num_rows > 0) {
+    echo "Verification is already in process.";
+    exit();
 }
+$check_stmt->close();
 
-else{
-
-$upload=move_uploaded_file($image_temp_name,$imagePath); 
-
-$upload=move_uploaded_file($image_temp_namex,$imagePathx); 
-
-    $check_verify =mysqli_query($conn,"select * from verify_seller where sid = '$sid'");
-
-    if ($check_verify->num_rows>0) {
-      
-echo "Verification is in process.";
-
-    }
-
-else{
-
-   $a="insert into verify_seller(sid,img,valid_id,verified,date)values('".htmlspecialchars($sid)."','".htmlspecialchars($imagePath)."','".htmlspecialchars($imagePathx)."','".htmlspecialchars($verified)."','".htmlspecialchars($date)."')";
-
- $r=mysqli_query($conn,$a);
-
- if ($r) {
-     
- 	echo "1";
- }
-
-else{
-
-  echo "Images upload not successful.";
+// Insert into DB
+$insert_stmt = $conn->prepare("INSERT INTO verify_seller (sid, img, valid_id, verified, date) VALUES (?, ?, ?, ?, ?)");
+$insert_stmt->bind_param("sssis", $sid, $img_url, $valid_id_url, $verified, $date);
+if ($insert_stmt->execute()) {
+    echo "1"; // success
+} else {
+    echo "Images upload not successful.";
 }
-
-}
-
-}
-
-
-
+$insert_stmt->close();
 ?>
