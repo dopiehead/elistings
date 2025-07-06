@@ -101,3 +101,13 @@ $(document).ready(function () {
 
 
 
+$(document).ready(function() {
+    const search = $("#searchValue").val();
+    $("#search").val(search);
+    setTimeout(() => {
+        $("#search").trigger("keyup");
+    }, 300);
+});
+
+
+

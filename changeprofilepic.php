@@ -1,54 +1,93 @@
-<?php session_start();
+<?php
+session_start();
 require 'engine/configure.php';
-$myid = mysqli_real_escape_string($conn,$_POST['id']);
-//if it is set to buyers only change folder accordingly
-if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
-    $imageFolder="uploads/buyers/";
+require_once 'vendor/autoload.php';
+
+use Cloudinary\Cloudinary;
+
+// Validate session and determine user type
+$userType = null;
+$userId = null;
+$imageColumn = null;
+$table = null;
+
+if (!empty($_SESSION['id'])) {
+    $userType = 'buyer';
+    $userId = $_SESSION['id'];
+    $table = 'user_profile';
+    $imageColumn = 'user_image';
+    $folder = 'uploads/buyers/';
+} elseif (!empty($_SESSION['business_id'])) {
+    $userType = 'vendor';
+    $userId = $_SESSION['business_id'];
+    $table = 'vendor_profile';
+    $imageColumn = 'business_image';
+    $folder = 'uploads/vendors/';
+} else {
+    exit('User not authenticated.');
 }
-//if it is set to vendors only change folder accordingly
- if (isset($_SESSION['business_id']) && !empty($_SESSION['business_id'])) {
-  $imageFolder="uploads/vendors/";   
+
+// Cloudinary configuration
+try {
+    $cloudinary = new Cloudinary([
+        'cloud_name' => $_ENV['CLOUDINARY_CLOUD_NAME'],
+        'api_key'    => $_ENV['CLOUDINARY_API_KEY'],
+        'api_secret' => $_ENV['CLOUDINARY_API_SECRET'],
+        'secure'     => true
+    ]);
+} catch (Exception $e) {
+    exit("Cloudinary configuration failed: " . $e->getMessage());
 }
-//if it is set to service providers only change folder accordingly
-  if (isset($_SESSION['sp_id']) && !empty($_SESSION['sp_id'])) {
-    $imageFolder="uploads/service-provider/";     
-  }
-//get profile picture name
-   $basename= mysqli_real_escape_string($conn,basename($_FILES["fileupload"]["name"]));
-   $maxsize = 4 * 1024 * 1024;
-    $myimage=$imageFolder.$basename;
-    $imageExtension= strtolower(pathinfo($myimage,PATHINFO_EXTENSION));
-    $allowed_extensions = array("jpg","jpeg","png","JPG","JPEG","PNG"); 
-   if(!in_array($imageExtension,$allowed_extensions)){ echo "Please upload valid Image in Png and Jpeg only"; }
-    $ImageSize=$_FILES['fileupload']['size'];
-    if($ImageSize>$maxsize){echo "Image file size of 4mb limit is exceeded.";}
-    $image_temp_name=$_FILES["fileupload"]["tmp_name"];
-    $upload=move_uploaded_file($image_temp_name,$myimage);
-//if it is set to buyers only
-if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {
-  $sql="update user_profile set user_image='".htmlspecialchars($myimage)."' where id='".htmlspecialchars($myid)."'";
+
+// Validate uploaded file
+if (!isset($_FILES['fileupload']) || $_FILES['fileupload']['error'] !== UPLOAD_ERR_OK) {
+    exit("No file uploaded or upload error.");
+}
+
+$file = $_FILES['fileupload'];
+$basename = basename($file['name']);
+$extension = strtolower(pathinfo($basename, PATHINFO_EXTENSION));
+$allowed = ['jpg', 'jpeg', 'png'];
+$maxSize = 4 * 1024 * 1024;
+
+if (!in_array($extension, $allowed)) {
+    exit("Please upload a valid image (JPG, JPEG, PNG).");
+}
+
+if ($file['size'] > $maxSize) {
+    exit("Image file size exceeds the 4MB limit.");
+}
+
+// Upload to Cloudinary
+try {
+    $upload = $cloudinary->uploadApi()->upload($file['tmp_name'], [
+        'folder' => $folder,
+        'public_id' => 'profile_' . uniqid(),
+        'overwrite' => true,
+        'resource_type' => 'image'
+    ]);
+    $imageUrl = $upload['secure_url'] ?? null;
+    if (!$imageUrl) {
+        exit("Upload failed. No URL returned.");
     }
-//if it is set to vendors  only
-  if (isset($_SESSION['business_id']) && !empty($_SESSION['business_id'])) {
- $sql="update vendor_profile set business_image='".htmlspecialchars($myimage)."' where id='".htmlspecialchars($myid)."'";
-   }
-//if it is set to service providers  only
-    if (isset($_SESSION['sp_id']) && !empty($_SESSION['sp_id'])) {
-   $sql="update service_providers set sp_img='".htmlspecialchars($myimage)."' where sp_id='".htmlspecialchars($myid)."'";
+} catch (Exception $e) {
+    exit("Cloudinary upload error: " . $e->getMessage());
+}
+
+// Update user record
+$id = mysqli_real_escape_string($conn, $_POST['id']);
+$imageUrlSafe = mysqli_real_escape_string($conn, $imageUrl);
+$sql = "UPDATE $table SET $imageColumn = '$imageUrlSafe' WHERE id = '$id'";
+$result = mysqli_query($conn, $sql);
+
+if ($result) {
+    if ($userType === 'buyer') {
+        $_SESSION['image'] = $imageUrl;
+    } else {
+        $_SESSION['business_image'] = $imageUrl;
     }
-  $bgt=mysqli_query($conn,$sql);
-if ($bgt) { 
-if (isset($_SESSION['id']) && !empty($_SESSION['id'])) {$_SESSION['image']= $myimage;}
-if (isset($_SESSION['business_id']) && !empty($_SESSION['business_id'])) {$_SESSION['business_image']=$myimage;}
-if (isset($_SESSION['sp_id']) && !empty($_SESSION['sp_id'])) { $_SESSION['sp_image']=$myimage;}
-echo "1";
+    echo "1";
+} else {
+    echo "Error updating profile image.";
 }
-else{ echo"Error in changing picture";
-     
-
-
-
-}
-
 ?>
-

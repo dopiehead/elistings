@@ -95,7 +95,6 @@ switch ($orderBy) {
 }
 
 $query .= " LIMIT $initial_page, $num_per_page";
-
 // ---------- FETCH PRODUCTS ----------
 $products = $conn->prepare($query);
 $products->execute();
@@ -109,18 +108,18 @@ if ($products_result->num_rows > 0): ?>
         $featured = $product["featured"];
         $price = $product["product_price"];
         $discount = $product["discount"];
-        $imageString = $row['product_image']; // e.g., "url1,url2,url3"
+        $imageString = $product['product_image']; // e.g., "url1,url2,url3"
         $imageArray = explode(',', $imageString);
         $firstImage = $imageArray[0]; // Get only the first one
 
         $discounted_price = $price - ($price * $discount / 100);
     ?>
-        <div class="item h-100 position-relative" style="border:1px solid rgba(0,0,0,0.1);margin-right:25px; width:250px;">
+        <div class="item h-100 position-relative" style="border:1px solid rgba(0,0,0,0.1);">
             <?php if ($featured): ?>
                 <span style="right:0;" class="fa fa-crown position-absolute top-0 text-warning"></span>
             <?php endif; ?>
 
-            <span style="padding:5px;" id="data_name"><?= htmlspecialchars($product['product_name']) ?></span><br>
+            <span style="padding:5px;" id="data_name"><?= htmlspecialchars(str_replace("&amp;"," & ",$product['product_name'])) ?></span><br>
             <span style="opacity: 0.5" id="data_price">From<br></span>
 
             <?php if ($discount > 0): ?>
@@ -135,7 +134,7 @@ if ($products_result->num_rows > 0): ?>
             <span style="opacity: 0.7;color:red;" id="data_price"><?= htmlspecialchars($product['product_location']) ?></span>
             <span style="opacity: 0.5" id="data_price"><?= htmlspecialchars($product['product_condition']) ?></span>
             <a href="product-details.php?id=<?= htmlspecialchars($id) ?>">
-                <img style="height: 150px; width:100%;" src="<?= htmlspecialchars($firstImage) ?>">
+                <img style="height: 150px; width:100%;object-fit:cover;" src="<?= htmlspecialchars($firstImage) ?>">
             </a>
 
             <?php if ($product['views'] > 0): ?>

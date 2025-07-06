@@ -43,11 +43,6 @@ var category = $(this).attr('id');
 });
 
 
-
-var instance = $("img.lazy").Lazy({chainable: false});
-$("img.lazy").Lazy();
-var instance = $("img.lazy").data("plugin_lazy");
-
 $('#loader-image').hide();
 $('.numbering').load('engine/item-numbering.php');
 $('.btn-request').on('click',function(e){

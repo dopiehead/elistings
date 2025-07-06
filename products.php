@@ -2,7 +2,10 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
  session_start();
- require 'engine/configure.php'; 
+ require 'engine/configure.php';
+ require 'engine/get-dollar.php';
+ require 'engine/get-euro.php';
+ require 'engine/get-pound.php'; 
  $search = isset($_GET['search']) && !empty($_GET['search']) ? $conn->real_escape_string($_GET['search']) : "";
  ?>  
 
@@ -15,25 +18,206 @@ ini_set('display_errors', 1);
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat|sofia|Trirong|Poppins">
      <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
      <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;700&family=Roboto&display=swap" rel="stylesheet">
-         <link rel="stylesheet" href="assets/css/btn_scroll.css">
+      <link rel="stylesheet" href="assets/css/btn_scroll.css">
                     <link rel="icon" href="/favicon.ico" type="image/x-icon">
 <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="stylesheet" href="assets/css/flickity.min.css">
     <link rel="stylesheet" href="assets/css/overlay.css">
-    <link rel="stylesheet" href="assets/css/cart.css">
     <link rel="stylesheet" href="assets/css/products.css">
-             <link rel="stylesheet" href="mobile-view.css">
+     
   <script src="assets/js/sweetalert.min.js"></script> 
   <script src="assets/js/jquery-1.11.3.min.js"></script>
 <script src="assets/js/flickity.pkgd.min.js"></script>
 <style>
   body{
     font-family:poppins !important;
+
   }
 </style>
 </head>
 <body class='bg-white'>
+<marquee
+    onmouseover="stop()"
+    onmouseout="start()"
+    scrollamount="10"
+    class="marquee"
+    style="display: flex; background-color:rgba(0,0,0,0.9); padding: 5px"
+>
+    <ul
+        style="
+          width: 100%;
+          list-style: none;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 30px;
+        "
+    >
+        <!-- -------------------------------- -->
+        <li
+            style="
+            font-size: 12px;
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2px;
+            border-right: 1px solid #ffffffdc;
+            padding-right: 10px;
+          "
+        >
+            <img
+                src="countries/GB.png"
+                width="20px"
+                alt=""
+            />&nbsp;<span style="color: #ffffff">EUR</span>
+            <span style="color: #21ca07">1.00</span>
+            &nbsp;
+            <img
+                src="countries/NG.png"
+                width="20px"
+                alt=""
+            />&nbsp;<span style="color: #ffffff">NGN</span>
+            <span style="color: #ff0303"><?php echo $pound_rate; ?></span>
+        </li>
+        <!-- -------------------------------- -->
+        <li
+            style="
+            font-size: 12px;
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2px;
+            border-right: 1px solid #ffffffdc;
+            padding-right: 10px;
+          "
+        >
+            <img
+                src="countries/EUR.png"
+                width="20px"
+                alt=""
+            />&nbsp;<span style="color: #ffffff">GDP</span>
+            <span style="color: #21ca07">1.00</span>
+            &nbsp;
+            <img
+                src="countries/NG.png"
+                width="20px"
+                alt=""
+            />&nbsp;<span style="color: #ffffff">NGN</span>
+            <span style="color: #ff0303"><?php echo $euro_rate; ?></span>
+        </li>
+        <!-- -------------------------------- -->
+        <li
+            style="
+            font-size: 12px;
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2px;
+            border-right: 1px solid #ffffffdc;
+            padding-right: 10px;
+          "
+        >
+            <img
+                src="countries/USA.png"
+                width="20px"
+                alt=""
+            />&nbsp;<span style="color: #ffffff">USA</span>
+            <span style="color: #21ca07">1.00</span>
+            &nbsp;
+            <img
+                src="countries/NG.png"
+                width="20px"
+                alt=""
+            />&nbsp;<span style="color: #ffffff">NGN</span>
+            <span style="color: lightgreen;"><?php echo$dollar_rate;?></span>
+        </li>
+        <!-- -------------------------------- -->
+        <li
+            style="
+            font-size: 12px;
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2px;
+            border-right: 1px solid #ffffffdc;
+            padding-right: 10px;
+          "
+        >
+            <img
+                src="countries/SA.png"
+                width="20px"
+                alt=""
+            />&nbsp;<span style="color: #ffffff">SA</span>
+            <span style="color: #21ca07">1.00</span>
+            &nbsp;
+            <img
+                src="countries/NG.png"
+                width="20px"
+                alt=""
+            />&nbsp;<span style="color: #ffffff">NGN</span>
+            <span style="color: #ff0303">1.00</span>
+        </li>
+        <!-- -------------------------------- -->
+        <li
+            style="
+            font-size: 12px;
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2px;
+            border-right: 1px solid #ffffffdc;
+            padding-right: 10px;
+          "
+        >
+            <img
+                src="countries/JPN.png"
+                width="20px"
+                alt=""
+            />&nbsp;<span style="color: #ffffff">JPN</span>
+            <span style="color: #21ca07">1.00</span>
+            &nbsp;
+            <img
+                src="countries/NG.png"
+                width="20px"
+                alt=""
+            />&nbsp;<span style="color: #ffffff">NGN</span>
+            <span style="color: #ff0303">1.00</span>
+        </li>
+        <!-- -------------------------------- -->
+        <li
+            style="
+            font-size: 12px;
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 2px;
+            border-right: 1px solid #ffffffdc;
+            padding-right: 10px;
+          "
+        >
+            <img
+                src="countries/GH.png"
+                width="20px"
+                alt=""
+            />&nbsp;<span style="color: #ffffff">GHN</span>
+            <span style="color: #21ca07">1.00</span>
+            &nbsp;
+            <img
+                src="countries/NG.png"
+                width="20px"
+                alt=""
+            />&nbsp;<span style="color: #ffffff">NGN</span>
+            <span style="color: #ff0303">1.00</span>
+        </li>
+    </ul>
+</marquee>  
 <!------------------------------------------Header--------------------------------------------------->
 <?php include 'components/header.php';  ?>
  <div class="back-button-container">
@@ -48,13 +232,15 @@ $featured = $conn->prepare("SELECT * FROM item_detail where sold = 0 and feature
 $featured->execute();
 $featured_result = $featured->get_result();
 if ($featured_result->num_rows>0) { ?>
-<h6 class='text-center'><b style="color: white; background-color: rgba(0,70,90,0.8);padding: 5px;">Featured</b></h6>
+<h4 class='text-left'><b><span class='bg-danger py-1'><span class='ms-4' style='visibility:hidden;'>1</span></span>   &nbsp;&nbsp;Featured</b></h4>
 
 <div style='height:250px;' class="featured  w-100  py-3 px-2">
 <?php
 while ($getfeaturedProducts = $featured_result->fetch_assoc()) { 
 $id = $getfeaturedProducts["id"];
 $featured_product = $getfeaturedProducts["featured"];
+$featured_image = explode(",",$getfeaturedProducts["product_image"]);
+
 ?>
 <div class="package bg-white"  style="border:1px solid rgba(0,0,0,0.1);margin-right:25px; width:250px;height:100%; position:relative;">
 <?php
@@ -73,7 +259,7 @@ $featured_product = $getfeaturedProducts["featured"];
             <?php endif ?>
 <span style="opacity: 0.7;color:red;" id="data_price"> <?= htmlspecialchars($getfeaturedProducts['product_location']) ?></span>
 <span style="opacity: 0.5" id="data_price"> <?= htmlspecialchars($getfeaturedProducts['product_condition']) ?></span>
-<a href="product-details.php?id=<?= htmlspecialchars($id) ?>"><img style="height: 150px; width:200px;" src='<?= htmlspecialchars($getfeaturedProducts['product_image']) ?>' ></a>
+<a href="product-details.php?id=<?= htmlspecialchars($id) ?>"><img style="height: 150px; width:200px;" src='<?= htmlspecialchars($featured_image[0]) ?>' ></a>
 <?php if($getfeaturedProducts['views']> 0) : ?>
                <span style="left:0;bottom:0;" class="position-absolute bg-dark text-white py-2 px-1" id="data_price"> <?= "<i class='fa fa-eye'></i>". htmlspecialchars($getfeaturedProducts['views']); ?></span>
             <?php endif; ?>
@@ -96,10 +282,15 @@ $featured_product = $getfeaturedProducts["featured"];
 <br>
 </div>
 <br>
+<!-- end of featured products -->
+
+
+
+
 
 <div class='d-flex justify-content-between px-3 mt-2 flex-md-row flex-column'>
        <!-- part a for filtering of result -->
-     <div class='filters col-md-4  pe-2 border-right border-3 border-secondary'>
+     <div class='filters col-md-3  pe-2 border-right border-3 border-secondary'>
         <h4 class='fw-bold mb-3'>Filter</h4>  
         <div class='d-flex flex-row flex-column gap-3 filter-content'>
         
@@ -119,23 +310,24 @@ $featured_product = $getfeaturedProducts["featured"];
           </select>
           
           <!-- category drop down -->
-          <select class='bg-light text-capitalize text-secondary' name="category" id="category">
+          <select class='bg-light text-capitalize text-secondary select-category py-2' name="category" id="category">
           <option value="">Category</option>
           <?php
-            $query_category = $conn->prepare("SELECT  DISTINCT product_category  FROM item_detail GROUP BY product_category ASC");
+            $query_category = $conn->prepare("SELECT  e_auto_categories  FROM categories GROUP BY e_auto_categories ASC");
             if($query_category->execute()):
               $result_category = $query_category->get_result();
               while($categoryRow = $result_category->fetch_assoc()) : ?>
-                <option value="<?= htmlspecialchars($categoryRow['product_category']) ?>"><?= htmlspecialchars($categoryRow['product_category']) ?></option>
+                <option value="<?= htmlspecialchars($categoryRow['e_auto_categories']) ?>"><?= htmlspecialchars($categoryRow['e_auto_categories']) ?></option>
           <?php  
               endwhile;          
            endif;
           ?>        
           </select>
+
+          <span class='w-100 bg-light py-2' id="subcategory"></span>
             
           <!-- subcategory after choosing category -->
-           <select class='bg-light d-none' name="subcategory" id="subcategory"><option value="">Subcategory</option></select>
-            
+
            <!-- states in nigeria -->
            <select class='bg-light text-secondary' name="location" id="location">
            <option value="">Location</option>
@@ -196,10 +388,10 @@ $featured_product = $getfeaturedProducts["featured"];
 
      </div>
 
-     <div class='contents col-md-8'>
+     <div class='contents col-md-9'>
 
         <div class='d-flex justify-content-between'>
-          <h3 class='fw-bold text-secondary'>Products</h3>
+          <h3 class='fw-bold text-danger'>Products</h3>
 
           <select name="sort" id="sort" class='bg-light text-dark border-mute rounded py-1 px-2 text-capitalize'>
              <option value="">Sort By</option>
@@ -243,16 +435,31 @@ $featured_product = $getfeaturedProducts["featured"];
 
 <a class="btn-down" onclick="topFunction()">&#8593;</a>
 <?php if (!empty($search)) { ?>
-<script>
-$(document).ready(function() {
-    const search = "<?= htmlspecialchars($search, ENT_QUOTES, 'UTF-8') ?>";
-    $("#search").val(search);
-    setTimeout(() => {
-        $("#search").trigger("keyup");
-    }, 300);
-});
-</script>
+<input type="hidden" id="searchValue" value="<?= htmlspecialchars($search) ?>">
+
 <?php } ?>
+<script>
+  $('#subcategory').html("<select name='subcategory' id='subcategory' class='bg-light text-secondary border-mute rounded py-1 px-2 text-capitalize form-control'><option>Choose subcategory</option></select>");
+$('.select-category').on('change',function() {
+    const category = $(this).val();
+
+     $.ajax({
+           type:"POST",
+           url:"engine/get-subcategory.php",
+           data:{'category':category || ''},
+           success:function(data) {
+             if(data.length > 0){
+             $('#subcategory').html(data);
+             }
+             else{
+              $('#subcategory').html("<select name='subcategory' id='subcategory' class='bg-light text-secondary border-mute rounded py-1 px-2 text-capitalize form-control'><option>Choose subcategory</option></select>");
+             }
+             
+           }
+    });
+});
+
+</script>
 
 <script src="assets/js/scroll.js" type="text/javascript"></script>
 <script src="assets/js/products.js" type="text/javascript"></script>
