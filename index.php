@@ -22,7 +22,7 @@ else{
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Responsive Header</title>
+    <title>Elisting</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
@@ -30,8 +30,9 @@ else{
     <link rel="stylesheet" href="assets/css/navbar.css">
     <link rel="stylesheet" href="assets/css/hero-section.css">
     <link rel="stylesheet" href="assets/css/brands.css">
-    <link rel="stylesheet" href="assets/css/marketplace.css">
     <link rel="stylesheet" href="assets/css/groups.css">
+    <link rel="stylesheet" href="assets/css/categories.css">
+    <link rel="stylesheet" href="assets/css/index-products.css">
     <link rel="stylesheet" href="assets/css/footer.css">
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
      <script src="assets/js/sweetalert.min.js"></script> 
@@ -110,36 +111,30 @@ else{
                 </p>
             </div>
 
-            <div id='brands'>       
+            <div class='mb-5' id='brands'>       
                   <?php
-                     for ($i=0; $i < 20 ; $i++) { ?>
-                       <div style='width:200px;' class='text-center shadow p-0 me-4'>
-                         <img style='height:200px;width:100%' src="https://placehold.co/400" alt="brands">
-                         <h6 class='fw-bold mt-2'>Brands</h6>
+                     for ($i=0; $i < 10 ; $i++) { ?>
+                       <div style='width:150px;' class='text-center shadow p-1 me-4'>
+                         <img style='height:150px;width:100%' src="https://placehold.co/400" alt="brands">
+                         <h6 class='text-secondary fw-bold mt-2'>Brands</h6>
                        </div> 
                     <?php }
                   ?>
 
             </div>
 
+          <br><br>
 
-       
-             
+          <?php include("components/category-links.php") ?>
+          <br><br>
 
+          <?php include("contents/products.php") ?>
 
-            <!-- Brands Grid -->
-         
-    </div>
-</div>
-
-
-
-
-
+          <br><br> 
+          <?php include("footer.php"); ?>
 
     <!-- footer -->
-     <br><br>
-    <?php include("components/footer.php") ?>
+
     <script>
         $('#brands').flickity({
           cellAlign: 'left',

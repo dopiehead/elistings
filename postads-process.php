@@ -5,29 +5,20 @@ ini_set('display_startup_errors', 1);
 session_start();
 
 require 'engine/configure.php';
-// var_dump($_ENV['CLOUDINARY_CLOUD_NAME'], $_ENV['CLOUDINARY_API_KEY'], $_ENV['CLOUDINARY_API_SECRET']);
-
 require_once 'vendor/autoload.php';
 
-use Cloudinary\Configuration\Configuration;
 use Cloudinary\Cloudinary;
 
+// Cloudinary configuration
 try {
-    // Method 1: Direct configuration array (Recommended)
     $cloudinary = new Cloudinary([
-        'cloud_name' => 'dhgqikloc',
-        'api_key' => '379753199352113',
-        'api_secret' => 'y1R8_WejnLXnAdb2PvCDXPE1CGEw',
-        'secure' => true
+        'cloud_name' => $_ENV['CLOUDINARY_CLOUD_NAME'],
+        'api_key'    => $_ENV['CLOUDINARY_API_KEY'],
+        'api_secret' => $_ENV['CLOUDINARY_API_SECRET'],
+        'secure'     => true
     ]);
-    
-    echo "Cloudinary configured successfully!<br>";
-    
-    // Your existing code continues here...
-    
 } catch (Exception $e) {
-    echo "Cloudinary Error: " . $e->getMessage();
-    die();
+    exit("Cloudinary configuration failed: " . $e->getMessage());
 }
 
 // Get and validate POST fields
@@ -55,41 +46,50 @@ if (!$user_id || !$product_name || !$product_category || !$product_price || !$ph
     exit("Required fields are missing.");
 }
 
-// Validate file upload
+// Validate image upload
 $allowed_extensions = ['jpg', 'jpeg', 'png'];
 $maxsize = 5 * 1024 * 1024;
 
-if (!isset($_FILES['imager']) || $_FILES['imager']['error'] !== 0) {
-    exit("Image upload failed.");
+if (!isset($_FILES['imager']) || !is_array($_FILES['imager']['tmp_name'])) {
+    exit("No image files uploaded.");
 }
 
-$image_temp = $_FILES['imager']['tmp_name'];
-$image_ext  = strtolower(pathinfo($_FILES['imager']['name'], PATHINFO_EXTENSION));
+$imageUrls = [];
 
-if (!in_array($image_ext, $allowed_extensions)) {
-    exit("Only JPG, JPEG, PNG files are allowed.");
-}
+foreach ($_FILES['imager']['tmp_name'] as $key => $tmpName) {
+    if (!empty($tmpName) && $_FILES['imager']['error'][$key] === UPLOAD_ERR_OK) {
+        $image_ext = strtolower(pathinfo($_FILES['imager']['name'][$key], PATHINFO_EXTENSION));
+        if (!in_array($image_ext, $allowed_extensions)) {
+            continue; // Skip invalid extensions
+        }
 
-if ($_FILES['imager']['size'] > $maxsize) {
-    exit("Image must not exceed 5MB.");
-}
+        if ($_FILES['imager']['size'][$key] > $maxsize) {
+            continue; // Skip large files
+        }
 
-// Upload to Cloudinary
-try {
-    $result = $cloudinary->uploadApi()->upload($image_temp, [
-        'folder' => 'uploads/'
-    ]);
-    $imageUrl = $result['secure_url'] ?? null;
+        try {
+            $uploadResult = $cloudinary->uploadApi()->upload($tmpName, [
+                'folder' => 'uploads/products'
+            ]);
 
-    if (!$imageUrl) {
-        exit("Cloudinary upload failed.");
+            if (isset($uploadResult['secure_url'])) {
+                $imageUrls[] = $uploadResult['secure_url'];
+            }
+        } catch (Exception $e) {
+            echo "Image $key upload failed: " . $e->getMessage();
+        }
     }
-} catch (Exception $e) {
-    exit("Cloudinary error: " . $e->getMessage());
 }
+
+if (empty($imageUrls)) {
+    exit("No valid image was uploaded.");
+}
+
+// Store all image URLs as comma-separated string
+$imageUrlString = implode(',', $imageUrls);
 
 // Check for duplicate entry
-$stmtCheck = $conn->prepare("SELECT id FROM item_detail WHERE product_name = ? AND product_details = ? AND user_id = ?");
+$stmtCheck = $conn->prepare("SELECT * FROM item_detail WHERE product_name = ? AND product_details = ? AND user_id = ?");
 $stmtCheck->bind_param("ssi", $product_name, $product_details, $user_id);
 $stmtCheck->execute();
 $stmtCheck->store_result();
@@ -100,7 +100,7 @@ if ($stmtCheck->num_rows > 0) {
 }
 $stmtCheck->close();
 
-// Insert new product
+// Insert into DB
 $stmt = $conn->prepare("
     INSERT INTO item_detail (
         user_id, product_name, product_category, product_condition, product_color,
@@ -111,7 +111,7 @@ $stmt = $conn->prepare("
 ");
 
 $stmt->bind_param(
-    "isssssssdsisiiiiiis",
+    "isssssssssisiiiiiis",
     $user_id,
     $product_name,
     $product_category,
@@ -120,7 +120,7 @@ $stmt->bind_param(
     $product_location,
     $product_address,
     $product_price,
-    $imageUrl,
+    $imageUrlString,
     $phone_number,
     $product_details,
     $quantity,
@@ -137,6 +137,7 @@ if ($stmt->execute()) {
     echo "1";
 } else {
     echo "Error saving product: " . $stmt->error;
+    error_log("Database error: " . $stmt->error);
 }
 
 $stmt->close();

@@ -1,50 +1,64 @@
-<?php session_start();
+<?php
+session_start();
 
-// Turn on error reporting
+// Show all PHP errors
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+
 require 'engine/configure.php';
 require 'engine/get-dollar.php';
-error_reporting(E_ALL ^ E_NOTICE);
-time();
+
+// Set default values
+$buyer = '';
+$location = '';
+
+// Handle session logic
 if (isset($_SESSION['business_id'])) {
-$buyer = $_SESSION['business_id'];
-$location = $_SESSION['business_address'];
+    $buyer = $_SESSION['business_id'];
+    $location = $_SESSION['business_address'];
+} elseif (isset($_SESSION['sp_id'])) {
+    $buyer = $_SESSION['sp_id'];
+    $location = $_SESSION['sp_location'];
+} elseif (isset($_SESSION['id'])) {
+    $buyer = $_SESSION['id'];
+    $location = $_SESSION['user_location'];
 }
-if (isset($_SESSION['sp_id'])) {
-$buyer = $_SESSION['sp_id'];
-$location = $_SESSION['sp_location'];
 
-}
-if(isset($_SESSION['id'])) {
-$buyer = $_SESSION['id'];
-$location = $_SESSION['user_location'];
-}	
-
-?>
-
-<?php
-//get the id  
 if (isset($_GET['id']) && !empty($_GET['id'])) {
-$id = mysqli_escape_string($conn,$_GET['id']);
-$get_product = mysqli_query($conn,"select * from item_detail where id = '".htmlspecialchars($id)."' and sold = 0");
-$sql = "UPDATE item_detail SET views = views +1 where id ='$id'";
-$query = mysqli_query($conn,$sql);
-while ($row = mysqli_fetch_array($get_product)) {
-$product_ID = $row['id'];
-$image = $row['product_image'];
-$discount = $row['discount'];
-$product_name = $row['product_name'];
-$category = $row['product_category'];
-$vendorId = $row['user_id'];
-$price = $row['product_price'];
-$dollar = round($price/$dollar_rate);
-$product_date = $row['date'];
-	}
-	
-}
+    $id = mysqli_real_escape_string($conn, $_GET['id']);
 
+    // Increment views
+    $updateViews = mysqli_query($conn, "UPDATE item_detail SET views = views + 1 WHERE id = '$id'");
+
+    // Fetch product details
+    $get_product = mysqli_query($conn, "SELECT * FROM item_detail WHERE id = '$id' AND sold = 0");
+
+    if ($get_product && mysqli_num_rows($get_product) > 0) {
+        $row = mysqli_fetch_assoc($get_product);
+        $product_ID = $row['id'];
+        $images = explode(',',$row['product_image']);
+
+        $discount = $row['discount'];
+        $product_name = $row['product_name'];
+        
+        $category = $row['product_category'];
+        $vendorId = $row['user_id'];
+        $price = $row['product_price'];
+        $dollar = round($price / $dollar_rate);
+        $product_date = $row['date'];
+
+    } else {
+        // If product not found or sold
+        header("Location: products.php");
+        exit;
+    }
+} else {
+    // If no product ID provided
+    header("Location: products.php");
+    exit;
+}
 ?>
+
 
  <?php
 
@@ -93,7 +107,7 @@ $vendorEmail =  "No vender found";
 <!-----------------------------------report form --------------------------------------->
 <div id="popup">
 <div class="container">
-<h6 align="center" id="h6" style="">Report Box</h6><br>
+<h6 class="text-center" id="h6" style="">Report Box</h6><br>
 <form style="" mehod="post" id="report-form" enctype="multipart/form-data"> 
 
       <br>
@@ -121,8 +135,8 @@ $vendorEmail =  "No vender found";
           <div class="container">
           <div class="row">
                  <div class="col-md-8">
-                      <div class="mySlides">
-
+                  
+                  <div>
              <?php
              
              if(!empty($buyer)){
@@ -139,31 +153,22 @@ $vendorEmail =  "No vender found";
 }
 ?>
 
-<img style='height:400px !important;width:100%;' src="<?= htmlspecialchars($image)  ?>">
+
+<?php        
+ foreach ($images as $image) { ?>
+       <div class="mySlides"><img style='height:400px !important;width:100%;object-fit:cover;' src="<?= htmlspecialchars($image)  ?>"></div>        
+<?php   }
+   ?>
+
+<?php if(count($images) > 1) : ?>
+<a class="prev" onclick="plusSlides(-1)">❮</a>
+<a class="next" onclick="plusSlides(1)">❯</a>
+<?php endif ?>
+
 </div>
 
 <!------------------------------------------Add to cart--------------------------------------------------->
 
-<?php
-
-if (isset($_GET['id'])) {
-$id= mysqli_escape_string($conn,$_GET['id']);
-$more= mysqli_query($conn,"SELECT *from picx where sid='".htmlspecialchars($id)."'");
-while ($pic=mysqli_fetch_array($more)) {
-if ($more->num_rows>0) {
-echo"<div class='mySlides'><img style='height:400px !important;width:100%;' src=".$pic['pictures']."></div>";
-}  
-}
-} 
- ?>	
-
-<?php
-$more= mysqli_query($conn,"SELECT *from picx where sid='".htmlspecialchars($id)."'");
-if ($more->num_rows>0) {
-echo'<a class="prev" onclick="plusSlides(-1)">❮</a>
-  <a class="next" onclick="plusSlides(1)">❯</a>';
-}
-?>
 
 <br>
 <b style="font-size:1.2rem;">&#8358; <?php if ($discount>0) {  echo round($price - ($discount/100 * $price)); 

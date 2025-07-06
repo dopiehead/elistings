@@ -1,0 +1,27 @@
+# Composer dependencies
+/vendor/
+
+# Sensitive credentials
+.env
+configure.php
+
+# IDE settings
+.idea/
+.vscode/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Log files
+*.log
+
+# Cache/temp
+cache/
+*.tmp
+
+# Upload folders
+/uploads/
+/seller-verification/
+# PHPUnit
+phpunit.xml

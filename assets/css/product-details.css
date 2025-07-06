@@ -547,6 +547,7 @@ Position the "next button" to the right
 --------------------------------------------------------------*/
 .next {
 right: 0;
+margin-right:15px;
 border-radius: 3px 0 0 3px;
 }
 
@@ -1184,9 +1185,9 @@ margin-top: 30px;
 
 width:100%;
 
- object-fit:cover;
+object-fit:cover;
 
-max-height: 550px;
+
 }
 
 

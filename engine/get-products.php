@@ -109,6 +109,10 @@ if ($products_result->num_rows > 0): ?>
         $featured = $product["featured"];
         $price = $product["product_price"];
         $discount = $product["discount"];
+        $imageString = $row['product_image']; // e.g., "url1,url2,url3"
+        $imageArray = explode(',', $imageString);
+        $firstImage = $imageArray[0]; // Get only the first one
+
         $discounted_price = $price - ($price * $discount / 100);
     ?>
         <div class="item h-100 position-relative" style="border:1px solid rgba(0,0,0,0.1);margin-right:25px; width:250px;">
@@ -131,7 +135,7 @@ if ($products_result->num_rows > 0): ?>
             <span style="opacity: 0.7;color:red;" id="data_price"><?= htmlspecialchars($product['product_location']) ?></span>
             <span style="opacity: 0.5" id="data_price"><?= htmlspecialchars($product['product_condition']) ?></span>
             <a href="product-details.php?id=<?= htmlspecialchars($id) ?>">
-                <img style="height: 150px; width:100%;" src="<?= htmlspecialchars($product['product_image']) ?>">
+                <img style="height: 150px; width:100%;" src="<?= htmlspecialchars($firstImage) ?>">
             </a>
 
             <?php if ($product['views'] > 0): ?>

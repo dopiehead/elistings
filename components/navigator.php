@@ -1,4 +1,5 @@
-
+                <?php $user_email = $_SESSION['business_email'] ?? $_SESSION['email']; ?>
+              
               <div class="overlay-content">
                   <a href="index.php" class="button_home" ><i class='fa fa-home'></i> Home<span id="date"><?= htmlspecialchars(date("F d, Y"));?></span></a><br>
                   <a href="dashboard.php" class="button_dashboard"><i class="fa fa-th-large"></i> Dashboard</a><br>

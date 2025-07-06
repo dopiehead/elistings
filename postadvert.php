@@ -20,9 +20,7 @@ $business_contact = $_SESSION['business_contact'] ?? null;
 
 // Fallback to email if available
 $user_email = $_SESSION['business_email'] ?? $_SESSION['email'] ?? null;
-
-// DB connection
-require("engine/configure.php");
+    
 
 ?>
 
@@ -289,17 +287,18 @@ require("engine/configure.php");
         id="file-label"
         style="font-size: 14px; padding: 1px; background-color: rgba(0,0,0,0.6); color: white;"
       >
-        Upload image (Max 4MB)
+        Upload multiple Images
       </small>
       <br>
-      <span id="fileName" style="display: block; margin-top: 5px;"></span>
+      <span id="fileName"  style="display: block; margin-top: 5px;"></span>
       <input
         type="file"
         id="imager"
-        name="imager"
+        name="imager[]"
         class="form-control"
         accept="image/*"
         style="display: none;"
+        multiple
         onchange="updateFileName(this)"
         required
       >

@@ -67,9 +67,7 @@ body{
   
   #noviews{
   
-  position:relative;
-  top:45px;
-  left:7px;
+  
   background-color: rgba(0,0,0,0.8);
   color: white;
   font-weight: bold;
@@ -84,9 +82,7 @@ body{
    
   #views{
   
-  position:relative;
-  top:45px;
-  left:-28px;
+
   background-color: rgba(0,0,0,0.8);
   color: white;
   font-weight: bold;
@@ -122,11 +118,10 @@ body{
   background-color: rgba(255,195,50,0.4);
   color: rgba(255,95,50,1);
   border: 1px solid transparent transparent;
-  position:relative;
-  top:40px;
+  
   font-weight: bold;
   padding:3px;
-  left: 75%;
+  
   
   font-size:11px;
   
@@ -576,9 +571,6 @@ body{
   
   #noviews{
   
-  position:relative;
-  top:45px;
-  left:2px !important;
   background-color: rgba(0,0,0,0.8);
   color: white;
   font-weight: bold;
@@ -593,9 +585,7 @@ body{
    
   #views{
   
-  position:relative;
-  top:45px;
-  left:-31px !important;
+
   background-color: rgba(0,0,0,0.8);
   color: white;
   font-weight: bold;
@@ -666,9 +656,6 @@ body{
   
   #noviews{
   
-  position:relative;
-  top:45px;
-  left:8px;
   background-color: rgba(0,0,0,0.8);
   color: white;
   font-weight: bold;
@@ -682,9 +669,7 @@ body{
    
   #views{
   
-  position:relative;
-  top:45px;
-  left:-33px !important;
+
   background-color: rgba(0,0,0,0.8);
   color: white;
   font-weight: bold;
@@ -728,9 +713,7 @@ body{
   
   #noviews{
   
-  position:relative;
-  top:45px;
-  left:5px;
+  
   background-color: rgba(0,0,0,0.8);
   color: white;
   font-weight: bold;
@@ -744,9 +727,6 @@ body{
    
   #views{
   
-  position:relative;
-  top:45px;
-  left:-35px !important;
   background-color: rgba(0,0,0,0.8);
   color: white;
   font-weight: bold;
@@ -814,9 +794,7 @@ body{
   
   #noviews{
   
-  position:relative;
-  top:45px;
-  left:5px;
+
   background-color: rgba(0,0,0,0.8);
   color: white;
   font-weight: bold;
@@ -830,9 +808,7 @@ body{
    
   #views{
   
-  position:relative;
-  top:45px;
-  left:-35px !important;
+ 
   background-color: rgba(0,0,0,0.8);
   color: white;
   font-weight: bold;
