@@ -16,6 +16,8 @@ Thumbs.db
 # Log files
 *.log
 
+*.mp4
+
 # Cache/temp
 cache/
 *.tmp
@@ -23,5 +25,7 @@ cache/
 # Upload folders
 /uploads/
 /seller-verification/
+/profile/
 # PHPUnit
 phpunit.xml
+assets/img/
