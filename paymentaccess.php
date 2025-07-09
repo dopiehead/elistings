@@ -3,7 +3,6 @@
 
 require 'engine/configure.php';
 
-
 $days = 60;
 
 $currentDate = new DateTime();
