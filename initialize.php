@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = $_POST['email'] ?? null;
     $amount = isset($_POST['amount']) ? intval($_POST['amount']) * 100 : 0; // Convert to kobo
     $productId = $_SESSION['product'] ?? null;
-    $username = $_SESSION['username'] ?? 'Guest'; // Optional: set fallback username
+    $username = $_SESSION['name'] ?? $_SESSION['business_name'] ?? 'Guest'; // Optional: set fallback username
 
     // ✅ Basic validation
     if (!$email || !$amount || !$productId) {
