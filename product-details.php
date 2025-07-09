@@ -480,12 +480,15 @@ echo"<span id='locitem'>".$row['product_location'].""."</span><br>";
 
 if (isset($_SESSION['id'])  && isset($_SESSION['business_id'])) {
 
-    if ($row['user_id']!=$_SESSION['business_id']) {   
+    if ($row['user_id']!=$_SESSION['business_id']) {  
+
       echo"<span style='font-weight:normal;font-size:11px;' id='locitem'><a style='font-weight:normal;' id='{$row['id']}' class='btn-compare fs-6' >Compare</a></span>";
 }
 
   }
+
 else{
+  
 $redirecturl =($_SERVER['REQUEST_URI']);
     echo"<a style='font-weight:normal;' id='locitem' id='' disabled class='btn-hover fs-6' >Compare</a><span class='hide'>Please <a href='login.php?details={$redirecturl}'>login</a> to use feature</span>";
 }

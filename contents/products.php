@@ -1,7 +1,4 @@
 
-    
- 
-    
     <div class="container products-header">
         <div class="header">
             <div class="title-section">

@@ -12,35 +12,33 @@
 
 
         <div class="categories-container">
-            <div class="category-item">
-                <div class="category-icon icon-it"></div>
-                <div class="category-name">Information technology</div>
-            </div>
-            
-            <div class="category-item">
-                <div class="category-icon icon-engineer"></div>
-                <div class="category-name">Electrical</div>
-            </div>
-            
-            <div class="category-item">
-                <div class="category-icon icon-mechanic"></div>
-                <div class="category-name text-capitalize">Mechanic</div>
-            </div>
-            
-            <div class="category-item active">
-                <div class="category-icon icon-teacher"></div>
-                <div class="category-name">Teaching</div>
-            </div>
-            
-            <div class="category-item">
-                <div class="category-icon icon-plumber"></div>
-                <div class="category-name text-capitalize">Plumbing services</div>
-            </div>
-            
-            <div class="category-item">
-                <div class="category-icon icon-carpenter"></div>
-                <div class="category-name">Carpentry Services</div>
-            </div>
+        <?php
+$services = [
+    ['name' => 'Information technology', 'slug' => 'information technology', 'icon' => 'icon-it'],
+    ['name' => 'Electrical', 'slug' => 'electrical', 'icon' => 'icon-engineer'],
+    ['name' => 'Mechanic', 'slug' => 'mechanic', 'icon' => 'icon-mechanic'],
+    ['name' => 'Teaching', 'slug' => 'teaching', 'icon' => 'icon-teacher'],
+    ['name' => 'Plumbing services', 'slug' => 'plumbing', 'icon' => 'icon-plumber'],
+    ['name' => 'Carpentry services', 'slug' => 'carpentry services', 'icon' => 'icon-carpenter']
+];
+
+// Optional: highlight active category
+$currentWork = $_GET['work'] ?? '';
+?>
+
+<?php foreach ($services as $service): 
+    $isActive = strtolower($service['slug']) === strtolower($currentWork) ? 'active' : '';
+?>
+    <div class="category-item <?= $isActive ?>">
+        <div class="category-icon <?= htmlspecialchars($service['icon']) ?>"></div>
+        <div class="category-name text-capitalize">
+            <a href='service-providers.php?work=<?= urlencode($service['slug']) ?>' class='text-decoration-none text-dark'>
+                <?= htmlspecialchars($service['name']) ?>
+            </a>
+        </div>
+    </div>
+<?php endforeach; ?>
+
         </div>
     </div>
 </div>

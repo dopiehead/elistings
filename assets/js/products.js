@@ -4,6 +4,47 @@ $('.featured').flickity({
 autoPlay:true,
 wrapAround: true,
 });
+
+
+
+$(document).ready(function() {
+    const search = $("#searchValue").val();
+    $("#search").val(search);
+    setTimeout(() => {
+        $("#search").trigger("keyup");
+    }, 300);
+});
+
+
+$(document).ready(function() {
+    const category = $("#categoryValue").val(); // from PHP
+    const $select = $('#category');
+    setTimeout(() => {
+    // First, try to match by value
+    let matched = $select.find('option[value="' + category + '"]');
+    
+    // If not found by value, try to match by text
+    if (!matched.length) {
+        matched = $select.find('option').filter(function () {
+            return $(this).text().trim().toLowerCase() === category.toLowerCase();
+        });
+    }
+
+    // Set selected and trigger change
+    if (matched.length) {
+        matched.prop('selected', true);
+        $select.trigger("change");
+    } else {
+        console.warn("Category not found:", category);
+    }
+
+}, 300);
+
+});
+
+
+
+
 var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
 (function(){
 var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
@@ -97,16 +138,6 @@ $(document).ready(function () {
             }
         });
     }
-});
-
-
-
-$(document).ready(function() {
-    const search = $("#searchValue").val();
-    $("#search").val(search);
-    setTimeout(() => {
-        $("#search").trigger("keyup");
-    }, 300);
 });
 
 

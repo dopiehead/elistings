@@ -7,6 +7,7 @@ ini_set('display_errors', 1);
  require 'engine/get-euro.php';
  require 'engine/get-pound.php'; 
  $search = isset($_GET['search']) && !empty($_GET['search']) ? $conn->real_escape_string($_GET['search']) : "";
+ $search_category = isset($_GET['category']) && !empty($_GET['category']) ? $conn->real_escape_string($_GET['category']) : "";
  ?>  
 
 <!DOCTYPE html>
@@ -436,8 +437,14 @@ $featured_image = explode(",",$getfeaturedProducts["product_image"]);
 <a class="btn-down" onclick="topFunction()">&#8593;</a>
 <?php if (!empty($search)) { ?>
 <input type="hidden" id="searchValue" value="<?= htmlspecialchars($search) ?>">
-
 <?php } ?>
+
+<?php if (!empty($search_category)) { ?>
+<input type="hidden" id="categoryValue" value="<?= htmlspecialchars($search_category) ?>">
+<?php } ?>
+
+
+
 <script>
   $('#subcategory').html("<select name='subcategory' id='subcategory' class='bg-light text-secondary border-mute rounded py-1 px-2 text-capitalize form-control'><option>Choose subcategory</option></select>");
 $('.select-category').on('change',function() {

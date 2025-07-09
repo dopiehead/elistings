@@ -166,17 +166,29 @@ $(document).ready(function() {
 <script>
 $(document).ready(function() {
     const work = <?= json_encode($work) ?>;
+   // from PHP
+    const $select = $('#category');
+    setTimeout(() => {
+    // First, try to match by value
+    let matched = $select.find('option[value="' + work + '"]');
     
-    // Poll every 100ms until the #category select is loaded with options
-    const interval = setInterval(function () {
-        const $category = $("#speciality");
-        // If the dropdown has options and contains the target value
-        if ($category.find("option").length && $category.find(`option[value='${work}']`).length) {
-            $category.val(work); // Set the selected value
-            $category.trigger("change"); // Trigger change event
-            clearInterval(interval); // Stop checking
-        }
-    }, 300);
+    // If not found by value, try to match by text
+    if (!matched.length) {
+        matched = $select.find('option').filter(function () {
+            return $(this).text().trim().toLowerCase() === work.toLowerCase();
+        });
+    }
+
+    // Set selected and trigger change
+    if (matched.length) {
+        matched.prop('selected', true);
+        $select.trigger("change");
+    } else {
+        console.warn("Category not found:", work);
+    }
+
+}, 300);
+
 });
 </script>
 <?php } ?>

@@ -29,16 +29,6 @@ s1.setAttribute('crossorigin','*');
 s0.parentNode.insertBefore(s1,s0);
 })();
   
-$('.featured').flickity({
- cellAlign: 'left',
-contain: true,
-autoPlay:true,
-freeScroll: true,
- friction:0.52,
-wrapAround: true,
-contain: true,
-prevNextButtons: false,
-});
 $('#loader-image').hide();
 $('.btn-request').on('click',function(e){
 e.preventDefault();
@@ -85,52 +75,52 @@ function share() {
         contain: true,
         autoPlay: true
     });
-
-
-var flickity = new Flickity('.category-container', {
-  cellAlign: 'left',
-  contain: true,
-  autoPlay: true,
-  prevNextButtons:false
-});
-
-
-var prevButton = document.querySelector('.previous-button');
-var nextButton = document.querySelector('.next-button');
-
-
-if (prevButton && nextButton) {
-  prevButton.addEventListener('click', function() {
-    flickity.previous();
-  });
-
-  nextButton.addEventListener('click', function() {
-    flickity.next(); 
-  });
-}
-
-
-
-
-var flickity = new Flickity('.categories-container', {
-    cellAlign: 'left',
-    contain: true,
-    autoPlay: true,
-    prevNextButtons:false
-  });
+   
+      // First Flickity slider for .categories-container
+      var categoriesSlider = new Flickity('.categories-container', {
+        cellAlign: 'left',
+        contain: true,
+        autoPlay: true,
+        prevNextButtons: false
+      });
+    
+      var prevButton1 = document.querySelector('.previous');
+      var nextButton1 = document.querySelector('.next-icon');
+    
+      if (prevButton1 && nextButton1) {
+        prevButton1.addEventListener('click', function () {
+          categoriesSlider.previous();
+        });
+    
+        nextButton1.addEventListener('click', function () {
+          categoriesSlider.next();
+        });
+      }
+    
+      // Second Flickity slider for .category-container
+      var categorySlider = new Flickity('.category-container', {
+        cellAlign: 'left',
+        contain: true,
+        autoPlay: true,
+        prevNextButtons: false
+      });
+    
+      var prevButton2 = document.querySelector('.previous-button');
+      var nextButton2 = document.querySelector('.next-button');
+    
+      if (prevButton2 && nextButton2) {
+        prevButton2.addEventListener('click', function () {
+          categorySlider.previous();
+        });
+    
+        nextButton2.addEventListener('click', function () {
+          categorySlider.next();
+        });
+      }
   
-  
-  var prevButton = document.querySelector('.previous');
-  var nextButton = document.querySelector('.next-icon');
-  
-  
-  if (prevButton && nextButton) {
-    prevButton.addEventListener('click', function() {
-      flickity.previous();
-    });
-  
-    nextButton.addEventListener('click', function() {
-      flickity.next(); 
-    });
-  }
+    
+
+
+
+
 

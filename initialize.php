@@ -18,7 +18,7 @@ $paystack = new Paystack('sk_test_5625633149fa467dad07b80c7b4dae6be1ddddf7');
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $email = $_POST['email'] ?? null;
-    $amount = isset($_POST['amount']) ? intval($_POST['amount']) * 100 : 0; // Convert to kobo
+    $amount = isset($_POST['amount']) ? intval($_POST['amount']) : 0; // Convert to kobo
     $productId = $_SESSION['product'] ?? null;
     $username = $_SESSION['name'] ?? $_SESSION['business_name'] ?? 'Guest'; // Optional: set fallback username
 

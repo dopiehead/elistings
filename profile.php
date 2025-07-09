@@ -149,10 +149,7 @@ $countNotifications = $getnotification->num_rows;
 if ($countNotifications>0) {
 ?>
 <?php echo$countNotifications;?>
-<?php    }  echo'</span>';}  ?>
-
-
-<?php
+<?php    }  echo'</span>';} 
 
 if (isset($_SESSION['id'])) {
 $userId = $_SESSION['id'];

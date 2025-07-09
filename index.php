@@ -28,6 +28,7 @@ $slug = "";
 <head>
     <title>Elisting</title>
     <?php include("components/index-links.php"); ?>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flickity/2.3.0/flickity.pkgd.min.js"></script>
     <style>
         body {
             font-family: "Poppins", sans-serif;
@@ -119,10 +120,10 @@ $slug = "";
         <?php include("footer.php"); ?>
     </div>
 </section>
-
+<a class="btn-down" onclick="topFunction()"><span class='fa fa-arrow-up'></span></a>
 <!-- Scripts -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/flickity/2.3.0/flickity.pkgd.min.js"></script>
+
 <script src="assets/js/index.js"></script>
 
 </body>

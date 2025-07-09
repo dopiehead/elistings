@@ -11,15 +11,17 @@
     <link rel="stylesheet" href="assets/css/categories.css">
     <link rel="stylesheet" href="assets/css/provider-categories.css">
     <link rel="stylesheet" href="assets/css/index-products.css">
+
     <link rel="stylesheet" href="assets/css/index-service-providers.css">
+    <link rel="stylesheet" href="assets/css/btn_scroll.css">
     <link rel="stylesheet" href="assets/css/footer.css">
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
      <script src="assets/js/sweetalert.min.js"></script> 
      <script src="assets/js/index.js"></script> 
+     <script src="assets/js/scroll.js" type="text/javascript"></script>
      <script type="text/javascript" src="assets/js/jquery.lazy.min.js"></script>
      <link rel="stylesheet" href="https://unpkg.com/flickity@2.3.0/dist/flickity.min.css">
      <link rel="stylesheet" href="https://unpkg.com/flickity-fade@1.0.0/flickity-fade.css">
      <script src="https://unpkg.com/flickity@2.3.0/dist/flickity.pkgd.min.js"></script>
      <script src="https://unpkg.com/flickity-fade@1.0.0/flickity-fade.js"></script>
-     <script src="assets/js/jquery-1.11.3.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
