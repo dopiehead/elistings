@@ -1,0 +1,8 @@
+
+/* Icons using Unicode symbols */
+.icon-it::before { content: "👨‍💻"; }
+.icon-engineer::before { content: "👩🏿‍🔬"; }
+.icon-mechanic::before { content: "🧑🏿‍🔧"; }
+.icon-teacher::before { content: "🧑🏿‍🏫"; }
+.icon-plumber::before { content: "🏠"; }
+.icon-carpenter::before { content: "🪚"; }

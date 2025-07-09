@@ -5,16 +5,15 @@
                 <h2 class="title">Browse By Category</h2>
             </div>
             <div class="navigation">
-                <div class="nav-arrow prev">←</div>
-                <div class="nav-arrow next">→</div>
+                <div class="nav-arrow prev previous-button">←</div>
+                <div class="nav-arrow next next-button">→</div>
             </div>
         </div>
 
 
-        <div class="categories-grid">
+        <div class="category-container">
             <div class="category-item">
-                <div class="category-ic
-                on icon-phone"></div>
+                <div class="category-icon icon-phone"></div>
                 <div class="category-name">Phones</div>
             </div>
             

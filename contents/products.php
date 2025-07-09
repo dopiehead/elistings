@@ -1,132 +1,70 @@
 
+    
+ 
+    
     <div class="container products-header">
         <div class="header">
             <div class="title-section">
                 <span class="our-products-label">Our Products</span>
-                <h2 class="title">Explore Our Products</h2>
+                <h2 class="title"><?= htmlspecialchars($headerCategory);?></h2>
             </div>
             <div class="navigation">
-                <div class="nav-arrow prev">←</div>
-                <div class="nav-arrow next">→</div>
+                
+
             </div>
         </div>
 
         <div class="products-grid">
-            <!-- Product 1 -->
+          <?php 
+         
+          error_reporting(E_ALL);
+          ini_set('display_errors', 1);
+          ini_set('display_startup_errors', 1);
+          $condition = "SELECT * FROM item_detail WHERE sold = 0";
+          if(isset($filter) && !empty($filter)){
+          $condition .= " AND $filter ";
+          }
+          $condition .= " ORDER BY id DESC LIMIT 8";
+          $getproducts = $conn->prepare($condition);
+          if($getproducts->execute()){
+            $productResult = $getproducts->get_result();
+            while($dataFound = $productResult->fetch_assoc()){
+               $discount = $dataFound['discount'];
+               if($discount > 0) :
+                 $discounted_price = $dataFound['product_price'] - (round($dataFound['product_price'] * $discount/100));
+               endif;
+                
+                ?>
+
             <div class="product-card">
-                <div class="wishlist-icon">♡</div>
-                <div class="product-image">🍫</div>
-                <div class="product-name">Breed Dry Dog Food</div>
-                <div class="product-price">$100</div>
+                <div class="wishlist-icon"><i class='fa fa-eye'></i><?= htmlspecialchars($dataFound['views']) ?></div>
+                <div class="product-image"><img style='width:80px;height:80px;' src='<?= htmlspecialchars($dataFound['product_image']) ?>' ></div>
+                <div class="product-name text-capitalize"><?= htmlspecialchars(html_entity_decode($dataFound['product_name'])) ?></div>
+                <div class="product-price"><i class='fa fa-naira-sign'></i>
+                       <?php if($discount >0 ){echo"<span style='text-decoration:line-through'>".$dataFound['product_price']."</span> ".$discounted_price; } else{ ?>
+                          <?= htmlspecialchars($dataFound['product_price']) ?>
+                        <?php } ?>
+
+                </div>
                 <div class="product-rating">
                     <div class="stars">★★★★★</div>
                     <div class="rating-count">(35)</div>
                 </div>
             </div>
 
-            <!-- Product 2 -->
-            <div class="product-card">
-                <div class="wishlist-icon">♡</div>
-                <div class="product-image">📷</div>
-                <div class="product-name">CANON EOS DSLR Camera</div>
-                <div class="product-price">$360</div>
-                <div class="product-rating">
-                    <div class="stars">★★★★☆</div>
-                    <div class="rating-count">(95)</div>
-                </div>
-            </div>
-
-            <!-- Product 3 -->
-            <div class="product-card">
-                <div class="wishlist-icon">♡</div>
-                <div class="product-image">💻</div>
-                <div class="product-name">ASUS FHD Gaming Laptop</div>
-                <div class="product-price">$700</div>
-                <div class="product-rating">
-                    <div class="stars">★★★★★</div>
-                    <div class="rating-count">(325)</div>
-                </div>
-            </div>
-
-            <!-- Product 4 -->
-            <div class="product-card">
-                <div class="wishlist-icon">♡</div>
-                <div class="product-image">🧴</div>
-                <div class="product-name">Curology Product Set</div>
-                <div class="product-price">$500</div>
-                <div class="product-rating">
-                    <div class="stars">★★★★☆</div>
-                    <div class="rating-count">(145)</div>
-                </div>
-            </div>
-
-            <!-- Product 5 -->
-            <div class="product-card">
-                <div class="product-badge new">NEW</div>
-                <div class="wishlist-icon">♡</div>
-                <div class="product-image">🚗</div>
-                <div class="product-name">Kids Electric Car</div>
-                <div class="product-price">$960</div>
-                <div class="product-rating">
-                    <div class="stars">★★★★★</div>
-                    <div class="rating-count">(65)</div>
-                </div>
-                <div class="color-options">
-                    <div class="color-dot color-red active"></div>
-                    <div class="color-dot color-blue"></div>
-                </div>
-            </div>
-
-            <!-- Product 6 -->
-            <div class="product-card">
-                <div class="product-badge new">NEW</div>
-                <div class="wishlist-icon">♡</div>
-                <div class="product-image">👟</div>
-                <div class="product-name">Jr. Zoom Soccer Cleats</div>
-                <div class="product-price">$1160</div>
-                <div class="product-rating">
-                    <div class="stars">★★★★★</div>
-                    <div class="rating-count">(35)</div>
-                </div>
-                <div class="color-options">
-                    <div class="color-dot color-yellow active"></div>
-                    <div class="color-dot color-red"></div>
-                </div>
-            </div>
-
-            <!-- Product 7 -->
-            <div class="product-card">
-                <div class="wishlist-icon">♡</div>
-                <div class="product-image">🎮</div>
-                <div class="product-name">GP11 Shooter USB Gamepad</div>
-                <div class="product-price">$660</div>
-                <div class="product-rating">
-                    <div class="stars">★★★★☆</div>
-                    <div class="rating-count">(55)</div>
-                </div>
-                <div class="color-options">
-                    <div class="color-dot color-black active"></div>
-                    <div class="color-dot color-red"></div>
-                </div>
-            </div>
-
-            <!-- Product 8 -->
-            <div class="product-card">
-                <div class="wishlist-icon">♡</div>
-                <div class="product-image">🧥</div>
-                <div class="product-name">Quilted Satin Jacket</div>
-                <div class="product-price">$660</div>
-                <div class="product-rating">
-                    <div class="stars">★★★★☆</div>
-                    <div class="rating-count">(55)</div>
-                </div>
-                <div class="color-options">
-                    <div class="color-dot color-green active"></div>
-                    <div class="color-dot color-black"></div>
-                </div>
-            </div>
+            <?php
+            }
+          }          
+          ?>          
         </div>
-
-        <button class="view-all-btn">View All Products</button>
+        <button href='products.php?filter=<?= urlencode($slug) ?>' class="view-all-btn">View All Products</button>
     </div>
 </div>
+<script>
+    $(".view-all-btn").on("click",function(){
+       let link = $(this).attr("href");
+       if(link.length > 0){
+          window.location.href = link;
+       }
+    });
+</script>

@@ -69,10 +69,6 @@ function hideSpinner() {
   }
 
 
-$("img.lazy").Lazy();
-var instance = $("img.lazy").data("plugin_lazy");
-
-
 $('.numbering').load('engine/item-numbering.php');
 $('.btn-compare').on('click',function() {
 var id = $(this).attr('id');

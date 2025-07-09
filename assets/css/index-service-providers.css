@@ -1,0 +1,162 @@
+
+
+.doctor-container {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    margin: 0 auto;
+    background-color: white;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+ 
+}
+
+.doctor-container .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.doctor-container .header h2 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #333;
+}
+
+.doctor-container .header span {
+    color: #666;
+    font-size: 14px;
+}
+
+.view-all {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.view-all:hover {
+    text-decoration: underline;
+}
+
+.doctors-grid {
+    display: flex;
+    gap: 15px;
+    justify-content: space-between;
+}
+
+.doctor-card {
+    flex: 1;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.doctor-card:hover {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+.doctor-card.featured {
+    border: 2px solid #007bff;
+    background-color: #f8f9ff;
+}
+
+.doctor-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    margin: 0 auto 15px;
+    background-color: #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.doctor-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.doctor-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.doctor-specialty {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+
+.doctor-location {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 15px;
+}
+
+
+.doctor-price {
+    font-size: 16px;
+    font-weight: 600;
+    color: #007bff;
+    margin-bottom: 10px;
+}
+
+.heart-icon {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+.heart-icon.filled {
+    color: #ff4757;
+}
+
+.heart-icon.outline {
+    color: #ccc;
+}
+
+/* Doctor avatars using CSS */
+.doctor-1 {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.doctor-2 {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+.doctor-3 {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    color: white;
+    font-size: 32px;
+    font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .doctors-grid {
+        flex-direction: column;
+    }
+    
+    .container {
+        padding: 15px;
+    }
+}

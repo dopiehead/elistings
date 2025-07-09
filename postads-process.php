@@ -100,6 +100,17 @@ if ($stmtCheck->num_rows > 0) {
 }
 $stmtCheck->close();
 
+
+$stmtPosts = $conn->prepare("SELECT * FROM item_detail WHERE product_name = ? AND product_category = ? AND user_id = ?");
+$stmtPosts->bind_param("ssi", $product_name, $product_category, $user_id);
+$stmtPosts->execute();
+$stmtPosts->store_result();
+if($stmtPosts->num_rows > 4){
+    $stmtPosts->close();
+    exit("You have exceeded the Free Posting limit. <a href='user-subscription.php'>Kindly Proceed to the Subscription packages.</a>");
+
+}
+$stmtPosts->close();
 // Insert into DB
 $stmt = $conn->prepare("
     INSERT INTO item_detail (

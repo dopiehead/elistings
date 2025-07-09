@@ -110,9 +110,6 @@ $useremail = $_SESSION['sp_email'];
       </div>
     </div>
 
-
-
-
 <div id="label">
        <div class="row">
          <div class="col-md-6">

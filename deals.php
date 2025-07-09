@@ -2454,8 +2454,8 @@ $('.service_providers').flickity({
 
 
 <script type="text/javascript">
-$("img.lazy").Lazy();
-var instance = $("img.lazy").data("plugin_lazy");
+$("img.").Lazy();
+var instance = $("img.").data("plugin_lazy");
 </script>
 
 

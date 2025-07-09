@@ -18,9 +18,7 @@ var category = $(this).attr('id');
              }
 });
 });
-var instance = $("img.lazy").Lazy({chainable: false});
-$("img.lazy").Lazy();
-var instance = $("img.lazy").data("plugin_lazy");
+
 var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
 (function(){
 var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
@@ -80,3 +78,59 @@ function share() {
     window.open(twitterShare, "_blank");
     window.open(linkedinShare, "_blank");
 }
+
+
+    $('#brands').flickity({
+        cellAlign: 'left',
+        contain: true,
+        autoPlay: true
+    });
+
+
+var flickity = new Flickity('.category-container', {
+  cellAlign: 'left',
+  contain: true,
+  autoPlay: true,
+  prevNextButtons:false
+});
+
+
+var prevButton = document.querySelector('.previous-button');
+var nextButton = document.querySelector('.next-button');
+
+
+if (prevButton && nextButton) {
+  prevButton.addEventListener('click', function() {
+    flickity.previous();
+  });
+
+  nextButton.addEventListener('click', function() {
+    flickity.next(); 
+  });
+}
+
+
+
+
+var flickity = new Flickity('.categories-container', {
+    cellAlign: 'left',
+    contain: true,
+    autoPlay: true,
+    prevNextButtons:false
+  });
+  
+  
+  var prevButton = document.querySelector('.previous');
+  var nextButton = document.querySelector('.next-icon');
+  
+  
+  if (prevButton && nextButton) {
+    prevButton.addEventListener('click', function() {
+      flickity.previous();
+    });
+  
+    nextButton.addEventListener('click', function() {
+      flickity.next(); 
+    });
+  }
+

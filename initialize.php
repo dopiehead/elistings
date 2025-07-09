@@ -1,5 +1,7 @@
-
 <?php
+// error_reporting(E_ALL);
+// ini_set('display_errors', 1);
+// ini_set('display_startup_errors', 1);
 
 require 'vendor/autoload.php';
 
@@ -8,27 +10,26 @@ use Yabacon\Paystack;
 $paystack = new Paystack('sk_test_5625633149fa467dad07b80c7b4dae6be1ddddf7');
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email =  $_POST['email'];
-    $amount =  $_POST['amount'] * 100; // Convert amount to kobo
+    $email = $_POST['email'];
+    $amount = $_POST['amount'] * 100; // Convert to kobo
 
     try {
-        $tranx = $paystack->transaction->initialize([
+        $response = $paystack->transaction->initialize([
             'email' => $email,
-            'amount' => $amount
+            'amount' => $amount,
+            'callback_url' => 'https://localhost/elisting/response.php' // <-- FIXED
         ]);
 
-        if (!$tranx->status) {
-            die('API returned error: ' . $tranx->message);
-        }
-
-        // Store the transaction reference in session (or database)
         session_start();
-        
-        $_SESSION['reference'] = $tranx->data->reference;
+        $_SESSION['reference'] = $response->data->reference;
 
-        // Redirect to Paystack payment page
-        header('Location: response.php' . $tranx->data->authorization_url);
-        exit();
+        if (isset($response->data->authorization_url)) {
+            header("Location: " . $response->data->authorization_url);
+            exit;
+        } else {
+            echo "Failed to get authorization URL. Full response: ";
+            var_dump($response);
+        }
 
     } catch (Exception $e) {
         die('Error: ' . $e->getMessage());

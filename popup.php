@@ -8,22 +8,25 @@
 <div class="col-md-8 col-8">
 <?php
 require 'engine/configure.php';
-$id= mysqli_escape_string($conn,$_POST['id']);
-$edit_product = mysqli_query($conn,"select *from item_detail where id = '".htmlspecialchars($id)."'");
-while ($data_edit=mysqli_fetch_array($edit_product)) {
+$id = $conn->real_escape_string($_POST['id']);
+$query = $conn->prepare("select *from item_detail where id = ? ");
+$query->bind_param("i",$id);
+$query->execute();
+$edit_product = $query->get_result();
+while ($data_edit = $edit_product->fetch_Assoc()) {
 if ($edit_product) {
 $price = $data_edit['product_price'];
 $views= $data_edit['views'];
 
 ?>
- <span id='pxname'><b>Product name</b>: <span onmouseover="changeBackground(this)" onfocus='changeBackground(this)' contenteditable='true' onblur="saveData(this, '<?php echo$id;?>', 'product_name');"><?php echo$data_edit['product_name'];?> </span></span>
+ <span id='pxname'><b>Product name</b>: <span class='text-decoration-underline' onmouseover="changeBackground(this)" onfocus='changeBackground(this)' contenteditable='true' onblur="saveData(this, '<?= htmlspecialchars($id);?>', 'product_name');"><?= htmlspecialchars($data_edit['product_name']);?> </span></span>
 <?php
 echo'</span></span><br>';
 
  if ($data_edit['discount']>0) { 
 
  ?>  
-<span><b>Price:</b> &#8358;<span  onmouseover="changeBackground(this)"  onfocus='changeBackground(this)' contenteditable="true" onblur="saveData(this, '<?php echo$id;?>', 'product_price');"><?php echo$data_edit['product_price'];?></span></span><br>
+<span><b>Price:</b> &#8358;<span  onmouseover="changeBackground(this)"  onfocus='changeBackground(this)' contenteditable="true" onblur="saveData(this, '<?= htmlspecialchars($id);?>', 'product_price');"><?= htmlspecialchars($data_edit['product_price']);?></span></span><br>
 
 <?php
 
@@ -31,84 +34,85 @@ echo'</span></span><br>';
 
 if ($data_edit['discount']==0) {
  ?>   
- <span><b>Price:</b> &#8358;<span  onmouseover="changeBackground(this)"   onfocus='changeBackground(this)' contenteditable onblur="saveData(this, '<?php echo$id?>', 'product_price');"><?php echo$data_edit['product_price'];?></span></span><br>
+ <span><b>Price:</b> &#8358;<span  onmouseover="changeBackground(this)"   onfocus='changeBackground(this)' contenteditable onblur="saveData(this, '<?= htmlspecialchars($id) ?>', 'product_price');"><?= htmlspecialchars($data_edit['product_price']);?></span></span><br>
 
 <?php       
 
-
 }
-
-
 ?>
-<span id='product_details' style=''><b>Details:</b> <span  onmouseover="changeBackground(this)"  onfocus='changeBackground(this)' contenteditable onblur="saveData(this, '<?php echo$id?>', 'product_price');"><?php echo$data_edit['product_details'];?></span></span><br>
+<span id='product_details' style=''><b>Details:</b> <span  onmouseover="changeBackground(this)"  onfocus='changeBackground(this)' contenteditable onblur="saveData(this, '<?= htmlspecialchars($id) ?>', 'product_price');"><?= htmlspecialchars($data_edit['product_details']);?></span></span><br>
 
 <?php
  }
 }
-?> 
 
-<?php 
-//get id of item
-require 'engine/configure.php';
-if (isset($_POST['id'])) {
-$id =  mysqli_escape_string($conn,$_POST['id']);
-$sql="select * from item_detail where id = '".htmlspecialchars($id)."'";
-$dbc=mysqli_query($conn,$sql);
-while ($row = mysqli_fetch_array($dbc)) {
-$mydiscount = $row['discount'];
-  }
+if (isset($_POST['id']) && !empty($_POST['id'])) {
+  $id =  $conn->real_escape_string($_POST['id']);
+  $sql="select * from item_detail where id = ?";
+  $dbc= $conn->prepare($sql);
+  $dbc->bind_param("i",$id);
+  $dbc->execute();
+  $itemResult = $dbc->get_result();
+    while ($row = mysqli_fetch_array($itemResult)) {
+     $mydiscount = $row['discount'];
+     }
 }
  ?>
 <!--------------------------------------------- Discount form---------------------------------------------------------------------------------------->
   <form method="POST" id="discount-form" enctype="multipart/form-data">
-<input type="hidden" name = "id" value="<?php echo $id?>">
-<p>Discount(%)</p>
-<input type="number" maxlength="18" min="0" name = "dis" style="" placeholder="%" value="<?php echo $mydiscount; ?>">
-<input type="submit" name="submit-discount" id="submit-discount"  value="Update" class="btn btn-update btn-info" style="">
-<div class="text-center" style="display: none;" id="loading-image"><img id="loader" height="50" width="80" src="loading-image.GIF"></div>
+   <input type="hidden" name = "id" value="<?= htmlspecialchars($id) ?>">
+   <p>Discount(%)</p>
+   <input type="number" maxlength="18" min="0" name = "dis" style="" placeholder="%" value="<?= htmlspecialchars($mydiscount); ?>">
+   <input type="submit" name="submit-discount" id="submit-discount"  value="Update" class="btn btn-update btn-info">
+   <div class="text-center" style="display: none;" id="loading-image"><img id="loader" height="50" width="80" src="loading-image.GIF"></div>
   </form>
 
 <!--------------------------------------------- Picture  form---------------------------------------------------------------------------------------->
-<form id="myformx"  method="post" enctype="multipart/form-data">
-<p class="text-center" id="pic-details"><i class="fa fa-camera"></i> Please upload at least one image below 2mb in 'jpeg' or 'png' format only.</p>
-<input type="hidden" name="pict" value="<?= htmlspecialchars($id);?>"> 
-<input type="file" name="fileupload[]" accept="image/*" multiple="multiple"><br><br>
-<input type="submit" name="submitx" id="submitx" style="color: white;" class="btn btn-info form-control" value=" Submit" >
-<div class="text-center" style="display: none;" id="loading-image"><img id="loader" height="50" width="80" src="loading-image.GIF"></div>
-</form>
+   <!-- <form id="myformx"  method="post" enctype="multipart/form-data">
+     <p class="text-center" id="pic-details"><i class="fa fa-camera"></i> Please upload at least one image below 2mb in 'jpeg' or 'png' format only.</p>
+     <input type="hidden" name="pict" value=" =?htmlspecialchars($id);?>"> 
+     <input type="file" name="fileupload[]" accept="image/*" multiple="multiple"><br><br>
+     <input type="submit" name="submitx" id="submitx" style="color: white;" class="btn btn-info form-control" value=" Submit" >
+     <div class="text-center" style="display: none;" id="loading-image"><img id="loader" height="50" width="80" src="loading-image.GIF"></div>
+  </form> -->
 </div>
 
 
 <!--------------------------------------------- interactions--------------------------------------------------------------------------------------->
 <div class="col-md-4 col-4">
-<div id="interactions">	
-<div style="text-align: center;"><i class="fa fa-fingerprint"></i> <b>Interactions</b></div>
-<hr>
-<br>
-<span> <span id="myview"><i class="fa fa-eye"></i> Views</span><span style="background-color: white;font-weight: bold;"> &nbsp;  <?php echo$views?></span><br><span id="myshare"><i class="fa fa-share"></i> Shares</span><span style="background-color: white;font-weight: bold;"> &nbsp;   1</span><br>
-<span id="myheart"><i class="fa fa-heart"></i> Likes</span><span style="background-color: white;font-weight: bold;"> &nbsp;     1</span><br>
+  <div id="interactions">	
+  <div style="text-align: center;"><i class="fa fa-fingerprint"></i> <b>Interactions</b></div>
+   <hr>
+    <br>
+    <span> 
+      <span id="myview"><i class="fa fa-eye"></i> Views</span>
+      <span style="background-color: white;font-weight: bold;"> &nbsp;  <?= htmlspecialchars($views)?></span>
+      <br>
+      <span id="myshare"><i class="fa fa-share"></i> Shares</span>
+      <span style="background-color: white;font-weight: bold;"> &nbsp;   1</span><br>
+    <span id="myheart"><i class="fa fa-heart"></i> Likes</span><span style="background-color: white;font-weight: bold;"> &nbsp;1</span><br>
 </div>
 
 <!--------------------------------------------- sold button---------------------------------------------------------------------------------------->
-<br><a class='addx btn btn-sold form-control' style='color:rgba(0,0,0,0.6);' id="<?php echo$id?>">Sold</a><br><br>
+<br>
 
+   </div>
+
+
+</div>
+
+<div class='d-flex justify-content-between align-items-center flex-md-row flex-column mt-5'>
+  
+  <button class='addx btn btn-sold bg-light border-success form-control text-success' style='box-shadow:0 0 7px rgba(0, 0, 0, 0.5);' id="<?= htmlspecialchars($id) ?>"><span class='fa fa-thumbs-up text-success'></span> Sold</button>
 <!--------------------------------------------- subcription button--------------------------------------------------------------------------------------->
 
-<a class='addx btn btn-gift-picks form-control' style='color:rgba(0,0,0,0.6);' id="<?php echo$id?>">Gift picks</a> <br><br>
-
-<a class='addx btn  btn-subscribe form-control' style='color:rgba(0,0,0,0.6);' id="<?php echo$id?>">Subcribe</a><br><br>
+  <button class='addx btn  btn-subscribe bg-light border-primary form-control text-primary' style='box-shadow:0 0 7px rgba(0,0,0,0.5);' id="<?= htmlspecialchars($id) ?>"> <span class='fa fa-book text-info'></span> Subcribe</button>
 
 <!--------------------------------------------- Delete product button--------------------------------------------------------------------------------------->
-<a class='addx btn btn-delete form-control' style='color:rgba(0,0,0,0.6);' id="<?php echo$id?>">Delete </a>  <br><br>
-
-</div>
+  <button class='addx btn bg-light btn-delete form-control border-danger text-danger' style='box-shadow:0 0 4px rgba(0,0,0,0.5);' id="<?= htmlspecialchars($id) ?>"> <span class='fa fa-trash text-danger'></span> Delete </button>  <br><br>
 </div>
 
 </div>
-
-
-
-
 
  </div>
 

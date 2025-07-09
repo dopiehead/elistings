@@ -70,6 +70,10 @@
     gap: 16px;
 }
 
+.categories-container{
+    gap: 16px; 
+}
+
 .category-item {
     border: 1px solid #e0e0e0;
     border-radius: 8px;
@@ -78,6 +82,9 @@
     cursor: pointer;
     transition: all 0.2s;
     background: white;
+    width:230px;
+    height:200px;
+    margin-right: 20px;
 }
 
 .category-item:hover {
@@ -122,15 +129,3 @@
 .icon-vehicle::before { content: "🚘"; }
 .icon-property::before { content: "🏠"; }
 .icon-beauty::before { content: "💄"; }
-
-@media (max-width: 768px) {
-    .categories-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
-}
-
-@media (max-width: 480px) {
-    .categories-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
-}

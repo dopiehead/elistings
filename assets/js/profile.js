@@ -8,7 +8,6 @@ if (confirm("Are you sure to change this?")) {
 
 $(".loading-image").show();
 
-
 var formdata = new FormData();
    $.ajax({
            type: "POST",
@@ -52,8 +51,6 @@ else
  }
     });
 
-
-
 $('#lg').html("<select  id='lga' class=' lga address_details'><option>Business Axis</option></select>");
   
 $('.location').on('change',function() {
@@ -61,7 +58,6 @@ $('.location').on('change',function() {
 var location = $(this).val();
 
       $.ajax({
-
 
           type:"POST",
 
@@ -79,8 +75,6 @@ var location = $(this).val();
      });
 
 });
-
-
 
   $('#btn-submit').on('click',function(){
       
@@ -101,7 +95,6 @@ var location = $(this).val();
              success: function(response) {
              
              if (response==1) {
-
             
             swal({
               
@@ -132,15 +125,10 @@ var location = $(this).val();
             error: function(jqXHR, textStatus, errorThrown) {
 
                 console.log(errorThrown);
-
             }
-
         })
-
     });
 
-
-  
 function cancel() {
 $("#editpage-details")[0].reset();
 }

@@ -197,15 +197,12 @@ body{
   
   #addx,.addx{
   
-  color:white !important;
   font-family:poppins;
   cursor: pointer;
   font-size: 13px !important;
-  background:#17a2b8;
   border:none; 
   padding:8px;
   margin: 1px 3px 1px 3px;
-  box-shadow:0px 2px 8px rgba(0,40,90,0.6);
   border-radius:5px; 
   
   

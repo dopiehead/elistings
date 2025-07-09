@@ -59,7 +59,7 @@ $price =  mysqli_escape_string($conn,$_POST['price']);
 $condition .= " AND product_price <= '".htmlspecialchars($price)."'";
 }
 
-$condition .= " ORDER BY id DESC";
+$condition .= " ORDER BY featured DESC";
 $discount = mysqli_query($conn,$condition);
 
 // ---------- COUNT TOTAL RECORDS ----------
@@ -88,7 +88,14 @@ $subscription = round((10/100)*$price);
 $dollar = round($price/$dollar_rate,2);
 $imageString = explode(",",$row['product_image']);
 $firstImage = $imageString[0];
-echo "<a class='btn-edit'  id ='".$productId."' ><i class='fa fa-edit'></i></a>";
+if($row['featured']==1){
+$featured = $row['featured']; 
+}
+echo "<div class='d-flex justify-content-between'>";
+if($row['featured']==1){
+echo "<span class='fa fa-crown text-warning'></span>";
+}
+echo"</div>";
 if ($row['discount']>0) {
 echo "<div style='top:30%' class='d-flex justify-content-between align-items-center'><span id='discount'>-".$row['discount']."%</span>";
 echo "<span class='' id='views'>".$row['views']." <i class='fa fa-eye'></i></span></div>";
@@ -112,7 +119,7 @@ echo" <span id='priceitem'>$".($dollar)." </span><br>";
 echo "<span id='nameitem' style='' ><a target='_blank' href='product-details.php?id={$row['id']}&{$row['product_name']}&{$row['product_location']}&{$row['product_category']}&{$row['product_details']}'>".$row['product_name']."</a></span>"."<br>";
 echo"<span id='locitem'>".$row['product_location'].""."</span><br>";
 echo "<span id='locitem'><a class='used'><b style='color:green;cursor:pointer;'>".$product_condition."</b></a></span><br>";    
-
+echo"<a class='text-white bg-secondary text-white px-2 py-1 btn-edit' style='cursor:pointer;position:absolute;right:0;bottom:0;'  id ='".$productId."' ><i class='fa fa-edit'></i></a>";
 ?> 
 <?php
 echo"</div>";      
@@ -163,7 +170,7 @@ if ($page < $total_num_page) {
     
 <a class="closeModal used">&times;</a>
  
- <h6><b>Welcome to eStores Used Products Posting one time Subscription!</b></h6>
+ <h6><b>Welcome to elisting's Products Posting one time Subscription!</b></h6>
  
  <hr>
 
