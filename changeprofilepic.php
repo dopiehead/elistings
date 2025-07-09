@@ -74,13 +74,13 @@ try {
     exit("Cloudinary upload error: " . $e->getMessage());
 }
 
-// Update user record
-$id = mysqli_real_escape_string($conn, $_POST['id']);
-$imageUrlSafe = mysqli_real_escape_string($conn, $imageUrl);
-$sql = "UPDATE $table SET $imageColumn = '$imageUrlSafe' WHERE id = '$id'";
-$result = mysqli_query($conn, $sql);
+// Update user record using prepared statement
+$id = $_POST['id'];
 
-if ($result) {
+$stmt = $conn->prepare("UPDATE $table SET $imageColumn = ? WHERE id = ?");
+$stmt->bind_param("si", $imageUrl, $id);
+
+if ($stmt->execute()) {
     if ($userType === 'buyer') {
         $_SESSION['image'] = $imageUrl;
     } else {
@@ -90,4 +90,7 @@ if ($result) {
 } else {
     echo "Error updating profile image.";
 }
+
+$stmt->close();
+$conn->close();
 ?>

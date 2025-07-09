@@ -59,20 +59,9 @@
 
 <input type="text" class="form-control"  placeholder="Business contact"  name="business_contact"><br>
 
-<select  class="form-control" style='font-size:14px'   name="business_type">
-    
-    <option value="">Select Merchant Type</option>
-    <option value="retailer">Retailer</option>
-    <option value="wholesaler">Wholesaler</option>
-    <option value='importer'>Importer</option>
-    <option value='manufacturer'>Manufacturer</option>
-    
-</select>
-
 <br>
 
 <input type="text" class="form-control"  placeholder="Company description"  name="company_description"><br>
-
 
 <small style="font-size: 12px;display:none">Upload Business image</small><br>
 

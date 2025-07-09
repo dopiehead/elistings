@@ -7,28 +7,18 @@ exit();
 date_default_timezone_set('Africa/Lagos');
 date_default_timezone_get();
 
-if (isset($_SESSION["id"])) {
-$date = $_SESSION['date'];
-$userId = $_SESSION['id'];
-$you = $_SESSION['email'];
-$user_type = "buyer";
-}
-if (isset($_SESSION["business_id"])) {
-$business_date = $_SESSION['business_date'];
-$userId = $_SESSION['business_id'];
-$you = $_SESSION['business_email'];
-$user_type = "vendor";
-}
+$date = $_SESSION['date'] ?? $_SESSION['business_date'] ?? null;
+$userId = $_SESSION['id'] ?? $_SESSION['business_id'] ?? null;
+$you = $_SESSION['email'] ?? $_SESSION['business_email'] ?? null;
+$user_type = "buyer" ?? "vendor" ?? "Guest";
 
-require 'engine/configure.php';
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-	<title>E-stores | dashboard </title>
+	<title>E-listings | Profile </title>
 	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1" charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=0" charset="utf-8">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat|sofia|Trirong|Poppins">
      <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
@@ -40,10 +30,7 @@ require 'engine/configure.php';
    <script src="assets/js/jquery-1.11.3.min.js"></script>
   <script src="assets/js/sweetalert.min.js"></script> 
  <script src="assets/js/flickity.pkgd.min.js"></script>
- <script src="assets/js/profile.js"></script>
-<style type="text/css">
 
-</style>
 </head>
 <body>
 
@@ -66,15 +53,12 @@ function openbar() {
 
 <div style="" class="  row">
 
-
   <div id="overlay" class="col-md-3">
 
     <?php include ("components/navigator.php") ?>
 
-
  </div>
 
- 
 <?php 
     //Check if user is a vendor
 $username = $_SESSION['business_name'] ?? $_SESSION['name'];
@@ -91,48 +75,62 @@ $useremail = $_SESSION['business_email'] ??  $_SESSION['email'];
 </div>
 <div class="col-md-6">
 <?php
-    //Check if user is a vendor
+require 'engine/configure.php';
 
-if (isset($_SESSION['business_id'])) {
-    require 'engine/configure.php';
-    $vendor = mysqli_query($conn,"select * from vendor_profile where id = '$userId'");
-    if ($vendor) {     
-     while ($dataVendor = mysqli_fetch_array($vendor)) {
-      $vendorName = $dataVendor['business_name'];
-      $vendorImg = $dataVendor['business_image'];
+$vendorName = $vendorImg = null;
+$userId = null;
+$table = null;
+$columnPrefix = null;
 
-     }
-
-    }
+// Determine user type and set table/column prefix
+if (!empty($_SESSION['business_id'])) {
+    $userId = $_SESSION['business_id'];
+    $table = 'vendor_profile';
+    $columnPrefix = 'business';
+} elseif (!empty($_SESSION['id'])) {
+    $userId = $_SESSION['id'];
+    $table = 'user_profile';
+    $columnPrefix = 'user';
 }
 
-if (isset($_SESSION['id'])) {
-    $vendor = mysqli_query($conn,"select * from user_profile where id = '$userId'");
-    if ($vendor) {
-    while ($dataVendor = mysqli_fetch_array($vendor)) {
-      $vendorName = $dataVendor['user_name'];
-      $vendorImg = $dataVendor['user_image'];
+// Proceed if user type is set
+if ($userId && $table && $columnPrefix) {
+    $stmt = $conn->prepare("SELECT {$columnPrefix}_name, {$columnPrefix}_image FROM {$table} WHERE id = ?");
+    $stmt->bind_param("i", $userId);
 
-     }
-
+    if ($stmt->execute()) {
+        $stmt->bind_result($vendorName, $vendorImg);
+        $stmt->fetch();
     }
+
+    $stmt->close();
 }
-     ?>
+?>
+
 
 <div id="bom">
 
 <div id="my">
 <div style='gap:10px;' class="d-flex align-items-center">
-<?php if (file_exists($vendorImg)) {
-$extension = strtolower(pathinfo($vendorImg,PATHINFO_EXTENSION));
-$image_extension  = array('jpg','jpeg','png');
-if (!in_array($extension , $image_extension)) {
-$vendorImg = "<i style='font-size:80px;color:black;' class='fa fa-user-alt'></i>";
-echo$vendorImg; }
-else{ ?>
-<img id="user_image" src="<?= htmlspecialchars($vendorImg);?>">
-<?php }  } 
+<?php
+$image_extension = ['jpg', 'jpeg', 'png'];
+$showIcon = true;
+
+if (!empty($vendorImg)) {
+    $extension = strtolower(pathinfo($vendorImg, PATHINFO_EXTENSION));
+
+    if (in_array($extension, $image_extension)) {
+        $showIcon = false;
+    }
+}
+
+if ($showIcon) {
+    echo "<i style='font-size:80px;color:black;' class='fa fa-user-alt'></i>";
+} else {
+    echo '<img id="user_image" src="' . htmlspecialchars($vendorImg) . '" alt="User Image">';
+}
 ?>
+
 <div>
 
 <div class="d-flex align-items-center justify-content-between">
@@ -180,8 +178,8 @@ if ($countNotifications>0) {
 
 </div>
 
-
 </div>
+
 
 <div class="">
 <div id="label">
@@ -218,16 +216,6 @@ if ($countNotifications>0) {
 <small> <?= htmlspecialchars($_SESSION['business_contact']) ?></small><br>
 <small>Dial code +234</small><br>
 
-<?php
-}
-?>
-<?php if (isset($_SESSION['sp_id']) ) {
-?>
-
-<small> <?= htmlspecialchars($_SESSION['sp_phonumber1']) ?></small><br>
-<small> <?= htmlspecialchars($_SESSION['sp_phonumber2']) ?></small><br>
-
-<small>Dial code +234</small><br>
 
 <?php
 }
@@ -236,12 +224,10 @@ if ($countNotifications>0) {
 <small><?= htmlspecialchars($useremail) ?></small>
 
    <br>
-
    <i class="fa-solid fa-user-alt"></i><br>
-
 <form id="editpage-form" method="post">
 
-<input type="hidden" name="id" value="<?php echo $userId?>">
+<input type="hidden" name="id" value="<?= htmlspecialchars($userId) ?>">
 <input type="file" name="fileupload"><br><br>
 <input type="submit" name="submit" id="submit" value="Change photo (Max 4MB)" class="btn btn-success " style="color: white;"><br>
 
@@ -256,26 +242,34 @@ if ($countNotifications>0) {
 <h6>My profile</h6>
 
 <?php
+session_start(); // Always start session before using $_SESSION
 
+require 'engine/configure.php'; // Assuming DB connection is here
+
+$user_name = '';
+$user_password = '';
+
+// Check business user
 if (isset($_SESSION['business_id'])) {
-$getuser = mysqli_query($conn,"select * from vendor_profile where id = '".$_SESSION['business_id']."'");
-while ($datafound = mysqli_fetch_array($getuser)) {
-$user_name = $datafound['business_name'];
-$user_password = $datafound['business_password'];
-}
-}
-
-
-if (isset($_SESSION['id'])) {
-$getuser = mysqli_query($conn,"select * from user_profile where id = '".$_SESSION['id']."'");
-while ($datafound = mysqli_fetch_array($getuser)) {
-$user_name = $datafound['user_name'];
-$user_password = $datafound['user_password'];
-  
+    $stmt = $conn->prepare("SELECT business_name, business_password FROM vendor_profile WHERE id = ?");
+    $stmt->bind_param("i", $_SESSION['business_id']);
+    $stmt->execute();
+    $stmt->bind_result($user_name, $user_password);
+    $stmt->fetch();
+    $stmt->close();
 }
 
+// Check regular user
+elseif (isset($_SESSION['id'])) {
+    $stmt = $conn->prepare("SELECT user_name, user_password FROM user_profile WHERE id = ?");
+    $stmt->bind_param("i", $_SESSION['id']);
+    $stmt->execute();
+    $stmt->bind_result($user_name, $user_password);
+    $stmt->fetch();
+    $stmt->close();
 }
 ?>
+
 
 
 <form id="editpage-details">
@@ -284,32 +278,18 @@ $user_password = $datafound['user_password'];
 <input type="text" id="first_name" name="first_name" placeholder="Full Name"><br>
 <?php }
 ?>
-<input type="hidden"  name="sid" value="<?php echo$userId ?>">
-<input type="hidden"  name="user_type" value="<?php echo$user_type ?>">
+<input type="hidden"  name="sid" value="<?= htmlspecialchars($userId) ?>">
+<input type="hidden"  name="user_type" value="<?= htmlspecialchars($user_type) ?>">
 
 <?php if (isset($_SESSION['business_id']) ) {
 ?>
-<input id="business_name" name="business_name" type="text" class="form-control" value="<?php echo $_SESSION['business_name']?>" placeholder="Business Name"><br>
+<input id="business_name" name="business_name" type="text" class="form-control" value="<?= htmlspecialchars($_SESSION['business_name']) ?>" placeholder="Business Name"><br>
 
 <?php }
 
 ?>
 <input id="first_name"  type="password" name="password" placeholder="Password"><input id="first_name"  type="password" name="cpassword" placeholder="Confirm Password"><br>
 
-
-<?php if (isset($_SESSION['sp_id']) ) { ?>
-
-<h6> Price </h6>
-
-<input type="number" name="pricing" style="font-size:14px;" placeholder="Amount in Naira" class="form-control"  id="pricing" value="<?php if($pricing !=0){ echo$pricing; }?>">
-<br>
-<input type="text" name="bank_name" style="font-size:14px;" placeholder="Bank Name" class="form-control" id="bank_name" value="<?php if($bank_name !=0){ echo$bank_name; }?>" >
-<br>
-<input type="number" name="account_number" style="font-size:14px;" placeholder="Account Number" class="form-control" value="<?php if($account_number!=0){ echo$account_number; }?>"  id="account_number">
-
-<br>
-
-<?php } ?>
 <h6>Contact information</h6>
 
 <?php $getthislink = mysqli_query($conn,"select * from user_information where sid = '".htmlspecialchars($userId)."' and user_type ='".htmlspecialchars($user_type)."' order by id desc limit 1"); if($getthislink->num_rows>0){
@@ -443,7 +423,7 @@ s0.parentNode.insertBefore(s1,s0);
 })();
 </script>
 <!--End of Tawk.to Script-->
-
+<script src="assets/js/profile.js"></script>
 
 </body>
 </html>

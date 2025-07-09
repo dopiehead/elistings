@@ -67,7 +67,9 @@ $slug = "";
         <?php $headerCategory = "Explore Products";
          include("contents/products.php"); ?>
         <br><br>
-
+         
+        <?php include("banner/first-banner.php") ?>
+        <br><br>
         <!-- Discounted Items -->
         <?php
          $categories = [
@@ -101,7 +103,10 @@ $slug = "";
           include("contents/products.php");
           echo "<br><br>";
         }
-         ?>
+         
+         include("banner/second-banner.php"); ?>
+         <br><br>
+
         <!-- Service Provider Categories -->
         <?php include("components/provider-categories.php"); ?>
         <br><br>

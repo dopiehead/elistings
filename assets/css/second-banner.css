@@ -1,0 +1,105 @@
+
+  .second-banner {
+    background-color: #0d111c;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+    padding: 20px;
+  }
+
+  .banner {
+    background: linear-gradient(to right, #0d111c, #1a2b48);
+    color: #fff;
+    width: 100%;
+    max-width: 1200px;
+    border-radius: 10px;
+    padding: 40px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+  }
+
+  .service-images {
+    flex: 1;
+    text-align: center;
+  }
+
+  .service-images img {
+    width: 200px;
+    max-width: 100%;
+    margin: 10px;
+    border-radius: 10px;
+  }
+
+  .text-content {
+    flex: 1;
+    color: #dff2ff;
+  }
+
+  .text-content h1 {
+    font-size: 60px;
+    font-weight: 800;
+    color: #b8d9ff;
+    text-shadow: 2px 2px 4px #000;
+  }
+
+  .text-content h1 span {
+    color: #4fd1ff;
+  }
+
+  .text-content p {
+    font-size: 16px;
+    margin: 20px 0;
+  }
+
+  .discount-box {
+    background: #1e90ff;
+    padding: 10px 20px;
+    border-radius: 30px;
+    display: inline-block;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+
+  .cta {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .cta a {
+    background: white;
+    color: #000;
+    padding: 12px 24px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .cta span {
+    font-size: 18px;
+  }
+
+  .badge-top {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #fff;
+    color: #333;
+    padding: 4px 12px;
+    font-size: 12px;
+    border-radius: 20px;
+  }
+
+  @media (max-width: 768px) {
+    .banner {
+      flex-direction: column;
+      text-align: center;
+    }
+  }

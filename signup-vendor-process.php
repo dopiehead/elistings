@@ -9,7 +9,6 @@ $business_contact = mysqli_real_escape_string($conn, $_POST['business_contact'])
 $business_password = mysqli_real_escape_string($conn, $_POST['business_password'])??"";
 $business_address = mysqli_real_escape_string($conn, $_POST['business_address'])??"";
 $company_description = mysqli_real_escape_string($conn, $_POST['company_description'])??"";
-$business_type = mysqli_real_escape_string($conn, $_POST['business_type'])??"";
 $business_image = mysqli_real_escape_string($conn, $_POST['imager'])??"";
 $cpassword = mysqli_real_escape_string($conn, $_POST['confirm_password']);
 $item_sold = mysqli_real_escape_string($conn, $_POST['item_sold'])??"0";
@@ -44,11 +43,11 @@ if ($check_stmt->num_rows > 0) {
 } else {
     // Insert new vendor
     $insert_query = "INSERT INTO vendor_profile 
-        (business_name, business_email, business_password, business_type, business_address, business_contact, company_description, business_image, items_sold, vkey, verified, bank_name, account_number, pay, status, date) 
-        VALUES (?, ?, ?, ?, ?, ?,  ?, ?, ?, ?, ?, ?,  ?, ?, ?, ?)";
+        (business_name, business_email, business_password, business_address, business_contact, company_description, business_image, items_sold, vkey, verified, bank_name, account_number, pay, status, date) 
+        VALUES (?, ?, ?, ?, ?, ?,  ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     $insert_stmt = $conn->prepare($insert_query);
-    $insert_stmt->bind_param("sssssssssissiiis", $business_name, $business_email, $secret_password, $business_type, $business_address, $business_contact, $company_description, $business_image, $item_sold, $vkey, $verified, $bank_name, $account_number, $pay, $status, $date);
+    $insert_stmt->bind_param("sssssssssissiiis", $business_name, $business_email, $secret_password, $business_address, $business_contact, $company_description, $business_image, $item_sold, $vkey, $verified, $bank_name, $account_number, $pay, $status, $date);
 
     if ($insert_stmt->execute()) {
         // Send verification email
@@ -67,7 +66,7 @@ if ($check_stmt->num_rows > 0) {
         $mail->addAddress($business_email);
         $mail->addReplyTo('info@estores.ng');
         $mail->isHTML(true);
-        $mail->Subject = 'Welcome to EstoresNG';
+        $mail->Subject = 'Welcome to ElistingNG';
 
         // Email body
         $mail->MsgHTML("
